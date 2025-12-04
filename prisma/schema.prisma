@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Administrasi {
+  id          String   @id @default(cuid())
+  namaDokumen String
+  kategori    String
+  linkDrive   String
+  tanggalUpdate DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Kegiatan {
+  id          String   @id @default(cuid())
+  judul       String
+  tanggal     DateTime
+  deskripsi   String
+  urlFoto     String?
+  urlVideo    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Download {
+  id            String   @id @default(cuid())
+  namaFile      String
+  tipeFile      String
+  urlDownload   String
+  jumlahDiunduh Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
