@@ -454,7 +454,22 @@ function gradeAll(){
     if(s.tipe==="pg"){sc=nilaiPG(s);benar=sc>0;pg+=sc;}
     else if(s.tipe==="isian"){sc=nilaiIsian(s);benar=sc>0;isian+=sc;}
     else{sc=nilaiUraian(s);uraian+=sc;}
-    detail.push({no:s.no,tipe:s.tipe,jawaban_user:CUR_JAWABAN[s.no],skor:sc,benar:benar});
+    // jawaban_benar untuk rekap guru (string yang bisa dibaca)
+    let jawaban_benar="";
+    if(s.tipe==="pg"&&Array.isArray(s.opsi)&&typeof s.jawaban==="number"){
+      jawaban_benar=String.fromCharCode(65+s.jawaban)+". "+(s.opsi[s.jawaban]||"");
+    }else if(s.tipe==="isian"&&Array.isArray(s.jawaban)){
+      jawaban_benar=s.jawaban.join(" / ");
+    }else if(s.tipe==="uraian"&&Array.isArray(s.kata_kunci)){
+      jawaban_benar=s.kata_kunci.join(", ");
+    }
+    detail.push({
+      no:s.no,tipe:s.tipe,q:s.q||"",
+      jawaban_user:CUR_JAWABAN[s.no],
+      opsi:(s.tipe==="pg"&&Array.isArray(s.opsi))?s.opsi:null,
+      jawaban_benar:jawaban_benar,
+      skor:sc,benar:benar
+    });
   });
   const total=pg+isian+uraian; // max 15+20+15=50
   const skor100=Math.round(total*2*10)/10; // ×2 → 100
