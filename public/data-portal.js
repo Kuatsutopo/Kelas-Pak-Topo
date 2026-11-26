@@ -14,9 +14,13 @@ window.PORTAL_DATA = {
       {judul:"Pecahan, Desimal & Persen", isi:"Pecahan menyatakan bagian dari keseluruhan. Pecahan senilai adalah pecahan yang nilainya sama, misalnya 1/2 = 2/4 = 3/6. Desimal 0,25 sama dengan pecahan 25/100 = 1/4. Persen adalah pecahan per seratus: 40% = 0,4 = 40/100. Untuk mengubah pecahan ke persen, kalikan dengan 100."},
       {judul:"Pola Bilangan & Pola Gambar", isi:"Pola bilangan adalah urutan bilangan dengan aturan tertentu. Pola naik 5, 10, 15, 20, ... memiliki aturan +5, sehingga suku ke-7 adalah 5 × 7 = 35. Pola gambar bintang bertambah 2 setiap urutan (2, 4, 6, 8), sehingga urutan ke-n berisi 2 × n bintang."}
     ],
-    video: [
-      {id:"z4DvDVi6Ong", judul:"Matematika Kelas 4 SD: Pecahan Senilai", sumber:"Kurikulum Merdeka"},
-      {id:"lP_eabdWFo8", judul:"Pecahan Senilai — Bab 2 Pecahan", sumber:"Matematika Kelas 4 Semester 1"}
+        video: [
+      {id:"R5R51RHmbrI", judul:"Nilai Tempat Bilangan — Matematika Kelas 4 SD", sumber:"Pojok Kelas"},
+      {id:"6kM-GPczs-k", judul:"Menentukan & Menggunakan Nilai Tempat Bilangan Cacah", sumber:"Buyung Andis"},
+      {id:"V298M_22YNA", judul:"FPB dan KPK — Matematika Kelas 4 SD", sumber:"Nita Cahyo"},
+      {id:"qxYSQDnLhK8", judul:"Cara Mencari FPB dan KPK dengan Sederhana", sumber:"Tintus Edu"},
+      {id:"z4DvDVi6Ong", judul:"Pecahan Senilai — Matematika Kelas 4 SD", sumber:"Kurikulum Merdeka"},
+      {id:"lP_eabdWFo8", judul:"Bab 2: Pecahan Senilai (Penjelasan Lengkap)", sumber:"Matematika Kelas 4 Semester 1"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=1fIzBjN3aC0_-bbTh3xYwkHHlfi7MxjA8", nama: "Buku Siswa Matematika Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -34,9 +38,13 @@ window.PORTAL_DATA = {
       {judul:"Peta, Skala & Ketampakan", isi:"Peta adalah gambar permukaan bumi pada bidang datar dengan skala tertentu. Peta yang menampilkan informasi penduduk, tanaman, dan hewan disebut peta tematik. Skala peta 1:100.000 berarti 1 cm di peta = 100.000 cm = 1 km di sebenarnya. Simbol garis pada peta menunjukkan jalan atau sungai."},
       {judul:"Cuaca, Bumi & Lingkungan", isi:"Cuaca dibentuk oleh suhu, kelembapan, angin, dan awan. Lapisan bumi paling luar yang kita pijak adalah kulit bumi (kerak). Lapisan bumi yang mengandung banyak logam disebut inti bumi. Pemanasan global menyebabkan es di kutub mencair, permukaan laut naik, dan cuaca tidak menentu. Jaga lingkungan dengan tidak membuang sampah sembarangan."}
     ],
-    video: [
-      {id:"lmjtybyvuJk", judul:"Rahasia Gaya Magnet — IPAS Kelas 4 SD", sumber:"Video pembelajaran IPAS"},
-      {id:"nlXwuNHF8JM", judul:"Proses Fotosintesis pada Tumbuhan", sumber:"Kurikulum Merdeka Kelas 4"}
+        video: [
+      {id:"nlXwuNHF8JM", judul:"Proses Fotosintesis pada Tumbuhan — IPAS Kelas 4", sumber:"Ratih Setyaningrum"},
+      {id:"7JTCfih_T3A", judul:"Fotosintesis pada Tumbuhan (Penjelasan)", sumber:"Fendra Nugroho"},
+      {id:"zjThHqsqpIQ", judul:"Pengelompokan Hewan — IPAS Kelas 4 SD", sumber:"PMPD 2025"},
+      {id:"UwAFvY_eoX4", judul:"Hewan Berdasarkan Makanannya (Karnivora/Herbivora/Omnivora)", sumber:"Ida Matul Izah"},
+      {id:"lmjtybyvuJk", judul:"Rahasia Gaya Magnet — IPAS Kelas 4 SD", sumber:"Kurikulum Merdeka"},
+      {id:"INw1dt9s4oE", judul:"Jenis Hewan Berdasarkan Makanannya", sumber:"Aisah Nur Fitri"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=1Kg4N4m78zbmPjVEqK3TS0NVv1CusfgBs", nama: "Buku Siswa IPAS Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -53,9 +61,13 @@ window.PORTAL_DATA = {
       {judul:"Imbuhan me- & ber-", isi:"Awalan me- pada kata dasar yang dimulai huruf b, f, v berubah menjadi mem-. Contoh: me- + baca = membaca. Awalan ber- menyatakan memiliki atau melakukan, contoh: 'bertani' (berusaha di ladang). Kata berimbuhan harus dipakai sesuai kaidah agar kalimat bermakna tepat."},
       {judul:"Pendapat, Sanggahan & Wawancara", isi:"Pendapat yang meyakinkan harus disertai alasan atau bukti. Sanggahan yang santun dan efektif dimulai dengan pengakuan, baru bantahan, misalnya: 'Saya setuju sebagian, namun...'. Wawancara adalah tanya jawab untuk memperoleh informasi; narasumber adalah pihak yang diwawancara. Gunakan kata tanya yang tepat: apa, mengapa, bagaimana, kapan, siapa."}
     ],
-    video: [
-      {id:"BO056iHJ6co", judul:"Kalimat Transitif & Intransitif — Kelas 4 SD", sumber:"Kurikulum Merdeka Bab 1"},
-      {id:"fFxujW9T5ec", judul:"Kalimat Transitif dan Intransitif", sumber:"Bahasa Indonesia Kelas 4 SD"}
+        video: [
+      {id:"lfRMxnr0h2M", judul:"Teks Narasi — Bahasa Indonesia Kelas 4", sumber:"Betty Marlina"},
+      {id:"IFg9NaZtqZ4", judul:"Teks Cerita — Bahasa Indonesia Kelas 4", sumber:"SD Birrul Sragen"},
+      {id:"CfhmEyvUKTo", judul:"Teks Narasi (Penjelasan & Contoh)", sumber:"Kejarcita"},
+      {id:"BO056iHJ6co", judul:"Kalimat Transitif & Intransitif — Kelas 4 SD", sumber:"Kurikulum Merdeka"},
+      {id:"fFxujW9T5ec", judul:"Kalimat Transitif dan Intransitif (Bab 2)", sumber:"Bahasa Indonesia Kelas 4"},
+      {id:"iVb9A07WlwU", judul:"Pembelajaran Bahasa Indonesia Kelas 4 SD", sumber:"Buk Yat Channel"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=13vm_4STNNX_P6dAoucrZcQCL-Iezw_3d", nama: "Buku Siswa Bahasa Indonesia Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -72,9 +84,13 @@ window.PORTAL_DATA = {
       {judul:"Aturan di Keluarga & Sekolah", isi:"Aturan adalah ketentuan yang harus ditaati bersama. Tujuan aturan: menciptakan ketertiban, ketertiban, dan keadilan. Contoh aturan keluarga: makan bersama, tidur tepat waktu. Contoh aturan sekolah: seragam rapi, tidak terlambat. Jika melanggar aturan ada sanksi. Manfaat menaati aturan: terciptanya keamanan dan kenyamanan."},
       {judul:"Hak & Kewajiban Anak", isi:"Hak adalah sesuatu yang harus diterima. Kewajiban adalah sesuatu yang harus dilakukan. Contoh hak anak di rumah: dikasihi, mendapat pendidikan, mendapat makan. Kewajiban harus dilaksanakan terlebih dahulu sebelum menuntut hak. Contoh kewajiban anak di sekolah: belajar tekun, menghormati guru, menjaga kebersihan kelas."}
     ],
-    video: [
-      {id:"l1GbVw3dvyo", judul:"Hak dan Kewajiban — PPKn Kelas 4 SD", sumber:"Video Pembelajaran Pancasila"},
-      {id:"faQcT9WSuco", judul:"Hak dan Kewajiban — Bab 2 Kurikulum Merdeka", sumber:"PPKn Kelas 4"}
+        video: [
+      {id:"9w9mODrBWnE", judul:"Animasi Simbol Sila Pancasila", sumber:"Hikmah Triyani"},
+      {id:"qD339HjXGBk", judul:"Makna 5 Lambang Sila Pancasila", sumber:"Majalah Bobo"},
+      {id:"_0PvJh-RE9M", judul:"Lagu Simbol Sila Pancasila (Lagu Anak)", sumber:"DenDis"},
+      {id:"faQcT9WSuco", judul:"Hak dan Kewajiban — PPKN Kelas 4 Bab 2", sumber:"Bimbel Online"},
+      {id:"C8UEQlge4yQ", judul:"Hak dan Kewajiban Anak — Pendidikan Pancasila", sumber:"Guru Belajar86"},
+      {id:"OTyVK-sUBIw", judul:"Garuda Pancasila — Lagu Wajib Nasional", sumber:"Lagu Nasional"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=1g92GfjDUkcCYGsgT_tfEr_-yjvdcqsGI", nama: "Buku Siswa Pendidikan Pancasila Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -91,9 +107,13 @@ window.PORTAL_DATA = {
       {judul:"Size & Shape (Ukuran & Bentuk)", isi:"big = besar, small = kecil, tall = tinggi, short = pendek, long = panjang. Shape (bentuk): round = bulat (bola), rectangular = persegi panjang (buku). Contoh: 'The toy robot is taller than the toy car.' artinya robot lebih tinggi dari mobil mainan."},
       {judul:"Toys (Mainan)", isi:"Toys adalah mainan. Contoh: toy car (mobil-mobilan), toy robot (robot mainan), ball (bola). Untuk menyebut ukuran mainan: 'The toy car is bigger than the ball.' Terjemahan: big = besar, small = kecil, round = bulat."}
     ],
-    video: [
+        video: [
       {id:"d3ulKq-pQ8Q", judul:"Telling Time — Bahasa Inggris Kelas 4 SD", sumber:"Kurikulum Merdeka"},
-      {id:"ThwiGd5EaZI", judul:"Daily Activities (Daily Routines)", sumber:"Materi Bahasa Inggris Kelas 4"}
+      {id:"ThwiGd5EaZI", judul:"Daily Activities & Daily Routines", sumber:"Bahasa Inggris Kelas 4"},
+      {id:"LBTW92gwepQ", judul:"Pet Animals — Binatang Peliharaan", sumber:"Kejarcita"},
+      {id:"Y5vN0FRg050", judul:"My Pets — Binatang Peliharaanku", sumber:"Miss Esti"},
+      {id:"RU_e4MUFNfQ", judul:"Fruits and Vegetables — Bahasa Inggris Kelas 4", sumber:"Primagama Jepara"},
+      {id:"W5MunpE_nMk", judul:"Favourite Food & Drink — Kelas 4", sumber:"Video Pendidikan Indonesia"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=1dwtP-pYLVdbHFex3nUFt4WNL7v-Oyv0b", nama: "Buku Siswa Bahasa Inggris Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -109,9 +129,13 @@ window.PORTAL_DATA = {
       {judul:"Tradhisi Begalan", isi:"Begalan iku tradhisi masyarakat Jawa sing asale saka daerah Banyumas. Tujuane pelaksanaan tradhisi Begalan yaiku kanggo nambut srah-srahan (srah-terima) manten. Perlengkapan sing digunakake yaiku perkakas dapur kayu: ilir, tampah, kemenyan, lan liya-liyane. Piwulang sing kasimpen: sakabehing perkakas nduweni teges filosofis babagan urip bebrayan."},
       {judul:"Sandhangan Swara (Aksara Jawa)", isi:"Sandhangan swara iku duwe fungsi kanggo ngowahi lan nambahi swara vokal ing aksara Jawa. Macam-macam sandhangan swara: wulu (bunyi i), suku (bunyi u), taling (bunyi é), pepet (bunyi e). Sandhangan wulu ngasilake swara vokal 'i', dene sandhangan suku ngasilake swara vokal 'u'. Conto: aksara 'ba' diwenehi sandhangan wulu dadi diwaca 'bi'."}
     ],
-    video: [
+        video: [
       {id:"Enb-jclXiy8", judul:"Mengenal Sandhangan Aksara Jawa", sumber:"Bahasa Jawa Kelas 4"},
-      {id:"N_SS8SCc90I", judul:"Sandhangan Aksara Jawa — Semester 2", sumber:"Bahasa Jawa Kelas 4 SD"}
+      {id:"N_SS8SCc90I", judul:"Sandhangan Aksara Jawa — Semester 2", sumber:"Kurikulum Merdeka"},
+      {id:"fnFE0ur6BJE", judul:"Basa Ngoko lan Krama — Unggah-ungguh Basa", sumber:"Iimsani"},
+      {id:"Y5r0nYpKGAg", judul:"Sinau Unggah-ungguh Basa Kelas 4", sumber:"Evi Wulandari"},
+      {id:"1AbQ64pr5CA", judul:"Sinau Tatakrama ing Pacelathon", sumber:"SAE SMART"},
+      {id:"dHIFlnKlW2I", judul:"Belajar Menulis Aksara Jawa (Ha Na Ca Ra Ka)", sumber:"Belajar Aksara Jawa"},
     ],
     pdf: { href: "/materi-bahasa-jawa-kelas4.pdf", nama: "Buku Basa Jawa 'Uniknya Bahasa Jawaku' (Badan Bahasa)", sumber: "Lokal" }
   },
@@ -128,9 +152,13 @@ window.PORTAL_DATA = {
       {judul:"Seni 2 & 3 Dimensi", isi:"Karya seni rupa 2 dimensi: karya yang memiliki panjang dan lebar, contoh lukisan, gambar. Karya seni rupa 3 dimensi: karya yang memiliki panjang, lebar, dan volume (tebal), contoh patung, gerabah, keramik. Gerabah/keramik dari tanah liat termasuk karya 3 dimensi buatan tangan. Guci termasuk karya seni rupa berdimensi 3."},
       {judul:"Diorama & Seni Lingkungan", isi:"Diorama adalah karya 3 dimensi yang menggambarkan adegan/bentang alam dalam kotak. Bahan dasar diorama: kardus, tanah liat, kertas warna. Seni lingkungan (environmental art) bertujuan mempercantik lingkungan dan menyadarkan orang untuk menjaga alam. Warna primer (utama) yang tidak berasal dari campuran: merah, biru, kuning."}
     ],
-    video: [
-      {id:"LEHcmgi5uc8", judul:"Membuat Gerabah dari Tanah Liat", sumber:"Seni Rupa Kelas 4"},
-      {id:"gtRH8fjV62s", judul:"Membuat Diorama Rumah Adat", sumber:"Seni Rupa Kelas 4 SD/MI"}
+        video: [
+      {id:"y__iORZ-n8M", judul:"Praktik Teknik Pilin (Coiling) Tanah Liat — Membuat Gerabah", sumber:"Dea Permata"},
+      {id:"6o00tCNxsmo", judul:"Teknik Pinching dan Coiling Keramik", sumber:"Martkas Seni"},
+      {id:"8ZAncVL9OwI", judul:"Praktik Membuat Diorama Sederhana — Kelas 4", sumber:"Mustikaa"},
+      {id:"b0oU54cFHvA", judul:"Miniatur Rumah Adat — Praktik Kelas 4", sumber:"SD Muhtadin TV"},
+      {id:"FFcqlMfl5h0", judul:"Praktik Membuat Poster 'Hemat Energi'", sumber:"Janu Art"},
+      {id:"LEHcmgi5uc8", judul:"Membuat Gerabah dari Tanah Liat (Tutorial)", sumber:"Kurikulum Merdeka"},
     ],
     pdf: { href: "https://drive.google.com/uc?export=download&id=1m5Yn3JOpDvATrlLIyA4ROHVe7t8HFra6", nama: "Buku Guru Seni Rupa Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
@@ -147,9 +175,13 @@ window.PORTAL_DATA = {
       {judul:"Kesenian Begalan", isi:"Begalan adalah kesenian tradisi dari Banyumas, digandhengake karo upacara perkawinan (srah-terima). Tokoh pemeran disebut 'pak bangsok' atau 'warok begalan'. Perkakas dapur yang dibawa diberi makna filosofis, contoh: ilir (pengayak) melambangkan ketenangan, tampah melambangkan kesabaran. Perlengkapan: ilir, tampah, kemenyan, saringan, dan sebagainya."},
       {judul:"Alat Pertanian Tradisional", isi:"Alat pertanian tradisional Banyumas: luku (untuk membajak sawah), ani-ani (untuk memotong padi saat panen), garu (meratakan tanah), cangkul (menggemburkan tanah), arit (memotong rumput/gulma). Luku ditarik hewan (kerbau/sapi) untuk mengolah sawah. Alat-alat ini mencerminkan kearifan lokal masyarakat tani Banyumas."}
     ],
-    video: [
+        video: [
       {id:"Jekvp3p0yAo", judul:"Membuat Combro — Budaya Banyumasan Kelas 4", sumber:"Materi Mulok Kelas 4 SD"},
-      {id:"8Rhqj6yd1tI", judul:"Begalan Banyumasan — Tradisi Seni", sumber:"Kesenian Banyumasan"}
+      {id:"BfvFoV0aLv8", judul:"Resep Gorengan Mudah (Combro/Mendoan)", sumber:"Dapur Atik"},
+      {id:"s071gXhTz0M", judul:"Kesenian Ebeg Banyumasan — Gelar Seni Rakyat", sumber:"Badan Penghubung Jateng"},
+      {id:"Pzywo6IAE9U", judul:"Kesenian Rakyat Kuda Kepang 'Ebeg Banyumasan'", sumber:"Indonesia Culture"},
+      {id:"fnkLThZIvBo", judul:"Lebih Dekat dgn Kesenian Ebeg Asli Banyumas", sumber:"Cahunsoedcom"},
+      {id:"8Rhqj6yd1tI", judul:"Begalan Banyumasan — Tradisi Seni", sumber:"Kesenian Banyumasan"},
     ],
     pdf: { href: "/materi-budaya-banyumasan-kelas4.pdf", nama: "Materi Budaya Banyumasan Kelas 4 (Ringkas)", sumber: "Lokal" }
   }
