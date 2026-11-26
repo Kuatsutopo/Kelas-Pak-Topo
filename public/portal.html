@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal Belajar Pak Topo — SD Negeri 1 Tinggarjaya</title>
+<style>
+:root{
+  --biru:#1d4ed8; --biru2:#2563eb; --biru3:#3b82f6;
+  --hijau:#16a34a; --kuning:#f59e0b; --merah:#dc2626;
+  --abu:#64748b; --bg:#f1f5f9; --bg2:#e2e8f0;
+  --putih:#fff; --teks:#0f172a; --teks2:#334155; --border:#cbd5e1;
+  --radius:14px; --shadow:0 4px 14px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--teks);line-height:1.5;font-size:16px;padding-bottom:30px}
+header{background:linear-gradient(135deg,var(--biru),var(--biru3));color:#fff;padding:24px 16px 32px;text-align:center;border-bottom-left-radius:22px;border-bottom-right-radius:22px;box-shadow:var(--shadow)}
+header .badge{display:inline-block;background:rgba(255,255,255,.22);padding:5px 14px;border-radius:99px;font-size:.82rem;font-weight:700;margin-bottom:10px}
+header h1{font-size:clamp(1.5rem,6vw,2rem);font-weight:800;margin-bottom:6px}
+header p{opacity:.92;font-size:.96rem;max-width:560px;margin:0 auto}
+.wrap{max-width:920px;margin:-22px auto 0;padding:0 16px}
+.card{background:var(--putih);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:16px;border:1px solid var(--border)}
+.pengumuman{background:#fffbeb;border:2px solid #fde68a;display:flex;gap:12px;align-items:flex-start}
+.pengumuman .ico{font-size:1.5rem}
+.pengumuman h2{font-size:1rem;color:#92400e;font-weight:800}
+.pengumuman p{font-size:.9rem;color:#78350f}
+.hero{background:linear-gradient(135deg,var(--kuning),#f97316);color:#fff;padding:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.hero-text{flex:1 1 260px}
+.hero-text .tag{background:rgba(255,255,255,.25);font-size:.78rem;font-weight:800;padding:4px 10px;border-radius:8px;text-transform:uppercase;display:inline-block;margin-bottom:6px}
+.hero-text h2{font-size:clamp(1.2rem,5vw,1.5rem);font-weight:800;margin-bottom:4px}
+.hero-text p{font-size:.92rem;opacity:.95}
+.btn-quiz{background:#fff;color:#b45309;text-decoration:none;font-weight:800;padding:13px 22px;border-radius:12px;font-size:.98rem;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(0,0,0,.12);transition:transform .12s}
+.btn-quiz:hover{transform:translateY(-2px)}
+.section-title{font-size:1.2rem;font-weight:800;margin:6px 0 12px;display:flex;align-items:center;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:20px}
+.mapel{background:var(--putih);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border:1px solid var(--border);border-top:5px solid var(--biru);display:flex;flex-direction:column;justify-content:space-between;transition:transform .12s}
+.mapel:hover{transform:translateY(-3px)}
+.mapel.ipas{border-color:var(--hijau)}
+.mapel.bindo{border-color:var(--merah)}
+.mapel.ppkn{border-color:#8b5cf6}
+.mapel.jawa{border-color:#ea580c}
+.mapel.seni{border-color:#ec4899}
+.mapel.bany{border-color:var(--kuning)}
+.mapel.ing{border-color:#0891b2}
+.mapel .emo{font-size:1.9rem;margin-bottom:6px}
+.mapel h3{font-size:1.05rem;font-weight:800;margin-bottom:3px}
+.mapel p{font-size:.84rem;color:var(--abu);margin-bottom:12px}
+.mapel-actions{display:flex;gap:7px}
+.btn-sm{flex:1;text-align:center;text-decoration:none;font-size:.82rem;font-weight:700;padding:8px 9px;border-radius:9px}
+.btn-materi{background:#eff6ff;color:var(--biru)}
+.btn-materi:hover{background:#dbeafe}
+.btn-latih{background:#fef3c7;color:#b45309}
+.btn-latih:hover{background:#fde68a}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:22px}
+.vcard{background:var(--putih);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border)}
+.vwrap{position:relative;padding-bottom:56.25%;height:0;background:#0f172a}
+.vwrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vinfo{padding:12px 14px}
+.vinfo h3{font-size:.98rem;font-weight:800;margin-bottom:2px}
+.vinfo p{font-size:.83rem;color:var(--abu)}
+footer{text-align:center;color:var(--abu);font-size:.83rem;margin-top:14px}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr;gap:10px}.mapel{padding:12px}.mapel .emo{font-size:1.6rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🏫 SD Negeri 1 Tinggarjaya · T.P. 2026/2027</div>
+  <h1>📚 Portal Belajar Pak Topo</h1>
+  <p>Materi pelajaran, video pembelajaran, dan kuis latihan interaktif untuk belajar dari rumah.</p>
+</header>
+
+<div class="wrap">
+
+  <section class="card pengumuman">
+    <div class="ico">📢</div>
+    <div>
+      <h2>Papan Pengumuman Kelas</h2>
+      <p>Selamat datang, Ananda! Pelajari ringkasan materi &amp; tonton video dulu sebelum mengerjakan <strong>Kuis Latihan SAS 1</strong>. Kerjakan jujur ya — kuis terlindungi anti-kecurangan.</p>
+    </div>
+  </section>
+
+  <section class="card hero">
+    <div class="hero-text">
+      <span class="tag">🔥 Evaluasi Aktif</span>
+      <h2>Kuis Latihan SAS 1 — Kelas 4</h2>
+      <p>Soal semua mata pelajaran. Maksimal 2 percobaan per mapel. Otomatis layar penuh &amp; terpantau.</p>
+    </div>
+    <a href="/kuis-sas1-kelas4.html" class="btn-quiz">🚀 Mulai Kuis SAS 1</a>
+  </section>
+
+  <h2 class="section-title">🗂️ Daftar Mata Pelajaran</h2>
+  <section class="grid">
+    <article class="mapel"><div><div class="emo">📐</div><h3>Matematika</h3><p>Bilangan, pecahan, pengukuran.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel ipas"><div><div class="emo">🌱</div><h3>IPAS</h3><p>Tumbuhan, wujud zat, gaya &amp; energi.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel bindo"><div><div class="emo">📝</div><h3>Bahasa Indonesia</h3><p>Ide pokok, kalimat transitif, narasi.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel ppkn"><div><div class="emo">🇮🇩</div><h3>Pendidikan Pancasila</h3><p>Makna sila, hak &amp; kewajiban.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel ing"><div><div class="emo">🔤</div><h3>Bahasa Inggris</h3><p>Taste, time, shapes &amp; toys.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel jawa"><div><div class="emo">🎭</div><h3>Bahasa Jawa</h3><p>Unggah-ungguh, parikan, aksara.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel seni"><div><div class="emo">🎨</div><h3>Seni Rupa</h3><p>Unsur, prinsip &amp; motif rupa.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+    <article class="mapel bany"><div><div class="emo">🏯</div><h3>Budaya Banyumasan</h3><p>Adat, kesenian &amp; bahasa lokal.</p></div><div class="mapel-actions"><a href="#" class="btn-sm btn-materi">📖 Materi</a><a href="/kuis-sas1-kelas4.html" class="btn-sm btn-latih">✏️ Kuis</a></div></article>
+  </section>
+
+  <h2 class="section-title">🎬 Video Pembelajaran Pilihan</h2>
+  <section class="vgrid">
+    <div class="vcard">
+      <div class="vwrap"><iframe src="https://www.youtube.com/embed/H9bfqQKQLL4" title="IPAS: Bagian Tubuh Tumbuhan" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vinfo"><h3>IPAS: Bagian Tubuh Tumbuhan</h3><p>Tonton dulu sebelum latihan soal.</p></div>
+    </div>
+    <div class="vcard">
+      <div class="vwrap"><iframe src="https://www.youtube.com/embed/2ZddiOErU8w" title="Matematika: Mengenal Pecahan" allowfullscreen loading="lazy"></iframe></div>
+      <div class="vinfo"><h3>Matematika: Mengenal Pecahan</h3><p>Ilustrasi gambar untuk mudah paham.</p></div>
+    </div>
+  </section>
+
+  <footer>Portal Belajar Pak Topo · SD Negeri 1 Tinggarjaya</footer>
+</div>
+
+</body>
+</html>

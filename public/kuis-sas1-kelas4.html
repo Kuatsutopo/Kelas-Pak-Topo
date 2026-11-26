@@ -221,6 +221,48 @@ let CUR_ATTEMPT = 1;
 let TIMER_ID = null, TIMER_START = 0, TIMER_SEC = 0;
 let SUBMIT_LOCK = false;
 
+// ============ ANTI-KECURANGAN (hanya aktif saat kuis berjalan) ============
+let AC_AKTIF = false, AC_PELANGGARAN = 0, AC_BATAS = 3, AC_LOCK = false, AC_FULLSCREEN_ON = false;
+function acCatat(alasan){
+  if(!AC_AKTIF || AC_LOCK) return;
+  AC_LOCK = true; AC_PELANGGARAN++;
+  // Simpan ke localStorage untuk rekap guru
+  try{
+    const log = JSON.parse(localStorage.getItem("ac_log")||"[]");
+    log.push({t: new Date().toLocaleString("id-ID"), mapel: CUR_MAPEL, alasan, n: AC_PELANGGARAN});
+    if(log.length>50) log.shift();
+    localStorage.setItem("ac_log", JSON.stringify(log));
+  }catch(e){}
+  if(AC_PELANGGARAN >= AC_BATAS){
+    alert("⚠️ PELANGGARAN MAKSIMAL ("+AC_PELANGGARAN+"/"+AC_BATAS+")\\n"+alasan+"\\nKuis otomatis dikumpulkan.");
+    AC_LOCK = true; AC_AKTIF = false;
+    try{ document.exitFullscreen&&document.exitFullscreen(); }catch(e){}
+    setTimeout(()=>{ if($("btn-submit") && !$("btn-submit").disabled) $("btn-submit").click(); }, 200);
+  } else {
+    alert("🚨 PERINGATAN "+AC_PELANGGARAN+"/"+AC_BATAS+"\\nTerdeteksi: "+alasan+"\\nSampai "+AC_BATAS+"x, kuis otomatis berhenti.");
+    setTimeout(()=>{ AC_LOCK=false; }, 800);
+  }
+}
+function acStart(){ AC_AKTIF = true; AC_PELANGGARAN = 0; AC_LOCK = false;
+  // Minta fullscreen otomatis
+  const el = document.documentElement;
+  if(el.requestFullscreen) el.requestFullscreen().then(()=>{AC_FULLSCREEN_ON=true;}).catch(()=>{});
+}
+function acStop(){ AC_AKTIF = false; AC_LOCK = false;
+  if(document.fullscreenElement){ try{ document.exitFullscreen(); }catch(e){} }
+}
+document.addEventListener("visibilitychange", ()=>{ if(document.hidden) acCatat("Meninggalkan halaman / buka tab lain"); });
+window.addEventListener("blur", ()=> acCatat("Keluar dari fokus jendela ujian"));
+document.addEventListener("fullscreenchange", ()=>{ if(AC_AKTIF && !document.fullscreenElement) acCatat("Keluar dari mode layar penuh"); });
+document.addEventListener("contextmenu", e=> e.preventDefault());
+document.addEventListener("copy", e=> { if(AC_AKTIF) e.preventDefault(); });
+document.addEventListener("keydown", e=>{
+  if(!AC_AKTIF) return;
+  if((e.ctrlKey && ["t","n","w","c","v","u","p","s"].includes(e.key.toLowerCase())) || ["F12","PrintScreen"].includes(e.key)){
+    e.preventDefault(); acCatat("Menekan tombol terlarang ("+e.key+")");
+  }
+});
+
 // ============ UTIL ============
 function norm(s){return String(s==null?"":s).toLowerCase().trim().replace(/\s+/g," ").replace(/[.,!?;:'"`]/g,"").replace(/(\d{1,3})\s(\d{3})/g,"$1$2").trim();}
 
@@ -486,6 +528,7 @@ function startQuiz(mapel){
   TIMER_ID=setInterval(tickTimer,1000);
   tickTimer();
   show("quiz");
+  acStart();
 }
 
 function tickTimer(){
@@ -617,6 +660,7 @@ function gradeAll(){
 // ============ SUBMIT ============
 $("btn-submit").onclick = async ()=>{
   if(SUBMIT_LOCK)return;
+  acStop();
   const err=$("quiz-err");err.classList.add("hidden");
   // cek apakah semua terisi
   let kosong=0;CUR_SOAL.forEach(s=>{
@@ -769,7 +813,7 @@ $("btn-ulasan").onclick = ()=>{
 };
 
 $("btn-coba-lagi").onclick = ()=>{startQuiz(CUR_MAPEL);};
-$("btn-kembali-dash").onclick = ()=>{enterDashboard();};
+$("btn-kembali-dash").onclick = ()=>{acStop();enterDashboard();};
 
 // ============ API ============
 async function apiGet(action,params){
