@@ -15,102 +15,106 @@
   --ink-primary:#18181b; --ink-secondary:#52525b; --ink-muted:#71717a;
   --border:#e4e4e7; --brand-green:#0f5132; --brand-green-soft:#ecfdf5;
   --brand-amber:#b45309; --brand-amber-soft:#fffbeb;
-  --accent-cta:#18181b;
   --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-page);color:var(--ink-primary);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-page);color:var(--ink-primary);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
 
-.topbar{position:sticky;top:0;z-index:20;background:rgba(250,249,246,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(250,249,246,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .topbar-inner{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-primary)}
 .brand-mark{width:42px;height:42px;border-radius:11px;object-fit:contain;flex-shrink:0;background:var(--bg-subtle);border:1px solid var(--border)}
 .brand-text strong{display:block;font-size:.95rem;font-weight:700;line-height:1.2}
 .brand-text span{font-size:.78rem;color:var(--ink-muted)}
-.nav-links{display:flex;align-items:center;gap:24px}
-.nav-links a{text-decoration:none;color:var(--ink-secondary);font-size:.88rem;font-weight:600;transition:color .15s}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-links a{text-decoration:none;color:var(--ink-secondary);font-size:.86rem;font-weight:600;transition:color .15s}
 .nav-links a:hover{color:var(--ink-primary)}
 
-.wrapper{max-width:1080px;margin:0 auto;padding:36px 24px 72px}
+.wrapper{max-width:1080px;margin:0 auto;padding:28px 24px 60px}
 
-.hero-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:20px;margin-bottom:48px}
-.hero-main{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;justify-content:space-between}
-.hero-logo{width:64px;height:64px;border-radius:14px;object-fit:contain;background:var(--bg-subtle);border:1px solid var(--border);margin-bottom:22px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:var(--brand-green);background:var(--brand-green-soft);padding:6px 12px;border-radius:99px;width:fit-content;margin-bottom:20px}
-.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#10b981}
-.hero-main h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.85rem,3.2vw,2.5rem);font-weight:700;line-height:1.18;letter-spacing:-.02em;margin-bottom:14px}
-.hero-main p{color:var(--ink-secondary);font-size:1rem;max-width:50ch;margin-bottom:28px}
-.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--brand-green);color:#fff;text-decoration:none;font-weight:600;font-size:.92rem;padding:13px 22px;border-radius:var(--radius-sm);transition:background .15s,transform .15s}
-.btn-primary:hover{background:#0b3d26;transform:translateY(-1px)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--bg-subtle);color:var(--ink-primary);text-decoration:none;font-weight:600;font-size:.92rem;padding:13px 20px;border-radius:var(--radius-sm);transition:background .15s}
-.btn-secondary:hover{background:#e7e4dc}
+.hero{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;display:flex;align-items:center;gap:24px;margin-bottom:28px}
+.hero-logo{width:72px;height:72px;border-radius:16px;object-fit:contain;background:var(--bg-subtle);border:1px solid var(--border);flex-shrink:0}
+.hero-text{flex:1}
+.hero-text .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--brand-green);background:var(--brand-green-soft);padding:5px 11px;border-radius:99px;margin-bottom:10px}
+.hero-text .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#10b981}
+.hero-text h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
+.hero-text p{color:var(--ink-secondary);font-size:.95rem;max-width:56ch}
+.hero-cta{display:flex;gap:10px;flex-shrink:0}
+.btn-pill{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;padding:10px 16px;border-radius:99px;text-decoration:none;transition:all .15s;white-space:nowrap}
+.btn-pill.green{background:var(--brand-green);color:#fff}
+.btn-pill.green:hover{background:#0b3d26}
+.btn-pill.outline{background:#fff;border:1px solid var(--border);color:var(--ink-primary)}
+.btn-pill.outline:hover{border-color:#a1a1aa;background:var(--bg-subtle)}
 
-.hero-side{display:flex;flex-direction:column;gap:20px}
-.notice-card{background:var(--brand-amber-soft);border:1px solid #fde68a;border-radius:var(--radius-lg);padding:24px;flex:1}
-.notice-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.notice-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--brand-amber)}
-.notice-date{font-size:.78rem;color:#92400e}
-.notice-card h2{font-size:1.05rem;font-weight:700;color:#78350f;margin-bottom:6px}
-.notice-card p{font-size:.9rem;color:#92400e;line-height:1.55}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;gap:12px}
+.section-head h2{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.3rem,3vw,1.7rem);font-weight:700;letter-spacing:-.01em}
+.section-head p{font-size:.9rem;color:var(--ink-muted);margin-top:4px}
+.section-head .count{font-size:.84rem;color:var(--ink-muted);flex-shrink:0}
 
-.quiz-meta-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.quiz-meta-card strong{display:block;font-size:.95rem;margin-bottom:2px}
-.quiz-meta-card span{font-size:.84rem;color:var(--ink-muted)}
-.pill-limit{background:var(--bg-subtle);color:var(--ink-primary);font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:8px;white-space:nowrap}
+/* GRID FOLDER IKON (LAUNCHER) */
+.folder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+.folder{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px 12px 14px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:8px}
+.folder:hover{border-color:var(--brand-green);transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(15,81,50,.18)}
+.folder:active{transform:translateY(-1px)}
+.folder-icon{width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 6px 12px rgba(0,0,0,.08));transition:transform .2s}
+.folder:hover .folder-icon{transform:scale(1.06)}
+.folder-name{font-size:.86rem;font-weight:700;color:var(--ink-primary);line-height:1.25}
+.folder-tag{font-size:.72rem;color:var(--ink-muted);font-weight:600}
+.folder-badge{position:absolute;top:8px;right:8px;background:var(--brand-green);color:#fff;font-size:.66rem;font-weight:700;padding:2px 7px;border-radius:99px}
+.folder-wrap{position:relative;width:100%}
 
-.section-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.section-head h2{font-family:'Fraunces',Georgia,serif;font-size:1.5rem;font-weight:700;letter-spacing:-.015em}
-.section-head p{font-size:.9rem;color:var(--ink-muted)}
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(24,24,27,.55);backdrop-filter:blur(4px)}
+.modal.show{display:flex;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal-card{background:#fff;border-radius:var(--radius-lg);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 70px -20px rgba(0,0,0,.3)}
+.modal-head{padding:24px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;position:relative}
+.modal-icon{width:64px;height:64px;border-radius:16px;object-fit:contain;flex-shrink:0;background:var(--bg-subtle);border:1px solid var(--border)}
+.modal-head h2{font-family:'Fraunces',Georgia,serif;font-size:1.4rem;font-weight:700;letter-spacing:-.01em}
+.modal-head p{font-size:.84rem;color:var(--ink-muted)}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--bg-subtle);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.1rem;color:var(--ink-muted);display:grid;place-items:center;line-height:1;transition:background .15s}
+.modal-close:hover{background:#e4e4e7;color:var(--ink-primary)}
+.modal-body{padding:18px 24px 24px}
+.modal-topik{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.modal-topik span{font-size:.76rem;background:var(--bg-subtle);color:var(--ink-secondary);padding:5px 10px;border-radius:99px;font-weight:600}
+.modal-desc{font-size:.92rem;color:var(--ink-secondary);margin-bottom:20px;line-height:1.55}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ma{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--ink-primary);transition:all .15s;background:#fff}
+.ma:hover{border-color:var(--brand-green);background:var(--brand-green-soft)}
+.ma-ico{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:1.3rem;flex-shrink:0}
+.ma-ico.materi{background:#ecfdf5;color:#0f5132}
+.ma-ico.video{background:#eff6ff;color:#1d4ed8}
+.ma-ico.pdf{background:#fffbeb;color:#b45309}
+.ma-ico.game{background:#fdf2f8;color:#be185d}
+.ma-ico.kuis{background:#f0fdf4;color:#15803d}
+.ma-info{flex:1;min-width:0}
+.ma-info strong{display:block;font-size:.92rem;font-weight:700;margin-bottom:2px}
+.ma-info span{font-size:.76rem;color:var(--ink-muted)}
+.ma.full{grid-column:1/-1}
+.ma.kuis-big{background:var(--brand-green);border-color:var(--brand-green);color:#fff}
+.ma.kuis-big:hover{background:#0b3d26}
+.ma.kuis-big .ma-ico{background:rgba(255,255,255,.18);color:#fff}
+.ma.kuis-big .ma-info span{color:rgba(255,255,255,.8)}
 
-.subjects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:54px}
-.subject-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .2s,box-shadow .2s;text-decoration:none;color:inherit}
-.subject-card:hover{border-color:#a1a1aa;box-shadow:0 12px 28px -10px rgba(0,0,0,.06)}
-.subject-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
-.icon-box{width:42px;height:42px;border-radius:12px;background:var(--bg-subtle);color:var(--ink-primary);display:grid;place-items:center;flex-shrink:0}
-.icon-box svg{width:22px;height:22px;stroke:var(--brand-green);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.subject-tag{font-size:.75rem;font-weight:600;color:var(--ink-muted);background:var(--bg-page);border:1px solid var(--border);padding:4px 10px;border-radius:99px}
-.subject-card h3{font-size:1.12rem;font-weight:700;margin-bottom:6px}
-.subject-card p{font-size:.9rem;color:var(--ink-secondary);margin-bottom:20px}
-.subject-footer{display:flex;gap:10px;padding-top:16px;border-top:1px solid var(--bg-subtle)}
-.link-btn{flex:1;text-align:center;text-decoration:none;font-size:.86rem;font-weight:600;padding:9px 14px;border-radius:9px;transition:all .15s;cursor:pointer;border:none;font-family:inherit}
-.link-btn.outline{border:1px solid var(--border);color:var(--ink-primary);background:#fff}
-.link-btn.outline:hover{background:var(--bg-subtle)}
-.link-btn.solid{background:var(--ink-primary);color:#fff}
-.link-btn.solid:hover{background:#3f3f46}
+/* QUICK BAR di bawah */
+.quickbar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+.quickbar a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:99px;text-decoration:none;font-size:.86rem;font-weight:600;border:1px solid var(--border);background:#fff;color:var(--ink-primary);transition:all .15s}
+.quickbar a:hover{border-color:var(--brand-green);background:var(--brand-green-soft);color:var(--brand-green)}
+.quickbar a .q{font-size:1.1rem}
 
-.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:54px}
-.video-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.video-frame{position:relative;padding-bottom:56.25%;background:#18181b}
-.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-caption{padding:18px 22px}
-.video-caption .vtag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--brand-green);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.video-caption h3{font-size:1rem;font-weight:700;margin-bottom:4px}
-.video-caption p{font-size:.86rem;color:var(--ink-muted)}
+footer{max-width:1080px;margin:0 auto;padding:20px 24px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.8rem;color:var(--ink-muted)}
 
-.download-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:54px}
-.download-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:border-color .2s,box-shadow .2s}
-.download-card:hover{border-color:#a1a1aa;box-shadow:0 10px 24px -10px rgba(0,0,0,.06)}
-.dl-icon{width:40px;height:40px;border-radius:10px;background:var(--brand-green-soft);display:grid;place-items:center;flex-shrink:0}
-.dl-icon svg{width:20px;height:20px;stroke:var(--brand-green);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.dl-body{flex:1;min-width:0}
-.dl-body h3{font-size:.98rem;font-weight:700;margin-bottom:2px}
-.dl-body p{font-size:.82rem;color:var(--ink-muted);margin-bottom:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dl-btn{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--brand-green);text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--brand-green);transition:background .15s}
-.dl-btn:hover{background:var(--brand-green);color:#fff}
-
-.game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:54px}
-.game-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;transition:border-color .2s,box-shadow .2s,transform .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px}
-.game-card:hover{border-color:#a1a1aa;box-shadow:0 12px 28px -10px rgba(0,0,0,.08);transform:translateY(-2px)}
-.game-emoji{font-size:1.8rem;line-height:1;margin-bottom:2px}
-.game-card h3{font-size:1rem;font-weight:700}
-.game-card p{font-size:.84rem;color:var(--ink-muted);flex:1}
-.game-play{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:var(--brand-green)}
-
-footer{max-width:1080px;margin:0 auto;padding:24px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.84rem;color:var(--ink-muted)}
-
-@media (max-width:820px){.hero-grid{grid-template-columns:1fr}.subjects-grid,.video-grid,.download-grid,.game-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-main{padding:26px}}
-@media (max-width:480px){.subjects-grid{gap:12px}.subject-card{padding:18px}.wrapper{padding:24px 16px 48px}}
+@media(max-width:820px){
+  .folder-grid{grid-template-columns:repeat(3,1fr)}
+  .nav-links{display:none}
+  .hero{flex-direction:column;text-align:center;gap:16px;padding:24px 20px}
+  .hero-cta{justify-content:center;flex-wrap:wrap}
+}
+@media(max-width:520px){
+  .folder-grid{grid-template-columns:repeat(2,1fr)}
+  .folder-icon{width:64px;height:64px}
+  .modal-actions{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -122,10 +126,7 @@ footer{max-width:1080px;margin:0 auto;padding:24px;border-top:1px solid var(--bo
       <div class="brand-text"><strong>Ruang Belajar Pak Topo</strong><span>SD Negeri 1 Tinggarjaya</span></div>
     </a>
     <div class="nav-links">
-      <a href="/portal.html">Materi &amp; Mapel</a>
-      <a href="#video">Video Belajar</a>
-      <a href="#download">Download Materi</a>
-      <a href="#game">Game Interaktif</a>
+      <a href="/portal.html">Beranda</a>
       <a href="/kuis-sas1-kelas4.html">Kuis SAS 1</a>
     </div>
   </div>
@@ -133,85 +134,59 @@ footer{max-width:1080px;margin:0 auto;padding:24px;border-top:1px solid var(--bo
 
 <main class="wrapper">
 
-  <section class="hero-grid">
-    <div class="hero-main">
-      <div>
-        <img src="/logo-sd.png" alt="Logo SD Negeri 1 Tinggarjaya" class="hero-logo">
-        <span class="eyebrow"><span class="dot"></span> Tahun Pelajaran 2026/2027 · Kelas 4</span>
-        <h1>Pusat Materi, Video, dan Latihan Evaluasi Mandiri.</h1>
-        <p>Pelajari ringkasan pokok bahasan dan simak penjelasan video sebelum mengerjakan kuis latihan Sumatif Akhir Semester. Materi disusun sesuai soal kuis tiap mata pelajaran.</p>
-      </div>
-      <div class="hero-actions">
-        <a href="/kuis-sas1-kelas4.html" class="btn-primary">
-          Mulai Kuis SAS 1
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#materi" class="btn-secondary">Lihat Daftar Materi</a>
-      </div>
+  <section class="hero">
+    <img src="/logo-sd.png" alt="Logo SD Negeri 1 Tinggarjaya" class="hero-logo">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="dot"></span> Tahun Pelajaran 2026/2027 · Kelas 4</span>
+      <h1>Ruang Belajar Siswa Kelas 4</h1>
+      <p>Pilih <strong>mapel</strong> di bawah ini untuk membuka materi, video, buku PDF, game, dan kuis. Belajar jadi lebih rapi — semua akses dalam satu klik!</p>
     </div>
-    <div class="hero-side">
-      <div class="notice-card">
-        <div class="notice-header">
-          <span class="notice-label">Papan Pengumuman</span>
-          <span class="notice-date">Info Kelas</span>
-        </div>
-        <h2>Persiapan Kuis Latihan SAS 1</h2>
-        <p>Gunakan nama lengkap dan nomor absen sesuai daftar kelas. Hasil nilai dan ulasan pembahasan langsung tampil setelah selesai. Kuis terlindungi anti-kecurangan.</p>
-      </div>
-      <div class="quiz-meta-card">
-        <div>
-          <strong>Ketentuan Pengerjaan</strong>
-          <span>Tersedia untuk kelas 4A – 4F, 8 mapel</span>
-        </div>
-        <span class="pill-limit">Maks. 2x Coba</span>
-      </div>
+    <div class="hero-cta">
+      <a href="/kuis-sas1-kelas4.html" class="btn-pill green">Kerjakan Kuis</a>
     </div>
   </section>
 
-  <section id="materi">
-    <div class="section-head">
-      <div>
-        <h2>Daftar Mata Pelajaran</h2>
-        <p>Pilih materi bacaan atau langsung menuju latihan soal per bidang studi.</p>
-      </div>
-      <span style="font-size:.85rem;color:var(--ink-muted)">Semester 1 · 8 Mata Pelajaran</span>
+  <div class="section-head">
+    <div>
+      <h2>Pilih Mapel</h2>
+      <p>Klik ikon mapel untuk membuka semua akses belajar</p>
     </div>
-    <div class="subjects-grid" id="grid-mapel"></div>
-  </section>
+    <span class="count">8 Mapel</span>
+  </div>
 
-  <section id="video">
-    <div class="section-head">
-      <div>
-        <h2>Video Penjelasan Materi</h2>
-        <p>Simak tayangan singkat berikut untuk memperkuat pemahaman sebelum evaluasi.</p>
-      </div>
-    </div>
-    <div class="video-grid" id="grid-video"></div>
-  </section>
+  <div class="folder-grid" id="grid-folder"></div>
 
-  <section id="download">
-    <div class="section-head">
-      <div>
-        <h2>Download Materi Buku</h2>
-        <p>Unduh buku siswa (PDF) untuk belajar offline. Bersumber dari Buku Sekolah resmi Kemdikbud &amp; Badan Bahasa.</p>
-      </div>
-      <span style="font-size:.85rem;color:var(--ink-muted)">8 File PDF</span>
-    </div>
-    <div class="download-grid" id="grid-download"></div>
-  </section>
-
-  <section id="game">
-    <div class="section-head">
-      <div>
-        <h2>Game Interaktif Belajar</h2>
-        <p>Asah pemahaman sambil bermain! Pilih game sesuai mapel — kumpulkan bintang sebanyak-banyaknya.</p>
-      </div>
-      <span style="font-size:.85rem;color:var(--ink-muted)">8 Game</span>
-    </div>
-    <div class="game-grid" id="grid-game"></div>
-  </section>
+  <div class="quickbar">
+    <a href="/kuis-sas1-kelas4.html"><span class="q">📝</span> Kuis SAS 1</a>
+    <a href="#folder" onclick="document.getElementById('grid-folder').scrollIntoView({behavior:'smooth'});return false"><span class="q">🗂️</span> Semua Mapel</a>
+  </div>
 
 </main>
+
+<!-- MODAL DETAIL MAPEL -->
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <img id="m-icon" src="" alt="" class="modal-icon">
+      <div>
+        <h2 id="m-nama">—</h2>
+        <p id="m-sub">—</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-topik" id="m-topik"></div>
+      <p class="modal-desc" id="m-desc"></p>
+      <div class="modal-actions">
+        <a class="ma materi" id="m-materi" href="#"><div class="ma-ico materi">📖</div><div class="ma-info"><strong>Materi Ringkas</strong><span>Baca ringkasan & contoh</span></div></a>
+        <a class="ma video" id="m-video" href="#"><div class="ma-ico video">🎬</div><div class="ma-info"><strong>Video Belajar</strong><span>Tonton di materi page</span></div></a>
+        <a class="ma pdf" id="m-pdf" href="#" target="_blank" rel="noopener" download><div class="ma-ico pdf">📄</div><div class="ma-info"><strong>Download Buku</strong><span id="m-pdf-nama">PDF buku siswa</span></div></a>
+        <a class="ma game" id="m-game" href="#"><div class="ma-ico game">🎮</div><div class="ma-info"><strong>Main Game</strong><span>Asah pemahaman</span></div></a>
+        <a class="ma kuis-big full" href="/kuis-sas1-kelas4.html"><div class="ma-ico kuis">📝</div><div class="ma-info"><strong>Kerjakan Kuis SAS 1</strong><span>Evaluasi akhir semester</span></div></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <span>Ruang Belajar Pak Topo — SD Negeri 1 Tinggarjaya</span>
@@ -220,111 +195,78 @@ footer{max-width:1080px;margin:0 auto;padding:24px;border-top:1px solid var(--bo
 
 <script src="/data-portal.js"></script>
 <script>
-const ICONS = {
-  matematika:'<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M7 7l5 5 5-5M7 12h10"/></svg>',
-  ipas:'<svg viewBox="0 0 24 24"><path d="M12 2C7 7 4 10 4 14a8 8 0 0 0 16 0c0-4-3-7-8-12z"/><path d="M12 14a3 3 0 0 1 0-6"/></svg>',
-  b_indonesia:'<svg viewBox="0 0 24 24"><path d="M4 5h16M4 5l3 14h6l3-14M8 9h8"/></svg>',
-  pancasila:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>',
-  b_inggris:'<svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/><path d="M2 10l2-5h0l2 5"/></svg>',
-  b_jawa:'<svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 4v16M12 4v16M16 4v16"/></svg>',
-  seni_rupa:'<svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 7-7M3 17l4 4"/></svg>',
-  b_banyumas:'<svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg>'
+const ORDER = ["matematika","b_indonesia","b_inggris","ipas","pancasila","b_jawa","seni_rupa","b_banyumas"];
+const ICON = "/icons/";
+// Ikon 3D dari gist (7 gambar tersedia); 8 mapel pakai 7 ikon, 1 diulang dgn emoji fallback
+const GAME_META = {
+  matematika:   {nama:"Petualangan Bilangan", emoji:"📐"},
+  b_indonesia:  {nama:"Tebak Kosakata",       emoji:"📚"},
+  b_inggris:    {nama:"Word Quest",           emoji:"🔤"},
+  ipas:         {nama:"Petualang Alam",       emoji:"🌱"},
+  pancasila:    {nama:"Garuda Pancasila",     emoji:"🦅"},
+  b_jawa:       {nama:"Aksara Jawa",          emoji:"🪯"},
+  seni_rupa:    {nama:"Pelangi Seni",         emoji:"🎨"},
+  b_banyumas:   {nama:"Banyumasan Kuis",      emoji:"🍛"},
+};
+// Mapel -> file ikon lokal
+const ICON_FILE = {
+  matematika:   "3dicons.png",
+  b_indonesia:  "casual1.png",
+  b_inggris:    "casual3.png",
+  ipas:         "space.png",
+  pancasila:    "hands.png",
+  b_jawa:       "valentine1.png",
+  seni_rupa:    "valentine2.png",
+  b_banyumas:   "3dicons.png",
 };
 
-const grid = document.getElementById('grid-mapel');
-const vgrid = document.getElementById('grid-video');
-const ORDER = ["matematika","b_indonesia","b_inggris","ipas","pancasila","b_jawa","seni_rupa","b_banyumas"];
-
+const grid = document.getElementById('grid-folder');
 ORDER.forEach(key => {
   const m = window.PORTAL_DATA[key];
   if(!m) return;
-  const materiHref = '/materi.html?mapel=' + encodeURIComponent(key);
-  const kuisHref = '/kuis-sas1-kelas4.html';
-  const card = document.createElement('a');
-  card.className = 'subject-card';
-  card.href = materiHref;
+  const card = document.createElement('div');
+  card.className = 'folder';
+  card.onclick = () => openModal(key);
   card.innerHTML = `
-    <div>
-      <div class="subject-top">
-        <div class="icon-box">${ICONS[key]}</div>
-        <span class="subject-tag">${m.semester}</span>
-      </div>
-      <h3>${m.label}</h3>
-      <p>${m.deskripsi}</p>
+    <div class="folder-wrap">
+      <img class="folder-icon" src="${ICON}${ICON_FILE[key]}" alt="${m.label}" loading="lazy" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div class=&quot;folder-icon&quot; style=&quot;display:grid;place-items:center;font-size:2.4rem;width:72px;height:72px&quot;>${GAME_META[key].emoji}</div>')">
     </div>
-    <div class="subject-footer">
-      <a class="link-btn outline" href="${materiHref}">Ringkasan Materi</a>
-      <a class="link-btn solid" href="${kuisHref}">Latihan Kuis</a>
-    </div>
+    <div class="folder-name">${m.label}</div>
+    <div class="folder-tag">${m.emoji} ${m.semester}</div>
   `;
   grid.appendChild(card);
+});
 
-  (m.video||[]).forEach(v => {
-    const item = document.createElement('div');
-    item.className = 'video-item';
-    item.innerHTML = `
-      <div class="video-frame"><iframe src="https://www.youtube.com/embed/${v.id}" title="${v.judul}" allowfullscreen loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
-      <div class="video-caption">
-        <span class="vtag">${m.label} · ${m.semester}</span>
-        <h3>${v.judul}</h3>
-        <p>${v.sumber}</p>
-      </div>
-    `;
-    vgrid.appendChild(item);
+function openModal(key){
+  const m = window.PORTAL_DATA[key];
+  if(!m) return;
+  document.getElementById('m-icon').src = ICON + ICON_FILE[key];
+  document.getElementById('m-icon').alt = m.label;
+  document.getElementById('m-nama').textContent = m.label;
+  document.getElementById('m-sub').textContent = m.emoji + ' ' + m.semester + ' · ' + (m.topik ? m.topik.length + ' topik' : '');
+  // topik chips
+  const tk = document.getElementById('m-topik');
+  tk.innerHTML = '';
+  (m.topik||[]).forEach(t => {
+    const s = document.createElement('span'); s.textContent = t; tk.appendChild(s);
   });
-});
-
-// Render kartu download buku PDF
-const dlgrid = document.getElementById('grid-download');
-const dlIconSvg = '<svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>';
-ORDER.forEach(key => {
-  const m = window.PORTAL_DATA[key];
-  if(!m || !m.pdf) return;
-  const card = document.createElement('div');
-  card.className = 'download-card';
-  card.innerHTML = `
-    <div class="dl-icon">${dlIconSvg}</div>
-    <div class="dl-body">
-      <h3>${m.label}</h3>
-      <p>${m.pdf.nama}</p>
-      <a class="dl-btn" href="${m.pdf.href}" target="_blank" rel="noopener" download>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-        Download PDF
-      </a>
-    </div>
-  `;
-  dlgrid.appendChild(card);
-});
-
-// Render kartu game interaktif per mapel
-const ggrid = document.getElementById('grid-game');
-const GAME_META = {
-  matematika:  {nama:"Petualangan Bilangan", emoji:"📐"},
-  b_indonesia: {nama:"Tebak Kosakata",       emoji:"📚"},
-  b_inggris:   {nama:"Word Quest",           emoji:"🔤"},
-  ipas:        {nama:"Petualang Alam",       emoji:"🌱"},
-  pancasila:   {nama:"Garuda Pancasila",     emoji:"🦅"},
-  b_jawa:      {nama:"Aksara Jawa",          emoji:"🪯"},
-  seni_rupa:   {nama:"Pelangi Seni",         emoji:"🎨"},
-  b_banyumas:  {nama:"Banyumasan Kuis",      emoji:"🍛"},
-};
-ORDER.forEach(key => {
-  const m = window.PORTAL_DATA[key];
-  const g = GAME_META[key];
-  if(!m || !g) return;
-  const card = document.createElement('a');
-  card.className = 'game-card';
-  card.href = '/game-' + key + '.html';
-  card.innerHTML = `
-    <div class="game-emoji">${g.emoji}</div>
-    <h3>${g.nama}</h3>
-    <p>10 soal pilihan ganda, timer 20 detik, 3 nyawa, combo bonus. Cocok untuk melatih materi ${m.label}.</p>
-    <span class="game-play">Main Sekarang
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </span>
-  `;
-  ggrid.appendChild(card);
-});
+  document.getElementById('m-desc').textContent = m.deskripsi || '';
+  // aksi link
+  document.getElementById('m-materi').href = '/materi.html?mapel=' + key;
+  document.getElementById('m-video').href = '/materi.html?mapel=' + key + '#video-list';
+  const pdfA = document.getElementById('m-pdf');
+  if(m.pdf){ pdfA.href = m.pdf.href; pdfA.style.display=''; document.getElementById('m-pdf-nama').textContent = m.pdf.nama.slice(0,32); }
+  else { pdfA.style.display='none'; }
+  document.getElementById('m-game').href = '/game-' + key + '.html';
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal').addEventListener('click', e => { if(e.target.id === 'modal') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>
