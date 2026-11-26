@@ -17,7 +17,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"z4DvDVi6Ong", judul:"Matematika Kelas 4 SD: Pecahan Senilai", sumber:"Kurikulum Merdeka"},
       {id:"lP_eabdWFo8", judul:"Pecahan Senilai — Bab 2 Pecahan", sumber:"Matematika Kelas 4 Semester 1"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=1fIzBjN3aC0_-bbTh3xYwkHHlfi7MxjA8", nama: "Buku Siswa Matematika Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "ipas": {
     label: "IPAS",
@@ -36,7 +37,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"lmjtybyvuJk", judul:"Rahasia Gaya Magnet — IPAS Kelas 4 SD", sumber:"Video pembelajaran IPAS"},
       {id:"nlXwuNHF8JM", judul:"Proses Fotosintesis pada Tumbuhan", sumber:"Kurikulum Merdeka Kelas 4"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=1Kg4N4m78zbmPjVEqK3TS0NVv1CusfgBs", nama: "Buku Siswa IPAS Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "b_indonesia": {
     label: "Bahasa Indonesia",
@@ -54,7 +56,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"BO056iHJ6co", judul:"Kalimat Transitif & Intransitif — Kelas 4 SD", sumber:"Kurikulum Merdeka Bab 1"},
       {id:"fFxujW9T5ec", judul:"Kalimat Transitif dan Intransitif", sumber:"Bahasa Indonesia Kelas 4 SD"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=13vm_4STNNX_P6dAoucrZcQCL-Iezw_3d", nama: "Buku Siswa Bahasa Indonesia Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "pancasila": {
     label: "Pendidikan Pancasila",
@@ -72,7 +75,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"l1GbVw3dvyo", judul:"Hak dan Kewajiban — PPKn Kelas 4 SD", sumber:"Video Pembelajaran Pancasila"},
       {id:"faQcT9WSuco", judul:"Hak dan Kewajiban — Bab 2 Kurikulum Merdeka", sumber:"PPKn Kelas 4"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=1g92GfjDUkcCYGsgT_tfEr_-yjvdcqsGI", nama: "Buku Siswa Pendidikan Pancasila Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "b_inggris": {
     label: "Bahasa Inggris",
@@ -90,7 +94,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"d3ulKq-pQ8Q", judul:"Telling Time — Bahasa Inggris Kelas 4 SD", sumber:"Kurikulum Merdeka"},
       {id:"ThwiGd5EaZI", judul:"Daily Activities (Daily Routines)", sumber:"Materi Bahasa Inggris Kelas 4"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=1dwtP-pYLVdbHFex3nUFt4WNL7v-Oyv0b", nama: "Buku Siswa Bahasa Inggris Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "b_jawa": {
     label: "Bahasa Jawa",
@@ -107,7 +112,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"Enb-jclXiy8", judul:"Mengenal Sandhangan Aksara Jawa", sumber:"Bahasa Jawa Kelas 4"},
       {id:"N_SS8SCc90I", judul:"Sandhangan Aksara Jawa — Semester 2", sumber:"Bahasa Jawa Kelas 4 SD"}
-    ]
+    ],
+    pdf: { href: "/materi-bahasa-jawa-kelas4.pdf", nama: "Buku Basa Jawa 'Uniknya Bahasa Jawaku' (Badan Bahasa)", sumber: "Lokal" }
   },
   "seni_rupa": {
     label: "Seni Rupa",
@@ -125,7 +131,8 @@ window.PORTAL_DATA = {
     video: [
       {id:"LEHcmgi5uc8", judul:"Membuat Gerabah dari Tanah Liat", sumber:"Seni Rupa Kelas 4"},
       {id:"gtRH8fjV62s", judul:"Membuat Diorama Rumah Adat", sumber:"Seni Rupa Kelas 4 SD/MI"}
-    ]
+    ],
+    pdf: { href: "https://drive.google.com/uc?export=download&id=1m5Yn3JOpDvATrlLIyA4ROHVe7t8HFra6", nama: "Buku Guru Seni Rupa Kelas 4 (Kurikulum Merdeka)", sumber: "Google Drive (Buku Sekolah)" }
   },
   "b_banyumas": {
     label: "Budaya Banyumasan",
@@ -143,6 +150,7 @@ window.PORTAL_DATA = {
     video: [
       {id:"Jekvp3p0yAo", judul:"Membuat Combro — Budaya Banyumasan Kelas 4", sumber:"Materi Mulok Kelas 4 SD"},
       {id:"8Rhqj6yd1tI", judul:"Begalan Banyumasan — Tradisi Seni", sumber:"Kesenian Banyumasan"}
-    ]
+    ],
+    pdf: { href: "/materi-budaya-banyumasan-kelas4.pdf", nama: "Materi Budaya Banyumasan Kelas 4 (Ringkas)", sumber: "Lokal" }
   }
 };
