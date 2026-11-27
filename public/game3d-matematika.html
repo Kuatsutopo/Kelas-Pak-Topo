@@ -398,7 +398,14 @@ function screenToWorld(clientX, clientY){
   );
   raycaster.setFromCamera(ndc, camera);
   const hit = new THREE.Vector3();
-  raycaster.ray.intersectPlane(groundPlane, hit);
+  const ok = raycaster.ray.intersectPlane(groundPlane, hit);
+  if(!ok){
+    // tap di atas horizon (langit) -> jalan ke titik jauh searah ray horizontal
+    const dir = raycaster.ray.direction.clone();
+    // pakai komponen x,z saja, normalisasi, lalu kalikan jarak 30
+    const len = Math.sqrt(dir.x*dir.x + dir.z*dir.z) || 1;
+    hit.set(dir.x/len*30 + camera.position.x, 0, dir.z/len*30 + camera.position.z);
+  }
   return hit;
 }
 
