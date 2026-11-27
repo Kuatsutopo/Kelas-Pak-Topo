@@ -369,7 +369,7 @@ const state = {
 
 // atur pos awal & yaw
 player.position.copy(state.pos);
-state.yaw = Math.PI; // hadap -z (ke tengah peta)
+state.yaw = 0; // hadap -z (ke tengah peta), kamera di belakang (+z)
 
 // === KONTROL ===
 const keys = {};
@@ -400,8 +400,9 @@ function screenToWorld(clientX, clientY){
   const hit = new THREE.Vector3();
   const ok = raycaster.ray.intersectPlane(groundPlane, hit);
   if(!ok){
-    // tap di atas horizon (langit) -> jalan ke depan pemain searah yaw, 20 unit
-    const fwd = new THREE.Vector3(Math.sin(state.yaw), 0, -Math.cos(state.yaw));
+    // tap di atas horizon (langit) -> jalan ke depan sesuai arah kamera melihat (lookAt)
+    const fwd = new THREE.Vector3().subVectors(state.pos, camera.position);
+    fwd.y = 0; fwd.normalize();
     hit.set(state.pos.x + fwd.x*20, 0, state.pos.z + fwd.z*20);
   }
   return hit;
