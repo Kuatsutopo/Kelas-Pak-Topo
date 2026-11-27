@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Petualangan 3D — Lembah Bangun Ruang & Pecahan · Kelas 4</title>
+<link rel="icon" type="image/png" href="/logo-sd-256.png">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:'Trebuchet MS','Segoe UI',sans-serif}
+#game-canvas{display:block;width:100vw;height:100vh;touch-action:none}
+/* LOADING */
+#loader{position:fixed;inset:0;background:linear-gradient(135deg,#0f5132,#10b981);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:100}
+#loader .ic{font-size:3rem;animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loader h1{font-size:1.4rem;margin:14px 0 6px;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+#loader p{font-size:.85rem;opacity:.9;max-width:300px;text-align:center;line-height:1.4}
+#loader .bar{width:240px;height:8px;background:rgba(255,255,255,.2);border-radius:4px;margin-top:14px;overflow:hidden}
+#loader .bar>div{height:100%;background:#fff;width:0;transition:width .3s}
+/* HUD */
+#hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;z-index:20;pointer-events:none;color:#fff;font-weight:700;text-shadow:0 2px 4px rgba(0,0,0,.6)}
+.hud-l{display:flex;gap:8px;align-items:center;background:rgba(0,0,0,.45);padding:6px 12px;border-radius:99px;font-size:.82rem}
+.hud-l .mat{display:flex;gap:4px}
+.hud-l .mat .d{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.5)}
+.hud-l .mat .d.on{background:#fbbf24;border-color:#fde68a;box-shadow:0 0 6px #fbbf24}
+.hud-r{background:rgba(0,0,0,.45);padding:6px 12px;border-radius:99px;font-size:.82rem}
+/* JOYSTICK */
+#joy{position:fixed;left:18px;bottom:18px;width:130px;height:130px;z-index:30;touch-action:none}
+#joy-b{width:100%;height:100%;border-radius:50%;background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.5);position:relative}
+#joy-k{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.65);border:2px solid #fff;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:none}
+/* ACTION BTN */
+#act{position:fixed;right:18px;bottom:30px;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);border:3px solid #fff;color:#fff;font-size:1.6rem;font-weight:800;display:grid;place-items:center;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,.3);touch-action:none;cursor:pointer}
+#act:active{transform:scale(.92)}
+#act .lbl{font-size:.62rem;font-weight:700;margin-top:-2px}
+/* DIALOG */
+#dlg{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);width:calc(100% - 32px);max-width:560px;background:rgba(15,23,42,.94);border:3px solid #fbbf24;border-radius:14px;padding:16px 18px;color:#fff;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.4);display:none}
+#dlg.show{display:block;animation:dlgIn .25s ease}
+@keyframes dlgIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+#dlg .nm{color:#fbbf24;font-weight:800;font-size:.92rem;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+#dlg .txt{font-size:.92rem;line-height:1.45}
+#dlg .hint{text-align:right;font-size:.74rem;color:#a7f3d0;margin-top:8px;font-weight:700}
+/* QUIZ */
+#quiz{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+#quiz.show{display:flex}
+#quiz-box{background:linear-gradient(135deg,#1e293b,#0f172a);border:3px solid #fbbf24;border-radius:18px;padding:22px 18px;width:100%;max-width:480px;color:#fff;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+#quiz-box .qh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+#quiz-box .qh .boss{font-size:2.2rem}
+#quiz-box .qh .ti{font-size:1rem;font-weight:800;color:#fbbf24}
+#quiz-box .qh .pr{margin-left:auto;font-size:.8rem;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:99px}
+#quiz-box .qq{font-size:1.05rem;font-weight:700;line-height:1.4;margin-bottom:14px}
+#quiz-box .qo{display:grid;gap:8px;margin-bottom:10px}
+#quiz-box .qo button{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2);color:#fff;padding:12px 14px;border-radius:10px;font-size:.92rem;font-weight:600;cursor:pointer;text-align:left;font-family:inherit;transition:all .15s}
+#quiz-box .qo button:hover{background:rgba(251,191,36,.2);border-color:#fbbf24}
+#quiz-box .qo button.benar{background:#10b981;border-color:#34d399}
+#quiz-box .qo button.salah{background:#ef4444;border-color:#f87171}
+#quiz-box .fb{text-align:center;font-weight:700;font-size:.95rem;padding:8px;border-radius:8px;margin-bottom:8px;min-height:24px}
+#quiz-box .fb.ok{background:rgba(16,185,129,.2);color:#6ee7b7}
+#quiz-box .fb.no{background:rgba(239,68,68,.2);color:#fca5a5}
+/* VICTORY */
+#win{position:fixed;inset:0;background:radial-gradient(circle,rgba(16,185,129,.92),rgba(15,81,50,.95));display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;z-index:60;padding:20px;text-align:center}
+#win.show{display:flex}
+#win .star{font-size:3rem;letter-spacing:6px;margin-bottom:10px}
+#win h1{font-size:1.8rem;text-shadow:0 4px 10px rgba(0,0,0,.4);margin-bottom:8px}
+#win p{font-size:.95rem;opacity:.95;margin-bottom:6px}
+#win .sk{font-size:1.3rem;font-weight:800;color:#fbbf24;margin:12px 0 18px}
+#win button{background:#fff;color:#0f5132;border:none;padding:12px 28px;border-radius:99px;font-weight:800;font-size:1rem;cursor:pointer;font-family:inherit;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+#win button:active{transform:scale(.95)}
+/* HINT label dekat NPC */
+#hint{position:fixed;left:50%;top:62%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fbbf24;padding:6px 14px;border-radius:99px;font-size:.82rem;font-weight:700;z-index:25;display:none;border:1.5px solid #fbbf24}
+#hint.show{display:block}
+@media(max-width:520px){#joy{width:110px;height:110px;left:14px;bottom:14px}#act{width:68px;height:68px;right:14px;bottom:24px;font-size:1.3rem}#dlg{bottom:110px}#quiz-box{padding:18px 14px}}
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="ic">⚔️</div>
+  <h1>Petualangan 3D</h1>
+  <p>Lembah Bangun Ruang & Pecahan — Kelas 4 SD Negeri 1 Tinggarjaya</p>
+  <div class="bar"><div id="ldbar"></div></div>
+</div>
+
+<div id="hud">
+  <div class="hud-l">🗺️ Lembah Ilmu · <div class="mat"><div class="d" id="m0"></div><div class="d" id="m1"></div><div class="d" id="m2"></div></div></div>
+  <div class="hud-r">⭐ <span id="sk">0</span></div>
+</div>
+
+<div id="hint">Tekan <b>A</b> untuk bicara</div>
+
+<div id="joy"><div id="joy-b"><div id="joy-k"></div></div></div>
+<div id="act"><div>🅰</div><div class="lbl">Aksi</div></div>
+
+<div id="dlg">
+  <div class="nm"><span id="dlg-ic">💎</span> <span id="dlg-nm">Kristal</span></div>
+  <div class="txt" id="dlg-txt"></div>
+  <div class="hint">Tekan A / Spasi untuk lanjut</div>
+</div>
+
+<div id="quiz">
+  <div id="quiz-box">
+    <div class="qh"><span class="boss">👹</span><span class="ti">Penjaga Gerbang Ujian</span><span class="pr" id="q-pr">1/4</span></div>
+    <div class="qq" id="q-q"></div>
+    <div class="qo" id="q-o"></div>
+    <div class="fb" id="q-fb"></div>
+  </div>
+</div>
+
+<div id="win">
+  <div class="star">⭐⭐⭐⭐⭐</div>
+  <h1>Kemenangan!</h1>
+  <p>Kamu menguasai Bangun Ruang & Pecahan!</p>
+  <p>Portal pengetahuan telah terbuka. 🌟</p>
+  <div class="sk" id="win-sk">Skor: 0</div>
+  <button onclick="location.reload()">🔁 Main Lagi</button>
+</div>
+
+<canvas id="game-canvas"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ============================================================
+// PETUALANGAN 3D — LEMBAH BANGUN RUANG & PECAHAN
+// Game RPG edukasi low-poly PS2 style (Three.js)
+// ============================================================
+(function(){
+'use strict';
+
+const canvas = document.getElementById('game-canvas');
+const loader = document.getElementById('loader');
+const ldbar = document.getElementById('ldbar');
+
+// === KONTEN MATERI ===
+const MATERI = [
+  {nm:"Kristal Kubus", ic:"📦", txt:"Kubus adalah bangun ruang dengan 6 sisi persegi yang sama, 12 rusuk sama panjang, dan 8 titik sudut. Volume kubus = sisi × sisi × sisi (s³). Contoh: dadu adalah kubus!"},
+  {nm:"Kristal Pecahan", ic:"➗", txt:"Pecahan senilai: pecahan yang nilainya sama walau angkanya beda. 1/2 = 2/4 = 3/6 = 4/8. Cara dapat: kalikan/bagi pembilang & penyebut dgn bilangan yang sama."},
+  {nm:"Kristal Operasi", ic:"➕", txt:"Menjumlahkan pecahan: jika penyebut sama, tinggal jumlahkan pembilangnya. Contoh: 1/4 + 2/4 = 3/4. Jika beda, samakan penyebut dulu lewat pecahan senilai!"},
+];
+const SOAL = [
+  {q:"Sebuah kubus memiliki berapa rusuk?", o:["8 rusuk","12 rusuk","6 rusuk","4 rusuk"], a:1},
+  {q:"Pecahan 1/2 sama dengan ... /8 ?", o:["2","3","4","5"], a:2},
+  {q:"Sebuah balok memiliki berapa sisi?", o:["4 sisi","6 sisi","8 sisi","12 sisi"], a:1},
+  {q:"Hasil dari 1/4 + 2/4 = ... ?", o:["1/4","2/4","3/4","4/4"], a:2},
+];
+
+// === AUDIO (Web Audio API) ===
+let actx;
+function initAudio(){if(!actx){actx = new (window.AudioContext||window.webkitAudioContext)();}}
+function beep(freq, dur, type, vol){
+  if(!actx)return;
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=type||'sine'; o.frequency.value=freq;
+  g.gain.value=vol||0.15;
+  o.connect(g); g.connect(actx.destination);
+  o.start();
+  g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime+dur);
+  o.stop(actx.currentTime+dur);
+}
+function sStep(){beep(180,0.05,'square',0.06);}
+function sCollect(){beep(660,0.1,'sine',0.18); setTimeout(()=>beep(880,0.12,'sine',0.18),100);}
+function sTalk(){beep(440,0.08,'triangle',0.12);}
+function sWin(){beep(523,0.15,'sine',0.2); setTimeout(()=>beep(659,0.15,'sine',0.2),150); setTimeout(()=>beep(784,0.3,'sine',0.2),300);}
+
+let ldProgress = 0;
+function setLoad(p){ldProgress = Math.max(ldProgress, p); ldbar.style.width = ldProgress+'%';}
+setLoad(10);
+
+// === SCENE ===
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
+scene.fog = new THREE.FogExp2(0x87ceeb, 0.018);
+setLoad(20);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 200);
+
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+setLoad(35);
+
+// === LIGHTING ===
+const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+scene.add(ambient);
+const sun = new THREE.DirectionalLight(0xfff4e6, 1.1);
+sun.position.set(20, 30, 15);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.left=-40; sun.shadow.camera.right=40;
+sun.shadow.camera.top=40; sun.shadow.camera.bottom=-40;
+sun.shadow.camera.near=0.5; sun.shadow.camera.far=80;
+scene.add(sun);
+const hemi = new THREE.HemisphereLight(0x87ceeb, 0x4ade80, 0.4);
+scene.add(hemi);
+setLoad(45);
+
+// === GROUND (pulau berumput) ===
+const groundGeo = new THREE.CircleGeometry(45, 48);
+const groundMat = new THREE.MeshLambertMaterial({color:0x6ab04c, flatShading:true});
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI/2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// pinggiran air (lingkaran besar biru)
+const waterGeo = new THREE.CircleGeometry(120, 48);
+const waterMat = new THREE.MeshLambertMaterial({color:0x3b82f6, flatShading:true, transparent:true, opacity:0.85});
+const water = new THREE.Mesh(waterGeo, waterMat);
+water.rotation.x = -Math.PI/2;
+water.position.y = -0.5;
+scene.add(water);
+
+// jalan setapak (lingkaran tengah)
+const pathGeo = new THREE.RingGeometry(8, 9, 48);
+const pathMat = new THREE.MeshLambertMaterial({color:0xd4a574, flatShading:true});
+const path = new THREE.Mesh(pathGeo, pathMat);
+path.rotation.x = -Math.PI/2;
+path.position.y = 0.02;
+scene.add(path);
+setLoad(55);
+
+// === TREES (low-poly) ===
+function makeTree(x, z, s){
+  const g = new THREE.Group();
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.25*s, 0.35*s, 1.4*s, 6), new THREE.MeshLambertMaterial({color:0x8b5a2b, flatShading:true}));
+  trunk.position.y = 0.7*s; trunk.castShadow = true;
+  const c1 = new THREE.Mesh(new THREE.ConeGeometry(1.1*s, 1.6*s, 7), new THREE.MeshLambertMaterial({color:0x228b22, flatShading:true}));
+  c1.position.y = 1.8*s; c1.castShadow = true;
+  const c2 = new THREE.Mesh(new THREE.ConeGeometry(0.85*s, 1.2*s, 7), new THREE.MeshLambertMaterial({color:0x2eb82c, flatShading:true}));
+  c2.position.y = 2.6*s; c2.castShadow = true;
+  g.add(trunk, c1, c2);
+  g.position.set(x, 0, z);
+  scene.add(g);
+  return g;
+}
+const trees = [
+  [-15,-12,1.1],[14,-10,1.3],[-18,8,1.0],[16,12,1.2],[-22,-2,1.4],[20,3,1.1],
+  [-8,-20,1.0],[10,18,1.2],[-25,15,1.3],[22,-16,1.1],[-3,22,1.0],[5,-22,1.2],
+  [-30,5,1.4],[28,8,1.3],[-12,20,1.1],[12,-22,1.0]
+];
+trees.forEach(t=>makeTree(t[0],t[1],t[2]));
+setLoad(62);
+
+// === HOUSES (rumah kecil low-poly) ===
+function makeHouse(x, z, rot){
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3, 2.2, 3), new THREE.MeshLambertMaterial({color:0xf4e4c1, flatShading:true}));
+  body.position.y = 1.1; body.castShadow = true; body.receiveShadow = true;
+  const roof = new THREE.Mesh(new THREE.ConeGeometry(2.5, 1.6, 4), new THREE.MeshLambertMaterial({color:0xb91c1c, flatShading:true}));
+  roof.position.y = 3.0; roof.rotation.y = Math.PI/4; roof.castShadow = true;
+  const door = new THREE.Mesh(new THREE.BoxGeometry(0.7, 1.2, 0.1), new THREE.MeshLambertMaterial({color:0x8b5a2b, flatShading:true}));
+  door.position.set(0, 0.6, 1.52);
+  g.add(body, roof, door);
+  g.position.set(x, 0, z); g.rotation.y = rot;
+  scene.add(g); return g;
+}
+makeHouse(-10, -8, 0.3); makeHouse(11, -7, -0.4); makeHouse(0, 18, Math.PI);
+setLoad(70);
+
+// === PLAYER (low-poly karakter) ===
+const player = new THREE.Group();
+const pBody = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.9, 0.45), new THREE.MeshLambertMaterial({color:0x2563eb, flatShading:true}));
+pBody.position.y = 0.95; pBody.castShadow = true;
+const pHead = new THREE.Mesh(new THREE.SphereGeometry(0.32, 8, 8), new THREE.MeshLambertMaterial({color:0xfbcfa3, flatShading:true}));
+pHead.position.y = 1.7; pHead.castShadow = true;
+const pHat = new THREE.Mesh(new THREE.ConeGeometry(0.4, 0.4, 8), new THREE.MeshLambertMaterial({color:0x10b981, flatShading:true}));
+pHat.position.y = 2.05; pHat.castShadow = true;
+// mata (titik hitam kecil di depan)
+const pEye = new THREE.Mesh(new THREE.SphereGeometry(0.04, 6, 6), new THREE.MeshBasicMaterial({color:0x000000}));
+pEye.position.set(0.12, 1.75, 0.3);
+const pEye2 = pEye.clone(); pEye2.position.x = -0.12;
+// lengan
+const pArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.7, 6), new THREE.MeshLambertMaterial({color:0x2563eb, flatShading:true}));
+pArmL.position.set(0.42, 0.95, 0); pArmL.castShadow = true;
+const pArmR = pArmL.clone(); pArmR.position.x = -0.42;
+// kaki
+const pLegL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.55, 6), new THREE.MeshLambertMaterial({color:0x1e293b, flatShading:true}));
+pLegL.position.set(0.18, 0.27, 0); pLegL.castShadow = true;
+const pLegR = pLegL.clone(); pLegR.position.x = -0.18;
+player.add(pBody, pHead, pHat, pEye, pEye2, pArmL, pArmR, pLegL, pLegR);
+player.position.set(0, 0, 0);
+scene.add(player);
+const playerYaw = {v: 0};
+setLoad(78);
+
+// === NPC KRISTAL MATERI ===
+const npcs = [];
+const npcPositions = [
+  {x:-16, z:6, idx:0, col:0x60a5fa, shape:'cube'},
+  {x:16, z:8, idx:1, col:0xfbbf24, shape:'frac'},
+  {x:0, z:-16, idx:2, col:0xa855f7, shape:'op'},
+];
+function makeKristal(np){
+  const g = new THREE.Group();
+  // kristal utama (bentuk berbeda per materi)
+  let body;
+  if(np.shape==='cube'){
+    body = new THREE.Mesh(new THREE.BoxGeometry(1.2,1.2,1.2), new THREE.MeshLambertMaterial({color:np.col, flatShading:true, transparent:true, opacity:0.9}));
+    body.position.y = 1.4;
+  } else if(np.shape==='frac'){
+    body = new THREE.Mesh(new THREE.OctahedronGeometry(0.85,0), new THREE.MeshLambertMaterial({color:np.col, flatShading:true, transparent:true, opacity:0.9}));
+    body.position.y = 1.4;
+  } else {
+    body = new THREE.Mesh(new THREE.TetrahedronGeometry(1.0,0), new THREE.MeshLambertMaterial({color:np.col, flatShading:true, transparent:true, opacity:0.9}));
+    body.position.y = 1.4;
+  }
+  body.castShadow = true;
+  // pedestal batu
+  const ped = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 1.1, 0.5, 8), new THREE.MeshLambertMaterial({color:0x78716c, flatShading:true}));
+  ped.position.y = 0.25; ped.castShadow = true; ped.receiveShadow = true;
+  // cincin bercahaya berputar
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.0, 0.08, 6, 24), new THREE.MeshBasicMaterial({color:np.col}));
+  ring.position.y = 2.6; ring.rotation.x = Math.PI/2;
+  // titik cahaya kecil di atas
+  const pl = new THREE.PointLight(np.col, 0.6, 4);
+  pl.position.y = 2.8;
+  g.add(body, ped, ring, pl);
+  g.userData = {ring, body, np, collected:false};
+  g.position.set(np.x, 0, np.z);
+  scene.add(g);
+  npcs.push(g);
+  return g;
+}
+npcPositions.forEach(makeKristal);
+setLoad(85);
+
+// === PENJAGA GERANG (Boss) ===
+const boss = new THREE.Group();
+const bossBody = new THREE.Mesh(new THREE.BoxGeometry(1.4, 2.0, 0.9), new THREE.MeshLambertMaterial({color:0x7c2d12, flatShading:true}));
+bossBody.position.y = 1.1; bossBody.castShadow = true;
+const bossHead = new THREE.Mesh(new THREE.SphereGeometry(0.55, 8, 8), new THREE.MeshLambertMaterial({color:0xa16207, flatShading:true}));
+bossHead.position.y = 2.35; bossHead.castShadow = true;
+const bossEye1 = new THREE.Mesh(new THREE.SphereGeometry(0.08, 6, 6), new THREE.MeshBasicMaterial({color:0xff0000}));
+bossEye1.position.set(0.2, 2.45, 0.48);
+const bossEye2 = bossEye1.clone(); bossEye2.position.x = -0.2;
+const bossCrown = new THREE.Mesh(new THREE.ConeGeometry(0.5, 0.7, 5), new THREE.MeshLambertMaterial({color:0xfbbf24, flatShading:true}));
+bossCrown.position.y = 2.95; bossCrown.castShadow = true;
+boss.add(bossBody, bossHead, bossEye1, bossEye2, bossCrown);
+boss.position.set(0, 0, 16);
+scene.add(boss);
+// gerbang portal di belakang boss
+const gate = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.3, 8, 24, Math.PI), new THREE.MeshLambertMaterial({color:0x10b981, flatShading:true, emissive:0x064e3b}));
+gate.position.set(0, 0.3, 20); gate.rotation.z = Math.PI/2;
+scene.add(gate);
+setLoad(92);
+
+// === STATE ===
+const state = {
+  pos: new THREE.Vector3(0, 0, 4),
+  yaw: Math.PI, // menghadap ke depan (z negatif) -- kita atur: yaw 0 = hadap +z
+  collected: [false, false, false],
+  skor: 0,
+  quizActive: false,
+  quizIdx: 0,
+  nearNpc: null,
+  dialogActive: false,
+  dialogStep: 0,
+  won: false,
+  walkPhase: 0,
+  stepTimer: 0,
+};
+
+// atur pos awal & yaw
+player.position.copy(state.pos);
+state.yaw = Math.PI; // hadap -z (ke tengah peta)
+
+// === KONTROL ===
+const keys = {};
+window.addEventListener('keydown', e=>{
+  initAudio();
+  keys[e.key.toLowerCase()] = true;
+  if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); doAction(); }
+});
+window.addEventListener('keyup', e=>{ keys[e.key.toLowerCase()] = false; });
+
+// Virtual joystick
+const joy = document.getElementById('joy');
+const joyK = document.getElementById('joy-k');
+const joyB = document.getElementById('joy-b');
+let joyActive = false, joyVec = {x:0, y:0}, joyId = null;
+function joyStart(e){
+  initAudio();
+  joyActive = true;
+  const t = e.touches ? e.touches[0] : e;
+  joyId = e.touches ? t.identifier : null;
+  joyMove(e);
+  e.preventDefault();
+}
+function joyMove(e){
+  if(!joyActive) return;
+  const rect = joyB.getBoundingClientRect();
+  let t = e;
+  if(e.touches){
+    for(let i=0;i<e.touches.length;i++){ if(e.touches[i].identifier===joyId){ t = e.touches[i]; break; } }
+  }
+  let dx = t.clientX - (rect.left + rect.width/2);
+  let dy = t.clientY - (rect.top + rect.height/2);
+  const mag = Math.sqrt(dx*dx+dy*dy);
+  const max = rect.width/2 - 18;
+  if(mag > max){ dx = dx/mag*max; dy = dy/mag*max; }
+  joyK.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+  joyVec.x = dx/max; joyVec.y = dy/max;
+  e.preventDefault();
+}
+function joyEnd(e){
+  joyActive = false; joyId = null;
+  joyK.style.transform = 'translate(-50%,-50%)';
+  joyVec.x = 0; joyVec.y = 0;
+}
+joy.addEventListener('touchstart', joyStart, {passive:false});
+joy.addEventListener('touchmove', joyMove, {passive:false});
+joy.addEventListener('touchend', joyEnd);
+joy.addEventListener('touchcancel', joyEnd);
+joy.addEventListener('mousedown', joyStart);
+window.addEventListener('mousemove', e=>{ if(joyActive) joyMove(e); });
+window.addEventListener('mouseup', joyEnd);
+
+// Action button
+const actBtn = document.getElementById('act');
+actBtn.addEventListener('click', ()=>{ initAudio(); doAction(); });
+actBtn.addEventListener('touchstart', e=>{ initAudio(); doAction(); e.preventDefault(); }, {passive:false});
+
+// === COLLISION (list bounding boxes sederhana: pos & radius) ===
+const obstacles = [
+  ...trees.map(t=>({x:t[0], z:t[1], r:1.1})),
+  {x:-10, z:-8, r:1.8}, {x:11, z:-7, r:1.8}, {x:0, z:18, r:1.8}, // houses
+  {x:0, z:16, r:1.4}, // boss
+];
+npcPositions.forEach(np=>obstacles.push({x:np.x, z:np.z, r:1.3, isNpc:true, idx:np.idx}));
+
+function checkCollision(nx, nz){
+  // batas pulau
+  if(nx*nx + nz*nz > 42*42) return true;
+  // obstacle
+  for(const o of obstacles){
+    const dx = nx - o.x, dz = nz - o.z;
+    if(dx*dx + dz*dz < o.r*o.r) return true;
+  }
+  return false;
+}
+
+// === DIALOG ===
+const dlg = document.getElementById('dlg');
+const dlgNm = document.getElementById('dlg-nm');
+const dlgIc = document.getElementById('dlg-ic');
+const dlgTxt = document.getElementById('dlg-txt');
+function showDlg(nm, ic, txt){
+  dlgNm.textContent = nm;
+  dlgIc.textContent = ic;
+  dlgTxt.textContent = txt;
+  dlg.classList.add('show');
+  sTalk();
+}
+function hideDlg(){ dlg.classList.remove('show'); }
+
+// === QUIZ ===
+const quizEl = document.getElementById('quiz');
+const qQ = document.getElementById('q-q');
+const qO = document.getElementById('q-o');
+const qFb = document.getElementById('q-fb');
+const qPr = document.getElementById('q-pr');
+
+function startQuiz(){
+  state.quizActive = true;
+  state.quizIdx = 0;
+  quizEl.classList.add('show');
+  renderQuiz();
+}
+function renderQuiz(){
+  if(state.quizIdx >= SOAL.length){ winGame(); return; }
+  const s = SOAL[state.quizIdx];
+  qPr.textContent = (state.quizIdx+1)+'/'+SOAL.length;
+  qQ.textContent = s.q;
+  qFb.textContent = ''; qFb.className = 'fb';
+  qO.innerHTML = '';
+  s.o.forEach((opt, i)=>{
+    const b = document.createElement('button');
+    b.textContent = String.fromCharCode(65+i)+'. '+opt;
+    b.onclick = ()=>answerQuiz(i, b, s);
+    qO.appendChild(b);
+  });
+}
+function answerQuiz(i, btn, s){
+  const btns = qO.querySelectorAll('button');
+  btns.forEach(b=>b.disabled = true);
+  if(i === s.a){
+    btn.classList.add('benar');
+    state.skor++;
+    qFb.textContent = '✓ Benar! Hebat!'; qFb.className = 'fb ok';
+    sCollect();
+  } else {
+    btn.classList.add('salah');
+    btns[s.a].classList.add('benar');
+    qFb.textContent = '✗ Jawaban benar: ' + String.fromCharCode(65+s.a) + '. ' + s.o[s.a]; qFb.className = 'fb no';
+    beep(200, 0.2, 'sawtooth', 0.12);
+  }
+  document.getElementById('sk').textContent = state.skor;
+  setTimeout(()=>{ state.quizIdx++; renderQuiz(); }, 1400);
+}
+
+function winGame(){
+  state.won = true;
+  quizEl.classList.remove('show');
+  document.getElementById('win-sk').textContent = 'Skor: ' + state.skor + ' / ' + SOAL.length;
+  document.getElementById('win').classList.add('show');
+  sWin();
+}
+
+// === ACTION ===
+function doAction(){
+  if(state.won) return;
+  if(state.quizActive) return;
+  // cek dekat NPC
+  if(state.nearNpc !== null && !state.collected[state.nearNpc]){
+    const idx = state.nearNpc;
+    const m = MATERI[idx];
+    // 2 langkah dialog: judul, lalu materi
+    if(!state.dialogActive){
+      state.dialogActive = true;
+      showDlg(m.nm, m.ic, m.txt);
+    } else {
+      // tutup & tandai terkumpul
+      hideDlg();
+      state.dialogActive = false;
+      state.collected[idx] = true;
+      document.getElementById('m'+idx).classList.add('on');
+      // sembunyikan kristal (animate up)
+      const n = npcs[idx];
+      n.userData.collected = true;
+      state.skor++;
+      document.getElementById('sk').textContent = state.skor;
+      sCollect();
+      // cek semua terkumpul -> buka ujian
+      if(state.collected.every(c=>c)){
+        setTimeout(()=>{
+          showDlg('Penjaga Gerbang', '👹', 'Kamu sudah kumpulkan semua materi! Saatnya ujian. Hadapi aku dgn 4 soal!');
+          setTimeout(()=>{ hideDlg(); startQuiz(); }, 2500);
+        }, 800);
+      }
+    }
+    return;
+  }
+  // dekat boss sebelum materi lengkap
+  const dxb = state.pos.x - boss.position.x, dzb = state.pos.z - boss.position.z;
+  if(dxb*dxb + dzb*dzb < 9){
+    if(!state.collected.every(c=>c)){
+      showDlg('Penjaga Gerbang', '👹', 'Kumpulkan dulu ke-3 Kristal Materi di lembah ini, baru kau bisa menghadapiku! 💎💎💎');
+      setTimeout(hideDlg, 3000);
+    }
+    return;
+  }
+}
+
+// === HINT ===
+const hintEl = document.getElementById('hint');
+function updateHint(){
+  if(state.nearNpc !== null && !state.collected[state.nearNpc] && !state.quizActive && !state.won){
+    hintEl.classList.add('show');
+  } else {
+    hintEl.classList.remove('show');
+  }
+}
+
+// === UPDATE LOOP ===
+let lastT = performance.now();
+function update(now){
+  const dt = Math.min((now - lastT)/1000, 0.05);
+  lastT = now;
+
+  if(!state.won && !state.quizActive){
+    // input gerak
+    let mx = 0, mz = 0;
+    if(keys['w']||keys['arrowup']) mz -= 1;
+    if(keys['s']||keys['arrowdown']) mz += 1;
+    if(keys['a']||keys['arrowleft']) mx -= 1;
+    if(keys['d']||keys['arrowright']) mx += 1;
+    // joystick
+    if(joyActive && (Math.abs(joyVec.x) > 0.15 || Math.abs(joyVec.y) > 0.15)){
+      mx = joyVec.x; mz = joyVec.y;
+    }
+    const mag = Math.sqrt(mx*mx + mz*mz);
+    if(mag > 0.05){
+      // normalisasi arah (mz: y ke depan = -z)
+      const nx = mx / Math.max(mag,1);
+      const nz = mz / Math.max(mag,1);
+      // target yaw: hadap arah gerak
+      const targetYaw = Math.atan2(nx, -nz);
+      // smooth yaw
+      let dy = targetYaw - state.yaw;
+      while(dy > Math.PI) dy -= 2*Math.PI;
+      while(dy < -Math.PI) dy += 2*Math.PI;
+      state.yaw += dy * Math.min(1, dt*10);
+      // gerak
+      const speed = 5.5;
+      const tx = state.pos.x + nx * speed * dt;
+      const tz = state.pos.z + nz * speed * dt;
+      if(!checkCollision(tx, state.pos.z)) state.pos.x = tx;
+      if(!checkCollision(state.pos.x, tz)) state.pos.z = tz;
+      // animasi kaki
+      state.walkPhase += dt * 10;
+      pLegL.rotation.x = Math.sin(state.walkPhase) * 0.5;
+      pLegR.rotation.x = -Math.sin(state.walkPhase) * 0.5;
+      pArmL.rotation.x = -Math.sin(state.walkPhase) * 0.4;
+      pArmR.rotation.x = Math.sin(state.walkPhase) * 0.4;
+      // suara langkah
+      state.stepTimer += dt;
+      if(state.stepTimer > 0.32){ sStep(); state.stepTimer = 0; }
+    } else {
+      pLegL.rotation.x = 0; pLegR.rotation.x = 0; pArmL.rotation.x = 0; pArmR.rotation.x = 0;
+    }
+
+    // terapkan ke player
+    player.position.copy(state.pos);
+    player.rotation.y = state.yaw;
+
+    // cek dekat NPC
+    state.nearNpc = null;
+    for(let i=0;i<npcPositions.length;i++){
+      if(state.collected[i]) continue;
+      const np = npcPositions[i];
+      const dx = state.pos.x - np.x, dz = state.pos.z - np.z;
+      if(dx*dx + dz*dz < 6.25){ state.nearNpc = i; break; }
+    }
+    updateHint();
+  }
+
+  // animasi kristal (putar ring + body float)
+  npcs.forEach(n=>{
+    if(n.userData.collected){
+      n.position.y += dt * 3;
+      n.scale.multiplyScalar(1 - dt*1.5);
+      if(n.scale.x < 0.05) n.visible = false;
+    } else {
+      n.userData.ring.rotation.z += dt * 1.5;
+      n.userData.body.rotation.y += dt * 0.6;
+      n.userData.body.position.y = 1.4 + Math.sin(now*0.002) * 0.15;
+    }
+  });
+  // boss breathing
+  boss.position.y = Math.sin(now*0.003) * 0.1;
+  bossCrown.rotation.y += dt * 0.5;
+  // gate glow
+  gate.rotation.y += dt * 0.8;
+
+  // === KAMERA (smooth follow, third person) ===
+  const camDist = 6.5, camHeight = 4.2;
+  const camX = state.pos.x - Math.sin(state.yaw) * camDist;
+  const camZ = state.pos.z + Math.cos(state.yaw) * camDist;
+  camera.position.x += (camX - camera.position.x) * Math.min(1, dt*6);
+  camera.position.z += (camZ - camera.position.z) * Math.min(1, dt*6);
+  camera.position.y += ((camHeight + state.pos.y) - camera.position.y) * Math.min(1, dt*6);
+  camera.lookAt(state.pos.x, state.pos.y + 1.5, state.pos.z);
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(update);
+}
+
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+setLoad(98);
+// start
+setTimeout(()=>{
+  setLoad(100);
+  setTimeout(()=>{
+    loader.style.display = 'none';
+    requestAnimationFrame(update);
+  }, 300);
+}, 200);
+
+})();
+</script>
+</body>
+</html>
