@@ -85,7 +85,41 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
 .hasil .skor{font-size:1.1rem;font-weight:700;margin-bottom:16px}
 .hasil .btn-next{max-width:280px;margin:0 auto 10px}
 .hidden{display:none}
-@media(max-width:520px){.cocok-grid{grid-template-columns:1fr}.hud{font-size:.8rem}.opts{gap:8px}.opt{padding:12px 14px;font-size:.95rem}}
+/* TARIK TAMBANG */
+.tambang{text-align:center}
+.ta-arena{position:relative;height:140px;background:linear-gradient(180deg,var(--soft) 0%,#fff 100%);border:2px solid var(--w);border-radius:16px;margin:12px 0 18px;overflow:hidden}
+.ta-rope{position:absolute;top:50%;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#92400e 0 12px,#b45309 12px 24px);transform:translateY(-50%);transition:left .4s ease,right .4s ease}
+.ta-flag{position:absolute;top:50%;left:50%;width:20px;height:24px;background:#ef4444;clip-path:polygon(0 0,100% 0,100% 60%,0 100%);transform:translate(-50%,-50%);transition:transform .4s ease}
+.ta-player{position:absolute;top:50%;left:10px;transform:translateY(-50%);font-size:3rem;transition:left .4s ease}
+.ta-robot{position:absolute;top:50%;right:10px;transform:translateY(-50%);font-size:3rem;transition:right .4s ease}
+.ta-meter{display:flex;gap:8px;justify-content:center;margin:8px 0 16px;font-size:.8rem;font-weight:700}
+.ta-meter .m{padding:5px 12px;border-radius:99px;background:var(--soft);color:var(--w)}
+.ta-level{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.ta-level .lv{padding:8px 16px;border-radius:10px;background:#fff;border:2px solid #e4e4e7;cursor:pointer;font-weight:700;font-size:.85rem;font-family:inherit;transition:all .15s}
+.ta-level .lv:hover{border-color:var(--w)}
+.ta-level .lv.active{background:var(--w);color:#fff;border-color:var(--w)}
+/* RACING */
+.race{position:relative;height:260px;background:linear-gradient(180deg,#fef3c7 0%,#fff 100%);border:2px solid var(--w);border-radius:16px;margin:12px 0 18px;overflow:hidden}
+.race-track{position:absolute;bottom:0;left:0;right:0;height:8px;background:#92400e}
+.race-finish{position:absolute;right:20px;bottom:8px;height:80px;width:6px;background:repeating-linear-gradient(0deg,#fff 0 10px,#000 10px 20px)}
+.race-car{position:absolute;bottom:14px;left:10px;font-size:2.2rem;transition:left .3s ease;z-index:2}
+.race-ai{position:absolute;bottom:14px;right:10px;font-size:2.2rem;transition:right .3s ease;z-index:2;transform:scaleX(-1)}
+.race-info{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);padding:4px 12px;border-radius:99px;font-size:.78rem;font-weight:700;color:var(--w);z-index:3}
+/* MEMORY */
+.mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mem-card{aspect-ratio:3/4;background:linear-gradient(135deg,var(--w),var(--grad));border-radius:12px;cursor:pointer;display:grid;place-items:center;color:#fff;font-weight:700;text-align:center;padding:8px;font-size:.82rem;transition:transform .2s;border:2px solid transparent;user-select:none}
+.mem-card:hover{transform:translateY(-2px)}
+.mem-card.flip{background:#fff;color:#18181b;border-color:var(--w)}
+.mem-card.done{background:#ecfdf5;color:#065f46;border-color:#10b981;cursor:default}
+.mem-card.hidden-card{visibility:hidden}
+/* RANKING */
+.rk-list{display:grid;gap:8px;margin:14px 0}
+.rk-item{background:#fff;border:2px solid #e4e4e7;border-radius:12px;padding:14px 16px;font-weight:600;cursor:grab;display:flex;align-items:center;gap:12px;transition:all .15s}
+.rk-item:hover{border-color:var(--w)}
+.rk-item.sel{background:var(--soft);border-color:var(--w)}
+.rk-rank{width:32px;height:32px;border-radius:8px;background:var(--w);color:#fff;display:grid;place-items:center;font-weight:800;flex-shrink:0;font-size:.95rem}
+.rk-item .rk-txt{flex:1}
+@media(max-width:520px){.cocok-grid{grid-template-columns:1fr}.mem-grid{grid-template-columns:repeat(2,1fr)}.hud{font-size:.8rem}.opts{gap:8px}.opt{padding:12px 14px;font-size:.95rem}}
 </style>
 </head>
 <body>
@@ -149,6 +183,42 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
     </div>
     <div class="ggo">▶</div>
   </div>
+  <div class="gcard" data-gi="5">
+    <div class="gico">🪢</div>
+    <div class="ginfo">
+      <h3>Tarik Tambang Seni vs Robot</h3>
+      <span class="mek">Tarik Tambang vs Robot</span>
+      <p>Lawan robot soal seni rupa, 3 level!</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="6">
+    <div class="gico">🏁</div>
+    <div class="ginfo">
+      <h3>Balapan Seni</h3>
+      <span class="mek">Balapan vs AI</span>
+      <p>Balapan cepat lawan AI soal seni</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="7">
+    <div class="gico">🧠</div>
+    <div class="ginfo">
+      <h3>Memory Teknik Tanah Liat</h3>
+      <span class="mek">Memory Kartu</span>
+      <p>Pasangkan teknik dgn cara</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="8">
+    <div class="gico">🏆</div>
+    <div class="ginfo">
+      <h3>Ranking Membuat Diorama</h3>
+      <span class="mek">Ranking Urutan</span>
+      <p>Urutkan langkah membuat diorama</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
 </div>
 <div class="play hidden" id="play">
   <div class="phead">
@@ -160,9 +230,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
 </div>
 <div class="foot">Game Edukatif Petualangan Seni · SD Negeri 1 Tinggarjaya · Kelas 4</div>
 <script>
-const MAP = {"games": [{"nama": "Unsur Sketsa", "mek": "kuis", "desc": "Tebak unsur sketsa", "soal": [{"q": "Unsur dasar sketsa yang membentuk kontur adalah?", "opts": ["Garis", "Warna", "Cahaya", "Bayangan"], "jawab": 0}, {"q": "Kesan permukaan benda (halus/kasar) disebut?", "opts": ["Raut", "Tekstur", "Bentuk", "Nada"], "jawab": 1}, {"q": "Gelap-terang pada sketsa disebut?", "opts": ["Tekstur", "Nada", "Bentuk", "Garis"], "jawab": 1}, {"q": "Alat utama membuat sketsa adalah?", "opts": ["Kuas", "Pensil", "Palet", "Gunting"], "jawab": 1}, {"q": "Wujud benda (bulat, kotak) disebut?", "opts": ["Bentuk", "Raut", "Nada", "Tekstur"], "jawab": 0}]}, {"nama": "Cocok Teknik Tanah Liat", "mek": "cocok", "desc": "Pasangkan teknik dgn cara", "pasangan": [{"kiri": "Coiling", "kanan": "Teknik pilin"}, {"kiri": "Pinching", "kanan": "Teknik cubit"}, {"kiri": "Slab", "kanan": "Teknik lempengan"}, {"kiri": "Throwing", "kanan": "Teknik putar"}, {"kiri": "Molding", "kanan": "Teknik cetak"}]}, {"nama": "2D atau 3D", "mek": "bs", "desc": "Tentukan karya 2D atau 3D", "soal": [{"q": "Lukisan adalah karya 2 dimensi.", "jawab": true}, {"q": "Patung adalah karya 2 dimensi.", "jawab": false}, {"q": "Poster adalah karya 2 dimensi.", "jawab": true}, {"q": "Diorama adalah karya 3 dimensi.", "jawab": true}, {"q": "Gerabah adalah karya 2 dimensi.", "jawab": false}]}, {"nama": "Urutan Membuat Diorama", "mek": "urutan", "desc": "Susun langkah membuat diorama", "soal": [{"q": "Langkah membuat diorama rumah adat:", "langkah": ["Siapkan kardus/kotak", "Buat miniatur rumah", "Pasang di latar kardus", "Tambahkan properti (pohon, jalan)", "Hias & warnai"]}]}, {"nama": "Ketik Bahan Keras", "mek": "ketik", "desc": "Lengkapi kalimat bahan seni 3D", "soal": [{"q": "Bahan gerabah dari tanah ...", "jawab": "liat"}, {"q": "Bahan putih untuk cetak patung adalah ...", "jawab": "gips"}, {"q": "Kayu dan batu termasuk bahan ... (keras/lembut)", "jawab": "keras"}]}]};
-const MEK_ICON = {"kuis": "🎯", "cocok": "🔗", "ketik": "⌨️", "urutan": "📋", "bs": "✓✗"};
-const MEK_LABEL = {"kuis": "Kuis Pilihan", "cocok": "Cocokkan Pasangan", "ketik": "Ketik Cepat", "urutan": "Susun Urutan", "bs": "Benar-Salah"};
+const MAP = {"games": [{"nama": "Unsur Sketsa", "mek": "kuis", "desc": "Tebak unsur sketsa", "soal": [{"q": "Unsur dasar sketsa yang membentuk kontur adalah?", "opts": ["Garis", "Warna", "Cahaya", "Bayangan"], "jawab": 0}, {"q": "Kesan permukaan benda (halus/kasar) disebut?", "opts": ["Raut", "Tekstur", "Bentuk", "Nada"], "jawab": 1}, {"q": "Gelap-terang pada sketsa disebut?", "opts": ["Tekstur", "Nada", "Bentuk", "Garis"], "jawab": 1}, {"q": "Alat utama membuat sketsa adalah?", "opts": ["Kuas", "Pensil", "Palet", "Gunting"], "jawab": 1}, {"q": "Wujud benda (bulat, kotak) disebut?", "opts": ["Bentuk", "Raut", "Nada", "Tekstur"], "jawab": 0}]}, {"nama": "Cocok Teknik Tanah Liat", "mek": "cocok", "desc": "Pasangkan teknik dgn cara", "pasangan": [{"kiri": "Coiling", "kanan": "Teknik pilin"}, {"kiri": "Pinching", "kanan": "Teknik cubit"}, {"kiri": "Slab", "kanan": "Teknik lempengan"}, {"kiri": "Throwing", "kanan": "Teknik putar"}, {"kiri": "Molding", "kanan": "Teknik cetak"}]}, {"nama": "2D atau 3D", "mek": "bs", "desc": "Tentukan karya 2D atau 3D", "soal": [{"q": "Lukisan adalah karya 2 dimensi.", "jawab": true}, {"q": "Patung adalah karya 2 dimensi.", "jawab": false}, {"q": "Poster adalah karya 2 dimensi.", "jawab": true}, {"q": "Diorama adalah karya 3 dimensi.", "jawab": true}, {"q": "Gerabah adalah karya 2 dimensi.", "jawab": false}]}, {"nama": "Urutan Membuat Diorama", "mek": "urutan", "desc": "Susun langkah membuat diorama", "soal": [{"q": "Langkah membuat diorama rumah adat:", "langkah": ["Siapkan kardus/kotak", "Buat miniatur rumah", "Pasang di latar kardus", "Tambahkan properti (pohon, jalan)", "Hias & warnai"]}]}, {"nama": "Ketik Bahan Keras", "mek": "ketik", "desc": "Lengkapi kalimat bahan seni 3D", "soal": [{"q": "Bahan gerabah dari tanah ...", "jawab": "liat"}, {"q": "Bahan putih untuk cetak patung adalah ...", "jawab": "gips"}, {"q": "Kayu dan batu termasuk bahan ... (keras/lembut)", "jawab": "keras"}]}, {"nama": "Tarik Tambang Seni vs Robot", "mek": "tambang", "desc": "Lawan robot soal seni rupa, 3 level!", "levels": [{"nama": "Level 1 — Unsur", "soal": [{"q": "Unsur dasar sketsa?", "opts": ["Garis", "Warna", "Cahaya", "Bayangan"], "jawab": 0}, {"q": "Kesan permukaan benda?", "opts": ["Tekstur", "Raut", "Bentuk", "Nada"], "jawab": 0}, {"q": "Gelap-terang sketsa?", "opts": ["Nada", "Tekstur", "Bentuk", "Garis"], "jawab": 0}, {"q": "Alat utama sketsa?", "opts": ["Pensil", "Kuas", "Palet", "Gunting"], "jawab": 0}, {"q": "Wujud benda disebut?", "opts": ["Bentuk", "Raut", "Nada", "Tekstur"], "jawab": 0}]}, {"nama": "Level 2 — Teknik", "soal": [{"q": "Tanah liat teknik pilin disebut?", "opts": ["Coiling", "Pinching", "Slab", "Molding"], "jawab": 0}, {"q": "Tanah liat teknik cubit?", "opts": ["Pinching", "Coiling", "Slab", "Throwing"], "jawab": 0}, {"q": "Tanah liat teknik lempengan?", "opts": ["Slab", "Coiling", "Pinching", "Molding"], "jawab": 0}, {"q": "Gips dipakai untuk?", "opts": ["Cetak patung", "Lukis", "Sketsa", "Mewarnai"], "jawab": 0}, {"q": "Lukisan termasuk seni?", "opts": ["2 dimensi", "3 dimensi", "4 dimensi", "1 dimensi"], "jawab": 0}]}, {"nama": "Level 3 — Karya", "soal": [{"q": "Patung termasuk seni?", "opts": ["3 dimensi", "2 dimensi", "1 dimensi", "4 dimensi"], "jawab": 0}, {"q": "Diorama menggambarkan?", "opts": ["Pemandangan 3D", "Lukisan 2D", "Sketsa", "Foto"], "jawab": 0}, {"q": "Seni lingkungan memanfaatkan?", "opts": ["Alam sekitar", "Kanvas", "Kertas", "Kaca"], "jawab": 0}, {"q": "Miniatur rumah adat termasuk?", "opts": ["Diorama", "Lukisan", "Sketsa", "Batik"], "jawab": 0}, {"q": "Sketsa kostum mencantumkan?", "opts": ["Warna, motif, aksesori", "Harga", "Ukuran badan", "Bahan kimia"], "jawab": 0}]}]}, {"nama": "Balapan Seni", "mek": "racing", "desc": "Balapan cepat lawan AI soal seni", "soal": [{"q": "Alat sketsa utama?", "opts": ["Pensil", "Kuas", "Palet", "Cat"], "jawab": 0}, {"q": "Bahan gerabah?", "opts": ["Tanah liat", "Gips", "Kayu", "Batu"], "jawab": 0}, {"q": "Lukisan = seni?", "opts": ["2D", "3D", "4D", "1D"], "jawab": 0}, {"q": "Patung = seni?", "opts": ["3D", "2D", "1D", "4D"], "jawab": 0}, {"q": "Teknik pilin tanah liat?", "opts": ["Coiling", "Slab", "Pinching", "Molding"], "jawab": 0}, {"q": "Seni taman termasuk?", "opts": ["Seni lingkungan", "Seni 2D", "Seni patung", "Seni sketsa"], "jawab": 0}]}, {"nama": "Memory Teknik Tanah Liat", "mek": "memory", "desc": "Pasangkan teknik dgn cara", "pasangan": [{"kiri": "Coiling", "kanan": "Pilin"}, {"kiri": "Pinching", "kanan": "Cubit"}, {"kiri": "Slab", "kanan": "Lempengan"}, {"kiri": "Throwing", "kanan": "Putar"}, {"kiri": "Molding", "kanan": "Cetak"}, {"kiri": "Sculpting", "kanan": "Ukir"}]}, {"nama": "Ranking Membuat Diorama", "mek": "ranking", "desc": "Urutkan langkah membuat diorama", "soal": [{"q": "Urutkan langkah diorama:", "item": ["Siapkan kardus", "Buat miniatur", "Pasang latar", "Tambah properti", "Hias & warnai"]}, {"q": "Urutkan langkah sketsa:", "item": ["Amati objek", "Sketsa garis kasar", "Tambah detail", "Beri nada gelap-terang", "Finishing"]}]}]};
+const MEK_ICON = {"kuis": "🎯", "cocok": "🔗", "ketik": "⌨️", "urutan": "📋", "bs": "✓✗", "tambang": "🪢", "racing": "🏁", "memory": "🧠", "ranking": "🏆"};
+const MEK_LABEL = {"kuis": "Kuis Pilihan", "cocok": "Cocokkan Pasangan", "ketik": "Ketik Cepat", "urutan": "Susun Urutan", "bs": "Benar-Salah", "tambang": "Tarik Tambang vs Robot", "racing": "Balapan vs AI", "memory": "Memory Kartu", "ranking": "Ranking Urutan"};
 
 let cur = null; // game aktif
 let state = {};
@@ -202,6 +272,10 @@ function startGame(gi){
   else if(cur.mek==='ketik') startKetik();
   else if(cur.mek==='urutan') startUrut();
   else if(cur.mek==='bs') startBS();
+  else if(cur.mek==='tambang') startTambang();
+  else if(cur.mek==='racing') startRacing();
+  else if(cur.mek==='memory') startMemory();
+  else if(cur.mek==='ranking') startRanking();
 }
 
 function hud(){return `<div class="hud"><div class="h">⭐ <span id="sk">${state.skor}</span></div><div class="h">❤️ <span class="ny" id="ny">${'❤'.repeat(state.nyawa)}</span></div><div class="h">📋 <span id="prog">0/0</span></div></div><div class="bar"><div id="bar-i"></div></div>`;}
@@ -369,6 +443,265 @@ function bsAnswer(val,s){
   if(val===s.jawab){state.skor++;fb('✓ Benar!',true);}
   else{state.nyawa--;fb('✗ Jawaban: '+(s.jawab?'Benar':'Salah'),false);}
   setTimeout(()=>{state.idx++;renderBS();},1100);
+}
+
+// === TARIK TAMBANG (vs Robot, 3 level) ===
+function startTambang(){
+  state.level=0;state.soalLeft=cur.levels.map(l=>l.soal.slice());
+  startTambangLevel();
+}
+function startTambangLevel(){
+  if(state.level>=cur.levels.length){showHasilTambang();return;}
+  if(state.nyawa<=0){showHasilTambang();return;}
+  const lv=cur.levels[state.level];
+  state.taSoal=shuffle(lv.soal);
+  state.taIdx=0;state.taPos=0; // -100 (robot menang) sampai +100 (pemain menang)
+  state.taLevelBenar=0;
+  renderTambang();
+}
+function renderTambang(){
+  if(state.taIdx>=state.taSoal.length){return tambangNext();}
+  if(state.nyawa<=0){return showHasilTambang();}
+  const s=state.taSoal[state.taIdx];
+  const lvName=cur.levels[state.level].nama;
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ <span class="ny">${'❤'.repeat(Math.max(0,state.nyawa))}</span></div><div class="h">📋 ${state.taIdx}/${state.taSoal.length}</div></div>`;
+  html+=`<div class="tambang">
+    <div class="ta-level"><span class="lv active">${lvName}</span></div>
+    <div class="ta-meter"><span class="m">Robot</span><span class="m">VS</span><span class="m">Kamu</span></div>
+    <div class="ta-arena">
+      <div class="ta-rope" id="ta-rope"></div>
+      <div class="ta-flag" id="ta-flag"></div>
+      <div class="ta-player">🧒</div>
+      <div class="ta-robot">🤖</div>
+    </div>
+    <div class="q">${s.q}</div>
+    <div class="opts" id="opts"></div>
+    <div class="fb"></div>
+  </div>`;
+  pBody.innerHTML=html;
+  updateTambangPos();
+  const opts=document.getElementById('opts');
+  s.opts.forEach((o,i)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>tambangAnswer(i,b,s);
+    opts.appendChild(b);
+  });
+}
+function updateTambangPos(){
+  const rope=document.getElementById('ta-rope');
+  const flag=document.getElementById('ta-flag');
+  if(!rope||!flag)return;
+  const shift=state.taPos; // -100..+100
+  rope.style.left=Math.max(0,shift*0.4)+'%';
+  rope.style.right=Math.max(0,-shift*0.4)+'%';
+  flag.style.transform=`translate(calc(-50% + ${shift*0.4}%),-50%)`;
+}
+function tambangAnswer(i,btn,s){
+  const all=[...document.querySelectorAll('.opt')];
+  all.forEach(b=>b.classList.add('dis'));
+  if(i===s.jawab){
+    btn.classList.add('benar');state.skor++;state.taLevelBenar++;
+    state.taPos=Math.min(100,state.taPos+30);
+    fb('✓ Benar! Kamu menarik!',true);
+  }else{
+    btn.classList.add('salah');all[s.jawab].classList.add('benar');
+    state.nyawa--;state.taPos=Math.max(-100,state.taPos-25);
+    fb('✗ Salah! Robot menarik!',false);
+  }
+  updateTambangPos();
+  setTimeout(()=>{
+    if(state.taPos>=100){state.level++;startTambangLevel();}
+    else if(state.taPos<=-100){state.nyawa=0;showHasilTambang();}
+    else{state.taIdx++;renderTambang();}
+  },1200);
+}
+function tambangNext(){
+  // level selesai, naik level
+  state.level++;
+  if(state.level>=cur.levels.length){showHasilTambang();}
+  else{startTambangLevel();}
+}
+function showHasilTambang(){
+  const pct=state.skor/(cur.levels.reduce((a,l)=>a+l.soal.length,0))*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Kamu mengalahkan robot! Hebat!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hampir menang dari robot!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, kalah tipis dari robot.';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>${state.taPos>=100?'🏆 Kamu Menang!':'🤖 Robot Menang'}</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === RACING (vs AI) ===
+function startRacing(){
+  state.soal=shuffle(cur.soal);state.total=state.soal.length;
+  state.rcPos=0;state.rcAiPos=0;state.rcIdx=0;state.rcRaceOver=false;
+  renderRacing();
+}
+function renderRacing(){
+  if(state.rcIdx>=state.total||state.nyawa<=0){return showHasilRacing();}
+  const s=state.soal[state.rcIdx];
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">📋 ${state.rcIdx}/${state.total}</div></div>`;
+  html+=`<div class="q">${s.q}</div>`;
+  html+=`<div class="race">
+    <div class="race-info">Lap ${state.rcIdx+1}/${state.total}</div>
+    <div class="race-track"></div>
+    <div class="race-finish"></div>
+    <div class="race-car" id="rc-car">🚗</div>
+    <div class="race-ai" id="rc-ai">🏎️</div>
+  </div>`;
+  html+=`<div class="opts" id="opts"></div><div class="fb"></div>`;
+  pBody.innerHTML=html;
+  updateRacingPos();
+  const opts=document.getElementById('opts');
+  s.opts.forEach((o,i)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>racingAnswer(i,b,s);
+    opts.appendChild(b);
+  });
+}
+function updateRacingPos(){
+  const car=document.getElementById('rc-car'),ai=document.getElementById('rc-ai');
+  if(!car||!ai)return;
+  const w=document.querySelector('.race').offsetWidth;
+  car.style.left=(10+state.rcPos*0.8)+'px';
+  ai.style.right=(10+state.rcAiPos*0.8)+'px';
+}
+function racingAnswer(i,btn,s){
+  const all=[...document.querySelectorAll('.opt')];
+  all.forEach(b=>b.classList.add('dis'));
+  if(i===s.jawab){
+    btn.classList.add('benar');state.skor++;
+    state.rcPos=Math.min(w_track(),state.rcPos+60);
+    fb('✓ Benar! Ngebut!',true);
+  }else{
+    btn.classList.add('salah');all[s.jawab].classList.add('benar');
+    state.nyawa--;
+    state.rcAiPos=Math.min(w_track(),state.rcAiPos+40);
+    fb('✗ Salah! AI ngebut!',false);
+  }
+  updateRacingPos();
+  setTimeout(()=>{
+    // AI selalu maju sedikit tiap soal
+    state.rcAiPos=Math.min(w_track(),state.rcAiPos+25);
+    updateRacingPos();
+    if(state.rcPos>=w_track()){state.skor+=2;return showHasilRacing(true);}
+    if(state.rcAiPos>=w_track()){return showHasilRacing(false);}
+    state.rcIdx++;renderRacing();
+  },1200);
+}
+function w_track(){return 320;}
+function showHasilRacing(win){
+  const pct=state.skor/state.total*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(win){stars='⭐⭐⭐⭐⭐';msg='🏁 Kamu menang balapan!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Kalah tipis dari AI!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, kalah sedikit.';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>${win?'🏆 Menang!':'🤖 AI Menang'}</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.total}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === MEMORY (kartu pasangan) ===
+function startMemory(){
+  const ps=shuffle(cur.pasangan).slice(0,6);
+  state.memTotal=ps.length;
+  state.memCards=[];
+  ps.forEach((p,i)=>{
+    state.memCards.push({id:i,pair:0,txt:p.kiri,done:false,flip:false});
+    state.memCards.push({id:i,pair:1,txt:p.kanan,done:false,flip:false});
+  });
+  state.memCards=shuffle(state.memCards);
+  state.memFirst=null;state.memLock=false;state.memMatched=0;
+  renderMemory();
+}
+function renderMemory(){
+  if(state.nyawa<=0){return showHasilMemory(false);}
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">🧠 ${state.memMatched}/${state.memTotal}</div></div>`;
+  html+=`<div class="q">Cari pasangan yang cocok!</div>`;
+  html+=`<div class="mem-grid" id="mem-grid"></div><div class="fb"></div>`;
+  pBody.innerHTML=html;
+  const grid=document.getElementById('mem-grid');
+  state.memCards.forEach((c,ci)=>{
+    const d=document.createElement('div');
+    d.className='mem-card'+(c.flip?' flip':'')+(c.done?' done':'');
+    d.textContent=c.flip||c.done?c.txt:'?';
+    d.dataset.ci=ci;
+    if(!c.done)d.onclick=()=>memFlip(ci);
+    grid.appendChild(d);
+  });
+}
+function memFlip(ci){
+  if(state.memLock)return;
+  const c=state.memCards[ci];
+  if(c.flip||c.done)return;
+  c.flip=true;
+  renderMemory();
+  if(state.memFirst===null){state.memFirst=ci;return;}
+  const first=state.memCards[state.memFirst];
+  if(first.id===c.id&&first.pair!==c.pair){
+    // match!
+    first.done=true;c.done=true;state.skor++;state.memMatched++;
+    state.memFirst=null;state.memLock=true;
+    fb('✓ Cocok!',true);
+    setTimeout(()=>{state.memLock=false;if(state.memMatched>=state.memTotal){showHasilMemory(true);}else{renderMemory();}},700);
+  }else{
+    state.nyawa--;state.memFirst=null;state.memLock=true;
+    fb('✗ Tidak cocok',false);
+    setTimeout(()=>{first.flip=false;c.flip=false;state.memLock=false;renderMemory();},900);
+  }
+}
+function showHasilMemory(win){
+  const pct=state.skor/state.memTotal*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Memori super! Semua cocok!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hebat, ingatan kuat!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, terus latihan!';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>Selesai!</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.memTotal}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === RANKING (urut peringkat) ===
+function startRanking(){
+  state.soal=shuffle(cur.soal);state.total=state.soal.length;
+  renderRanking();
+}
+function renderRanking(){
+  if(state.idx>=state.total||state.nyawa<=0){return showHasilRanking();}
+  const s=state.soal[state.idx];
+  state.rkUser=[];state.rkShuffled=shuffle(s.item);state.rkBenar=s.item.slice();
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">📋 ${state.idx}/${state.total}</div></div>`;
+  html+=`<div class="q">${s.q}<br><small style="font-weight:500;color:#71717a;font-size:.82rem">Klik sesuai urutan peringkat benar</small></div>`;
+  html+=`<div class="rk-list" id="rk-list"></div><div class="fb"></div>`;
+  html+=`<button class="btn-next" id="rk-check" disabled style="opacity:.5">Periksa Peringkat</button>`;
+  pBody.innerHTML=html;
+  const list=document.getElementById('rk-list');
+  state.rkShuffled.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='rk-item';d.dataset.i=i;
+    d.innerHTML=`<div class="rk-rank" id="rk-r-${i}"></div><div class="rk-txt">${t}</div>`;
+    d.onclick=()=>rkClick(i,d,t);
+    list.appendChild(d);
+  });
+  document.getElementById('rk-check').onclick=rkCheck;
+}
+function rkClick(i,d,t){
+  if(state.rkUser.length>=state.rkBenar.length)return;
+  state.rkUser.push(t);
+  const rank=document.getElementById('rk-r-'+i);
+  rank.textContent=state.rkUser.length;
+  d.classList.add('sel');
+  if(state.rkUser.length===state.rkBenar.length){
+    const chk=document.getElementById('rk-check');chk.disabled=false;chk.style.opacity=1;
+  }
+}
+function rkCheck(){
+  const benar=state.rkBenar.every((t,i)=>state.rkUser[i]===t);
+  if(benar){state.skor++;fb('✓ Peringkat benar!',true);}
+  else{state.nyawa--;fb('✗ Urutan salah: '+state.rkBenar.join(' → '),false);}
+  setTimeout(()=>{state.idx++;renderRanking();},1500);
+}
+function showHasilRanking(){
+  const pct=state.skor/state.total*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Ranking jago! Sempurna!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hebat, urutan tepat!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, terus latihan!';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>Selesai!</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.total}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
 }
 
 </script>

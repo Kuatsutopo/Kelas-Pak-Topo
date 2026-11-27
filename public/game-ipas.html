@@ -85,7 +85,41 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
 .hasil .skor{font-size:1.1rem;font-weight:700;margin-bottom:16px}
 .hasil .btn-next{max-width:280px;margin:0 auto 10px}
 .hidden{display:none}
-@media(max-width:520px){.cocok-grid{grid-template-columns:1fr}.hud{font-size:.8rem}.opts{gap:8px}.opt{padding:12px 14px;font-size:.95rem}}
+/* TARIK TAMBANG */
+.tambang{text-align:center}
+.ta-arena{position:relative;height:140px;background:linear-gradient(180deg,var(--soft) 0%,#fff 100%);border:2px solid var(--w);border-radius:16px;margin:12px 0 18px;overflow:hidden}
+.ta-rope{position:absolute;top:50%;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#92400e 0 12px,#b45309 12px 24px);transform:translateY(-50%);transition:left .4s ease,right .4s ease}
+.ta-flag{position:absolute;top:50%;left:50%;width:20px;height:24px;background:#ef4444;clip-path:polygon(0 0,100% 0,100% 60%,0 100%);transform:translate(-50%,-50%);transition:transform .4s ease}
+.ta-player{position:absolute;top:50%;left:10px;transform:translateY(-50%);font-size:3rem;transition:left .4s ease}
+.ta-robot{position:absolute;top:50%;right:10px;transform:translateY(-50%);font-size:3rem;transition:right .4s ease}
+.ta-meter{display:flex;gap:8px;justify-content:center;margin:8px 0 16px;font-size:.8rem;font-weight:700}
+.ta-meter .m{padding:5px 12px;border-radius:99px;background:var(--soft);color:var(--w)}
+.ta-level{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.ta-level .lv{padding:8px 16px;border-radius:10px;background:#fff;border:2px solid #e4e4e7;cursor:pointer;font-weight:700;font-size:.85rem;font-family:inherit;transition:all .15s}
+.ta-level .lv:hover{border-color:var(--w)}
+.ta-level .lv.active{background:var(--w);color:#fff;border-color:var(--w)}
+/* RACING */
+.race{position:relative;height:260px;background:linear-gradient(180deg,#fef3c7 0%,#fff 100%);border:2px solid var(--w);border-radius:16px;margin:12px 0 18px;overflow:hidden}
+.race-track{position:absolute;bottom:0;left:0;right:0;height:8px;background:#92400e}
+.race-finish{position:absolute;right:20px;bottom:8px;height:80px;width:6px;background:repeating-linear-gradient(0deg,#fff 0 10px,#000 10px 20px)}
+.race-car{position:absolute;bottom:14px;left:10px;font-size:2.2rem;transition:left .3s ease;z-index:2}
+.race-ai{position:absolute;bottom:14px;right:10px;font-size:2.2rem;transition:right .3s ease;z-index:2;transform:scaleX(-1)}
+.race-info{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);padding:4px 12px;border-radius:99px;font-size:.78rem;font-weight:700;color:var(--w);z-index:3}
+/* MEMORY */
+.mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mem-card{aspect-ratio:3/4;background:linear-gradient(135deg,var(--w),var(--grad));border-radius:12px;cursor:pointer;display:grid;place-items:center;color:#fff;font-weight:700;text-align:center;padding:8px;font-size:.82rem;transition:transform .2s;border:2px solid transparent;user-select:none}
+.mem-card:hover{transform:translateY(-2px)}
+.mem-card.flip{background:#fff;color:#18181b;border-color:var(--w)}
+.mem-card.done{background:#ecfdf5;color:#065f46;border-color:#10b981;cursor:default}
+.mem-card.hidden-card{visibility:hidden}
+/* RANKING */
+.rk-list{display:grid;gap:8px;margin:14px 0}
+.rk-item{background:#fff;border:2px solid #e4e4e7;border-radius:12px;padding:14px 16px;font-weight:600;cursor:grab;display:flex;align-items:center;gap:12px;transition:all .15s}
+.rk-item:hover{border-color:var(--w)}
+.rk-item.sel{background:var(--soft);border-color:var(--w)}
+.rk-rank{width:32px;height:32px;border-radius:8px;background:var(--w);color:#fff;display:grid;place-items:center;font-weight:800;flex-shrink:0;font-size:.95rem}
+.rk-item .rk-txt{flex:1}
+@media(max-width:520px){.cocok-grid{grid-template-columns:1fr}.mem-grid{grid-template-columns:repeat(2,1fr)}.hud{font-size:.8rem}.opts{gap:8px}.opt{padding:12px 14px;font-size:.95rem}}
 </style>
 </head>
 <body>
@@ -149,6 +183,42 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
     </div>
     <div class="ggo">▶</div>
   </div>
+  <div class="gcard" data-gi="5">
+    <div class="gico">🪢</div>
+    <div class="ginfo">
+      <h3>Tarik Tambang Energi vs Robot</h3>
+      <span class="mek">Tarik Tambang vs Robot</span>
+      <p>Lawan robot soal energi, 3 level!</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="6">
+    <div class="gico">🏁</div>
+    <div class="ginfo">
+      <h3>Balapan Sains</h3>
+      <span class="mek">Balapan vs AI</span>
+      <p>Balapan cepat lawan AI soal sains</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="7">
+    <div class="gico">🧠</div>
+    <div class="ginfo">
+      <h3>Memory Bentuk Energi</h3>
+      <span class="mek">Memory Kartu</span>
+      <p>Pasangkan sumber dgn energi</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
+  <div class="gcard" data-gi="8">
+    <div class="gico">🏆</div>
+    <div class="ginfo">
+      <h3>Ranking Organ Tumbuhan</h3>
+      <span class="mek">Ranking Urutan</span>
+      <p>Urutkan bagian tumbuhan dari bawah ke atas</p>
+    </div>
+    <div class="ggo">▶</div>
+  </div>
 </div>
 <div class="play hidden" id="play">
   <div class="phead">
@@ -160,9 +230,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
 </div>
 <div class="foot">Game Edukatif Petualangan Sains · SD Negeri 1 Tinggarjaya · Kelas 4</div>
 <script>
-const MAP = {"games": [{"nama": "Tebak Bentuk Energi", "mek": "kuis", "desc": "Identifikasi bentuk energi dari contoh", "soal": [{"q": "Kompor menghasilkan energi?", "opts": ["Gerak", "Panas", "Cahaya", "Bunyi"], "jawab": 1}, {"q": "Matahari adalah sumber energi?", "opts": ["Listrik & Bunyi", "Panas & Cahaya", "Gerak & Kimia", "Bunyi & Panas"], "jawab": 1}, {"q": "Drum menghasilkan energi?", "opts": ["Gerak", "Cahaya", "Bunyi", "Listrik"], "jawab": 2}, {"q": "Kincir angin menghasilkan energi?", "opts": ["Gerak", "Panas", "Bunyi", "Kimia"], "jawab": 0}, {"q": "Makanan mengandung energi?", "opts": ["Gerak", "Kimia", "Listrik", "Cahaya"], "jawab": 1}]}, {"nama": "Mengubah Energi", "mek": "cocok", "desc": "Pasangkan perubahan bentuk energi", "pasangan": [{"kiri": "Lampu menyala", "kanan": "Listrik → Cahaya"}, {"kiri": "Kipas berputar", "kanan": "Listrik → Gerak"}, {"kiri": "Kompor gas", "kanan": "Kimia → Panas"}, {"kiri": "Panel surya", "kanan": "Cahaya → Listrik"}, {"kiri": "Speaker", "kanan": "Listrik → Bunyi"}]}, {"nama": "Fotosintesis Mystery", "mek": "urutan", "desc": "Susun urutan proses fotosintesis", "soal": [{"q": "Urutan fotosintesis (bahan → hasil):", "langkah": ["Akar menyerap air", "Daun menerima CO₂ & cahaya", "Klorofil memproses", "Dihasilkan glukosa", "Oksigen dilepas ke udara"]}, {"q": "Bagian tumbuhan (dari bawah ke atas):", "langkah": ["Akar", "Batang", "Daun", "Bunga", "Buah"]}]}, {"nama": "Kutub Magnet", "mek": "bs", "desc": "Pernyataan benar atau salah tentang magnet", "soal": [{"q": "Kutub senama (U-U) saling tarik-menarik.", "jawab": false}, {"q": "Magnet menarik benda dari besi dan baja.", "jawab": true}, {"q": "Magnet tidak menarik aluminium dan tembaga.", "jawab": true}, {"q": "Kompas bekerja karena jarumnya berupa magnet.", "jawab": true}, {"q": "Kutub utara dan selatan magnet saling menolak.", "jawab": false}]}, {"nama": "Ketik Gaya & Gesek", "mek": "ketik", "desc": "Lengkapi kalimat tentang gaya", "soal": [{"q": "Gaya yang muncul saat dua permukaan bersentuhan disebut gaya ...", "jawab": "gesek"}, {"q": "Gaya dapat mengubah bentuk, arah, dan ... benda.", "jawab": "kecepatan"}, {"q": "Zat hijau daun tempat fotosintesis disebut ...", "jawab": "klorofil"}]}]};
-const MEK_ICON = {"kuis": "🎯", "cocok": "🔗", "ketik": "⌨️", "urutan": "📋", "bs": "✓✗"};
-const MEK_LABEL = {"kuis": "Kuis Pilihan", "cocok": "Cocokkan Pasangan", "ketik": "Ketik Cepat", "urutan": "Susun Urutan", "bs": "Benar-Salah"};
+const MAP = {"games": [{"nama": "Tebak Bentuk Energi", "mek": "kuis", "desc": "Identifikasi bentuk energi dari contoh", "soal": [{"q": "Kompor menghasilkan energi?", "opts": ["Gerak", "Panas", "Cahaya", "Bunyi"], "jawab": 1}, {"q": "Matahari adalah sumber energi?", "opts": ["Listrik & Bunyi", "Panas & Cahaya", "Gerak & Kimia", "Bunyi & Panas"], "jawab": 1}, {"q": "Drum menghasilkan energi?", "opts": ["Gerak", "Cahaya", "Bunyi", "Listrik"], "jawab": 2}, {"q": "Kincir angin menghasilkan energi?", "opts": ["Gerak", "Panas", "Bunyi", "Kimia"], "jawab": 0}, {"q": "Makanan mengandung energi?", "opts": ["Gerak", "Kimia", "Listrik", "Cahaya"], "jawab": 1}]}, {"nama": "Mengubah Energi", "mek": "cocok", "desc": "Pasangkan perubahan bentuk energi", "pasangan": [{"kiri": "Lampu menyala", "kanan": "Listrik → Cahaya"}, {"kiri": "Kipas berputar", "kanan": "Listrik → Gerak"}, {"kiri": "Kompor gas", "kanan": "Kimia → Panas"}, {"kiri": "Panel surya", "kanan": "Cahaya → Listrik"}, {"kiri": "Speaker", "kanan": "Listrik → Bunyi"}]}, {"nama": "Fotosintesis Mystery", "mek": "urutan", "desc": "Susun urutan proses fotosintesis", "soal": [{"q": "Urutan fotosintesis (bahan → hasil):", "langkah": ["Akar menyerap air", "Daun menerima CO₂ & cahaya", "Klorofil memproses", "Dihasilkan glukosa", "Oksigen dilepas ke udara"]}, {"q": "Bagian tumbuhan (dari bawah ke atas):", "langkah": ["Akar", "Batang", "Daun", "Bunga", "Buah"]}]}, {"nama": "Kutub Magnet", "mek": "bs", "desc": "Pernyataan benar atau salah tentang magnet", "soal": [{"q": "Kutub senama (U-U) saling tarik-menarik.", "jawab": false}, {"q": "Magnet menarik benda dari besi dan baja.", "jawab": true}, {"q": "Magnet tidak menarik aluminium dan tembaga.", "jawab": true}, {"q": "Kompas bekerja karena jarumnya berupa magnet.", "jawab": true}, {"q": "Kutub utara dan selatan magnet saling menolak.", "jawab": false}]}, {"nama": "Ketik Gaya & Gesek", "mek": "ketik", "desc": "Lengkapi kalimat tentang gaya", "soal": [{"q": "Gaya yang muncul saat dua permukaan bersentuhan disebut gaya ...", "jawab": "gesek"}, {"q": "Gaya dapat mengubah bentuk, arah, dan ... benda.", "jawab": "kecepatan"}, {"q": "Zat hijau daun tempat fotosintesis disebut ...", "jawab": "klorofil"}]}, {"nama": "Tarik Tambang Energi vs Robot", "mek": "tambang", "desc": "Lawan robot soal energi, 3 level!", "levels": [{"nama": "Level 1 — Energi Dasar", "soal": [{"q": "Kompor menghasilkan energi?", "opts": ["Panas", "Cahaya", "Gerak", "Bunyi"], "jawab": 0}, {"q": "Matahari sumber energi?", "opts": ["Panas & Cahaya", "Listrik", "Bunyi", "Gerak"], "jawab": 0}, {"q": "Drum menghasilkan energi?", "opts": ["Bunyi", "Cahaya", "Listrik", "Panas"], "jawab": 0}, {"q": "Kincir angin energi?", "opts": ["Gerak", "Panas", "Bunyi", "Kimia"], "jawab": 0}, {"q": "Makanan mengandung energi?", "opts": ["Kimia", "Listrik", "Cahaya", "Bunyi"], "jawab": 0}]}, {"nama": "Level 2 — Perubahan", "soal": [{"q": "Lampu = listrik → ?", "opts": ["Cahaya", "Gerak", "Bunyi", "Kimia"], "jawab": 0}, {"q": "Kipas = listrik → ?", "opts": ["Gerak", "Cahaya", "Panas", "Bunyi"], "jawab": 0}, {"q": "Kompor gas = kimia → ?", "opts": ["Panas", "Cahaya", "Listrik", "Gerak"], "jawab": 0}, {"q": "Panel surya = cahaya → ?", "opts": ["Listrik", "Panas", "Gerak", "Bunyi"], "jawab": 0}, {"q": "Speaker = listrik → ?", "opts": ["Bunyi", "Cahaya", "Panas", "Kimia"], "jawab": 0}]}, {"nama": "Level 3 — Konsep", "soal": [{"q": "Energi tidak dapat diciptakan atau?", "opts": ["Dimusnahkan", "Dilihat", "Disimpan", "Diukur"], "jawab": 0}, {"q": "Fotosintesis menghasilkan?", "opts": ["Glukosa & O₂", "Air & CO₂", "Cahaya & Panas", "Gula & CO₂"], "jawab": 0}, {"q": "Klorofil terdapat di?", "opts": ["Daun", "Akar", "Batang", "Bunga"], "jawab": 0}, {"q": "Gaya gesek menghasilkan?", "opts": ["Panas", "Cahaya", "Listrik", "Bunyi"], "jawab": 0}, {"q": "Kutub senama magnet saling?", "opts": ["Menolak", "Menarik", "Diam", "Putar"], "jawab": 0}]}]}, {"nama": "Balapan Sains", "mek": "racing", "desc": "Balapan cepat lawan AI soal sains", "soal": [{"q": "Alat pencernaan pertama?", "opts": ["Mulut", "Lambung", "Usus", "Kerongkongan"], "jawab": 0}, {"q": "Daun membuat makanan via?", "opts": ["Fotosintesis", "Respirasi", "Transpirasi", "Pencernaan"], "jawab": 0}, {"q": "Akar menyerap?", "opts": ["Air & mineral", "Cahaya", "Udara", "Gula"], "jawab": 0}, {"q": "Magnet punya kutub?", "opts": ["2", "3", "4", "1"], "jawab": 0}, {"q": "Bumi berputar pada?", "opts": ["Sumbu", "Orbit", "Matahari", "Bulan"], "jawab": 0}, {"q": "Gunung tertinggi di Indonesia?", "opts": ["Puncak Jaya", "Semeru", "Slamet", "Kerinci"], "jawab": 0}]}, {"nama": "Memory Bentuk Energi", "mek": "memory", "desc": "Pasangkan sumber dgn energi", "pasangan": [{"kiri": "Matahari", "kanan": "Panas & Cahaya"}, {"kiri": "Kompor", "kanan": "Panas"}, {"kiri": "Drum", "kanan": "Bunyi"}, {"kiri": "Kincir", "kanan": "Gerak"}, {"kiri": "Makanan", "kanan": "Kimia"}, {"kiri": "Lampu", "kanan": "Cahaya"}]}, {"nama": "Ranking Organ Tumbuhan", "mek": "ranking", "desc": "Urutkan bagian tumbuhan dari bawah ke atas", "soal": [{"q": "Urutkan dari bawah ke atas:", "item": ["Akar", "Batang", "Daun", "Bunga", "Buah"]}, {"q": "Urutkan proses fotosintesis:", "item": ["Akar serap air", "Daun terima cahaya", "Klorofil proses", "Hasil glukosa", "Oksigen keluar"]}]}]};
+const MEK_ICON = {"kuis": "🎯", "cocok": "🔗", "ketik": "⌨️", "urutan": "📋", "bs": "✓✗", "tambang": "🪢", "racing": "🏁", "memory": "🧠", "ranking": "🏆"};
+const MEK_LABEL = {"kuis": "Kuis Pilihan", "cocok": "Cocokkan Pasangan", "ketik": "Ketik Cepat", "urutan": "Susun Urutan", "bs": "Benar-Salah", "tambang": "Tarik Tambang vs Robot", "racing": "Balapan vs AI", "memory": "Memory Kartu", "ranking": "Ranking Urutan"};
 
 let cur = null; // game aktif
 let state = {};
@@ -202,6 +272,10 @@ function startGame(gi){
   else if(cur.mek==='ketik') startKetik();
   else if(cur.mek==='urutan') startUrut();
   else if(cur.mek==='bs') startBS();
+  else if(cur.mek==='tambang') startTambang();
+  else if(cur.mek==='racing') startRacing();
+  else if(cur.mek==='memory') startMemory();
+  else if(cur.mek==='ranking') startRanking();
 }
 
 function hud(){return `<div class="hud"><div class="h">⭐ <span id="sk">${state.skor}</span></div><div class="h">❤️ <span class="ny" id="ny">${'❤'.repeat(state.nyawa)}</span></div><div class="h">📋 <span id="prog">0/0</span></div></div><div class="bar"><div id="bar-i"></div></div>`;}
@@ -369,6 +443,265 @@ function bsAnswer(val,s){
   if(val===s.jawab){state.skor++;fb('✓ Benar!',true);}
   else{state.nyawa--;fb('✗ Jawaban: '+(s.jawab?'Benar':'Salah'),false);}
   setTimeout(()=>{state.idx++;renderBS();},1100);
+}
+
+// === TARIK TAMBANG (vs Robot, 3 level) ===
+function startTambang(){
+  state.level=0;state.soalLeft=cur.levels.map(l=>l.soal.slice());
+  startTambangLevel();
+}
+function startTambangLevel(){
+  if(state.level>=cur.levels.length){showHasilTambang();return;}
+  if(state.nyawa<=0){showHasilTambang();return;}
+  const lv=cur.levels[state.level];
+  state.taSoal=shuffle(lv.soal);
+  state.taIdx=0;state.taPos=0; // -100 (robot menang) sampai +100 (pemain menang)
+  state.taLevelBenar=0;
+  renderTambang();
+}
+function renderTambang(){
+  if(state.taIdx>=state.taSoal.length){return tambangNext();}
+  if(state.nyawa<=0){return showHasilTambang();}
+  const s=state.taSoal[state.taIdx];
+  const lvName=cur.levels[state.level].nama;
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ <span class="ny">${'❤'.repeat(Math.max(0,state.nyawa))}</span></div><div class="h">📋 ${state.taIdx}/${state.taSoal.length}</div></div>`;
+  html+=`<div class="tambang">
+    <div class="ta-level"><span class="lv active">${lvName}</span></div>
+    <div class="ta-meter"><span class="m">Robot</span><span class="m">VS</span><span class="m">Kamu</span></div>
+    <div class="ta-arena">
+      <div class="ta-rope" id="ta-rope"></div>
+      <div class="ta-flag" id="ta-flag"></div>
+      <div class="ta-player">🧒</div>
+      <div class="ta-robot">🤖</div>
+    </div>
+    <div class="q">${s.q}</div>
+    <div class="opts" id="opts"></div>
+    <div class="fb"></div>
+  </div>`;
+  pBody.innerHTML=html;
+  updateTambangPos();
+  const opts=document.getElementById('opts');
+  s.opts.forEach((o,i)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>tambangAnswer(i,b,s);
+    opts.appendChild(b);
+  });
+}
+function updateTambangPos(){
+  const rope=document.getElementById('ta-rope');
+  const flag=document.getElementById('ta-flag');
+  if(!rope||!flag)return;
+  const shift=state.taPos; // -100..+100
+  rope.style.left=Math.max(0,shift*0.4)+'%';
+  rope.style.right=Math.max(0,-shift*0.4)+'%';
+  flag.style.transform=`translate(calc(-50% + ${shift*0.4}%),-50%)`;
+}
+function tambangAnswer(i,btn,s){
+  const all=[...document.querySelectorAll('.opt')];
+  all.forEach(b=>b.classList.add('dis'));
+  if(i===s.jawab){
+    btn.classList.add('benar');state.skor++;state.taLevelBenar++;
+    state.taPos=Math.min(100,state.taPos+30);
+    fb('✓ Benar! Kamu menarik!',true);
+  }else{
+    btn.classList.add('salah');all[s.jawab].classList.add('benar');
+    state.nyawa--;state.taPos=Math.max(-100,state.taPos-25);
+    fb('✗ Salah! Robot menarik!',false);
+  }
+  updateTambangPos();
+  setTimeout(()=>{
+    if(state.taPos>=100){state.level++;startTambangLevel();}
+    else if(state.taPos<=-100){state.nyawa=0;showHasilTambang();}
+    else{state.taIdx++;renderTambang();}
+  },1200);
+}
+function tambangNext(){
+  // level selesai, naik level
+  state.level++;
+  if(state.level>=cur.levels.length){showHasilTambang();}
+  else{startTambangLevel();}
+}
+function showHasilTambang(){
+  const pct=state.skor/(cur.levels.reduce((a,l)=>a+l.soal.length,0))*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Kamu mengalahkan robot! Hebat!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hampir menang dari robot!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, kalah tipis dari robot.';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>${state.taPos>=100?'🏆 Kamu Menang!':'🤖 Robot Menang'}</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === RACING (vs AI) ===
+function startRacing(){
+  state.soal=shuffle(cur.soal);state.total=state.soal.length;
+  state.rcPos=0;state.rcAiPos=0;state.rcIdx=0;state.rcRaceOver=false;
+  renderRacing();
+}
+function renderRacing(){
+  if(state.rcIdx>=state.total||state.nyawa<=0){return showHasilRacing();}
+  const s=state.soal[state.rcIdx];
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">📋 ${state.rcIdx}/${state.total}</div></div>`;
+  html+=`<div class="q">${s.q}</div>`;
+  html+=`<div class="race">
+    <div class="race-info">Lap ${state.rcIdx+1}/${state.total}</div>
+    <div class="race-track"></div>
+    <div class="race-finish"></div>
+    <div class="race-car" id="rc-car">🚗</div>
+    <div class="race-ai" id="rc-ai">🏎️</div>
+  </div>`;
+  html+=`<div class="opts" id="opts"></div><div class="fb"></div>`;
+  pBody.innerHTML=html;
+  updateRacingPos();
+  const opts=document.getElementById('opts');
+  s.opts.forEach((o,i)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>racingAnswer(i,b,s);
+    opts.appendChild(b);
+  });
+}
+function updateRacingPos(){
+  const car=document.getElementById('rc-car'),ai=document.getElementById('rc-ai');
+  if(!car||!ai)return;
+  const w=document.querySelector('.race').offsetWidth;
+  car.style.left=(10+state.rcPos*0.8)+'px';
+  ai.style.right=(10+state.rcAiPos*0.8)+'px';
+}
+function racingAnswer(i,btn,s){
+  const all=[...document.querySelectorAll('.opt')];
+  all.forEach(b=>b.classList.add('dis'));
+  if(i===s.jawab){
+    btn.classList.add('benar');state.skor++;
+    state.rcPos=Math.min(w_track(),state.rcPos+60);
+    fb('✓ Benar! Ngebut!',true);
+  }else{
+    btn.classList.add('salah');all[s.jawab].classList.add('benar');
+    state.nyawa--;
+    state.rcAiPos=Math.min(w_track(),state.rcAiPos+40);
+    fb('✗ Salah! AI ngebut!',false);
+  }
+  updateRacingPos();
+  setTimeout(()=>{
+    // AI selalu maju sedikit tiap soal
+    state.rcAiPos=Math.min(w_track(),state.rcAiPos+25);
+    updateRacingPos();
+    if(state.rcPos>=w_track()){state.skor+=2;return showHasilRacing(true);}
+    if(state.rcAiPos>=w_track()){return showHasilRacing(false);}
+    state.rcIdx++;renderRacing();
+  },1200);
+}
+function w_track(){return 320;}
+function showHasilRacing(win){
+  const pct=state.skor/state.total*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(win){stars='⭐⭐⭐⭐⭐';msg='🏁 Kamu menang balapan!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Kalah tipis dari AI!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, kalah sedikit.';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>${win?'🏆 Menang!':'🤖 AI Menang'}</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.total}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === MEMORY (kartu pasangan) ===
+function startMemory(){
+  const ps=shuffle(cur.pasangan).slice(0,6);
+  state.memTotal=ps.length;
+  state.memCards=[];
+  ps.forEach((p,i)=>{
+    state.memCards.push({id:i,pair:0,txt:p.kiri,done:false,flip:false});
+    state.memCards.push({id:i,pair:1,txt:p.kanan,done:false,flip:false});
+  });
+  state.memCards=shuffle(state.memCards);
+  state.memFirst=null;state.memLock=false;state.memMatched=0;
+  renderMemory();
+}
+function renderMemory(){
+  if(state.nyawa<=0){return showHasilMemory(false);}
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">🧠 ${state.memMatched}/${state.memTotal}</div></div>`;
+  html+=`<div class="q">Cari pasangan yang cocok!</div>`;
+  html+=`<div class="mem-grid" id="mem-grid"></div><div class="fb"></div>`;
+  pBody.innerHTML=html;
+  const grid=document.getElementById('mem-grid');
+  state.memCards.forEach((c,ci)=>{
+    const d=document.createElement('div');
+    d.className='mem-card'+(c.flip?' flip':'')+(c.done?' done':'');
+    d.textContent=c.flip||c.done?c.txt:'?';
+    d.dataset.ci=ci;
+    if(!c.done)d.onclick=()=>memFlip(ci);
+    grid.appendChild(d);
+  });
+}
+function memFlip(ci){
+  if(state.memLock)return;
+  const c=state.memCards[ci];
+  if(c.flip||c.done)return;
+  c.flip=true;
+  renderMemory();
+  if(state.memFirst===null){state.memFirst=ci;return;}
+  const first=state.memCards[state.memFirst];
+  if(first.id===c.id&&first.pair!==c.pair){
+    // match!
+    first.done=true;c.done=true;state.skor++;state.memMatched++;
+    state.memFirst=null;state.memLock=true;
+    fb('✓ Cocok!',true);
+    setTimeout(()=>{state.memLock=false;if(state.memMatched>=state.memTotal){showHasilMemory(true);}else{renderMemory();}},700);
+  }else{
+    state.nyawa--;state.memFirst=null;state.memLock=true;
+    fb('✗ Tidak cocok',false);
+    setTimeout(()=>{first.flip=false;c.flip=false;state.memLock=false;renderMemory();},900);
+  }
+}
+function showHasilMemory(win){
+  const pct=state.skor/state.memTotal*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Memori super! Semua cocok!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hebat, ingatan kuat!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, terus latihan!';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>Selesai!</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.memTotal}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
+}
+
+// === RANKING (urut peringkat) ===
+function startRanking(){
+  state.soal=shuffle(cur.soal);state.total=state.soal.length;
+  renderRanking();
+}
+function renderRanking(){
+  if(state.idx>=state.total||state.nyawa<=0){return showHasilRanking();}
+  const s=state.soal[state.idx];
+  state.rkUser=[];state.rkShuffled=shuffle(s.item);state.rkBenar=s.item.slice();
+  let html=`<div class="hud"><div class="h">⭐ ${state.skor}</div><div class="h">❤️ ${'❤'.repeat(Math.max(0,state.nyawa))}</div><div class="h">📋 ${state.idx}/${state.total}</div></div>`;
+  html+=`<div class="q">${s.q}<br><small style="font-weight:500;color:#71717a;font-size:.82rem">Klik sesuai urutan peringkat benar</small></div>`;
+  html+=`<div class="rk-list" id="rk-list"></div><div class="fb"></div>`;
+  html+=`<button class="btn-next" id="rk-check" disabled style="opacity:.5">Periksa Peringkat</button>`;
+  pBody.innerHTML=html;
+  const list=document.getElementById('rk-list');
+  state.rkShuffled.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='rk-item';d.dataset.i=i;
+    d.innerHTML=`<div class="rk-rank" id="rk-r-${i}"></div><div class="rk-txt">${t}</div>`;
+    d.onclick=()=>rkClick(i,d,t);
+    list.appendChild(d);
+  });
+  document.getElementById('rk-check').onclick=rkCheck;
+}
+function rkClick(i,d,t){
+  if(state.rkUser.length>=state.rkBenar.length)return;
+  state.rkUser.push(t);
+  const rank=document.getElementById('rk-r-'+i);
+  rank.textContent=state.rkUser.length;
+  d.classList.add('sel');
+  if(state.rkUser.length===state.rkBenar.length){
+    const chk=document.getElementById('rk-check');chk.disabled=false;chk.style.opacity=1;
+  }
+}
+function rkCheck(){
+  const benar=state.rkBenar.every((t,i)=>state.rkUser[i]===t);
+  if(benar){state.skor++;fb('✓ Peringkat benar!',true);}
+  else{state.nyawa--;fb('✗ Urutan salah: '+state.rkBenar.join(' → '),false);}
+  setTimeout(()=>{state.idx++;renderRanking();},1500);
+}
+function showHasilRanking(){
+  const pct=state.skor/state.total*100;
+  let stars='⭐⭐',msg='Tetap semangat!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Ranking jago! Sempurna!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hebat, urutan tepat!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, terus latihan!';}
+  pBody.innerHTML=`<div class="hasil"><div class="star">${stars}</div><h2>Selesai!</h2><p>${msg}</p><div class="skor">Skor: ${state.skor}/${state.total}</div><button class="btn-next" onclick="startGame(MAP.games.indexOf(cur))">🔁 Main Lagi</button><button class="btn-next" onclick="backHub()">🏠 Pilih Game Lain</button></div>`;
 }
 
 </script>
