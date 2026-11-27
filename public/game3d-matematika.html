@@ -293,9 +293,9 @@ setLoad(78);
 // === NPC KRISTAL MATERI ===
 const npcs = [];
 const npcPositions = [
-  {x:-16, z:6, idx:0, col:0x60a5fa, shape:'cube'},
-  {x:16, z:8, idx:1, col:0xfbbf24, shape:'frac'},
-  {x:0, z:-16, idx:2, col:0xa855f7, shape:'op'},
+  {x:-10, z:4, idx:0, col:0x60a5fa, shape:'cube'},
+  {x:10, z:5, idx:1, col:0xfbbf24, shape:'frac'},
+  {x:0, z:-10, idx:2, col:0xa855f7, shape:'op'},
 ];
 function makeKristal(np){
   const g = new THREE.Group();
@@ -736,7 +736,7 @@ function update(now){
       if(state.collected[i]) continue;
       const np = npcPositions[i];
       const dx = state.pos.x - np.x, dz = state.pos.z - np.z;
-      if(dx*dx + dz*dz < 6.25){ state.nearNpc = i; break; }
+      if(dx*dx + dz*dz < 12){ state.nearNpc = i; break; }
     }
     updateHint();
   }
