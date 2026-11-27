@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab Sains Interaktif — Kelas 4 SD Negeri 1 Tinggarjaya</title>
+<link rel="icon" type="image/png" href="/logo-sd-256.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--w:#065f46;--soft:#ecfdf5;--grad:#22c55e;--gold:#f59e0b;--red:#ef4444;--blue:#3b82f6;--dark:#0f172a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-gradient(135deg,#faf9f6,#f3f1ec);color:#18181b;min-height:100vh;padding:16px;-webkit-font-smoothing:antialiased}
+.top{display:flex;align-items:center;gap:12px;max-width:780px;margin:0 auto 18px;text-decoration:none;color:#18181b}
+.top img{width:42px;height:42px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid #e4e4e7}
+.top strong{display:block;font-size:.95rem;font-weight:700}
+.top span{font-size:.78rem;color:#71717a}
+.hero{max-width:780px;margin:0 auto 22px;background:linear-gradient(135deg,var(--w),var(--grad));color:#fff;border-radius:24px;padding:26px 22px;text-align:center;box-shadow:0 20px 50px -20px rgba(0,0,0,.18)}
+.hero .icon{font-size:2.6rem;display:block;margin-bottom:6px}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.3rem,5vw,1.9rem);font-weight:700;letter-spacing:-.01em}
+.hero p{font-size:.9rem;opacity:.94;margin-top:4px}
+.nav{max-width:780px;margin:0 auto 18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.nav a{text-decoration:none;font-size:.84rem;font-weight:600;padding:9px 16px;border-radius:99px;background:#fff;border:1px solid #e4e4e7;color:#18181b;transition:all .15s}
+.nav a:hover{border-color:var(--w);color:var(--w)}
+.nav a.primary{background:var(--w);color:#fff;border-color:var(--w)}
+.hub{max-width:780px;margin:0 auto;display:grid;gap:14px}
+.gcard{background:#fff;border:1px solid #e4e4e7;border-radius:18px;padding:18px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .15s;box-shadow:0 10px 24px -14px rgba(0,0,0,.08)}
+.gcard:hover{transform:translateY(-2px);border-color:var(--w);box-shadow:0 16px 32px -16px rgba(0,0,0,.14)}
+.gico{flex-shrink:0;width:56px;height:56px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:1.8rem;border:1px solid #065f4622}
+.ginfo{flex:1}
+.ginfo h3{font-size:1.05rem;font-weight:700;color:#18181b;margin-bottom:2px}
+.ginfo .tag{font-size:.74rem;font-weight:700;color:var(--w);text-transform:uppercase;letter-spacing:.04em}
+.ginfo p{font-size:.84rem;color:#71717a;margin-top:2px}
+.ggo{flex-shrink:0;color:var(--w);font-size:1.4rem;font-weight:800}
+.foot{max-width:780px;margin:24px auto 0;text-align:center;font-size:.8rem;color:#71717a;padding:18px}
+/* PLAY */
+.play{max-width:780px;margin:0 auto;background:#fff;border:1px solid #e4e4e7;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.08)}
+.phead{background:linear-gradient(135deg,var(--w),var(--grad));color:#fff;padding:18px 20px;display:flex;align-items:center;gap:14px}
+.pback{background:rgba(255,255,255,.2);border:none;color:#fff;width:38px;height:38px;border-radius:10px;font-size:1.2rem;cursor:pointer;font-family:inherit}
+.phead h2{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;flex:1}
+.phead .pico{font-size:1.6rem}
+.pbody{padding:22px}
+.hidden{display:none}
+.lab-q{font-size:1.05rem;font-weight:700;text-align:center;margin-bottom:14px;color:var(--dark)}
+.lab-hint{font-size:.84rem;color:#71717a;text-align:center;margin-bottom:18px}
+/* DAYA HANTAR LISTRIK */
+.dh-stage{background:linear-gradient(180deg,#f0fdf4 0%,#fff 100%);border:2px solid var(--w);border-radius:16px;padding:18px;margin-bottom:16px}
+.dh-circuit{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;font-size:.78rem;font-weight:700}
+.dh-battery{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;background:#fff;border:2px solid var(--dark);border-radius:8px}
+.dh-battery .b-body{width:40px;height:54px;background:var(--dark);border-radius:4px;position:relative}
+.dh-battery .b-cap{width:18px;height:6px;background:var(--dark);margin-top:1px}
+.dh-battery .b-plus{position:absolute;top:6px;left:6px;color:#fff;font-weight:800;font-size:.7rem}
+.dh-battery .b-min{position:absolute;bottom:6px;right:6px;color:#fff;font-weight:800;font-size:.7rem}
+.dh-wire{height:6px;background:var(--dark);border-radius:3px;min-width:30px;flex:1;max-width:80px}
+.dh-wire.on{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.dh-bulb{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px}
+.dh-bulb-ico{font-size:2.6rem;transition:all .3s;filter:grayscale(1)}
+.dh-bulb.on .dh-bulb-ico{filter:grayscale(0) drop-shadow(0 0 14px var(--gold));transform:scale(1.08)}
+.dh-bulb.off .dh-bulb-ico{filter:grayscale(1) opacity(.6)}
+.dh-mat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;background:#fff;border:2px dashed var(--w);border-radius:8px;min-width:80px;transition:all .2s}
+.dh-mat.on{border-style:solid;background:var(--soft)}
+.dh-mat-ico{font-size:1.6rem}
+.dh-mat-name{font-size:.78rem;font-weight:700;color:var(--dark)}
+.dh-matlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
+.dh-matbtn{background:#fff;border:2px solid #e4e4e7;border-radius:12px;padding:12px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .15s;font-family:inherit}
+.dh-matbtn:hover{border-color:var(--w);transform:translateY(-2px)}
+.dh-matbtn.sel{border-color:var(--w);background:var(--soft)}
+.dh-matbtn .m-ico{font-size:2rem}
+.dh-matbtn .m-nm{font-size:.78rem;font-weight:700;color:var(--dark)}
+.dh-result{text-align:center;font-weight:700;font-size:1rem;padding:12px;border-radius:12px;margin-bottom:10px}
+.dh-result.yes{background:#ecfdf5;color:#065f46;border:2px solid #10b981}
+.dh-result.no{background:#fef2f2;color:#991b1b;border:2px solid #ef4444}
+.dh-score{display:flex;justify-content:center;gap:14px;background:var(--soft);border:1px solid #e4e4e7;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:700;font-size:.88rem}
+/* MAGNET */
+.mg-stage{background:linear-gradient(180deg,#fef3c7 0%,#fff 100%);border:2px solid var(--gold);border-radius:16px;padding:18px;margin-bottom:16px;text-align:center}
+.mg-pole{display:flex;justify-content:center;gap:60px;margin-bottom:14px;position:relative}
+.mg-magnet{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px;cursor:grab;transition:transform .15s}
+.mg-magnet:hover{transform:scale(1.05)}
+.mg-magnet .m-bar{width:50px;height:70px;border-radius:6px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.4rem}
+.mg-magnet.n .m-bar{background:linear-gradient(180deg,var(--red),#b91c1c)}
+.mg-magnet.s .m-bar{background:linear-gradient(180deg,var(--blue),#1d4ed8)}
+.mg-magnet .m-lbl{font-size:.74rem;font-weight:700;color:var(--dark)}
+.mg-arrows{font-size:2rem;margin:8px 0;transition:all .3s}
+.mg-test{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.mg-item{background:#fff;border:2px solid #e4e4e7;border-radius:12px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all .15s;font-family:inherit}
+.mg-item:hover{border-color:var(--gold);transform:translateY(-2px)}
+.mg-item .m-ico{font-size:2rem}
+.mg-item .m-nm{font-size:.78rem;font-weight:700;color:var(--dark)}
+.mg-fb{padding:12px;border-radius:12px;font-weight:700;text-align:center;margin-bottom:10px}
+.mg-fb.attract{background:#ecfdf5;color:#065f46;border:2px solid #10b981}
+.mg-fb.repel{background:#fef2f2;color:#991b1b;border:2px solid #ef4444}
+.mg-fb.nothing{background:#f4f4f5;color:#52525b;border:2px solid #a1a1aa}
+/* FOTOSINTESIS */
+.ft-stage{background:linear-gradient(180deg,#dbeafe 0%,#fff 100%);border:2px solid var(--blue);border-radius:16px;padding:18px;margin-bottom:16px}
+.ft-tree{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:14px}
+.ft-leaf{font-size:3rem;transition:all .4s}
+.ft-leaf.dead{filter:grayscale(1) opacity(.4);transform:scale(.9)}
+.ft-leaf.glow{filter:drop-shadow(0 0 12px #22c55e)}
+.ft-need{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}
+.ft-need-btn{background:#fff;border:2px solid #e4e4e7;border-radius:12px;padding:12px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .15s;font-family:inherit}
+.ft-need-btn:hover{border-color:var(--blue);transform:translateY(-2px)}
+.ft-need-btn.on{border-color:var(--grad);background:#ecfdf5}
+.ft-need-btn .n-ico{font-size:1.8rem}
+.ft-need-btn .n-nm{font-size:.74rem;font-weight:700;color:var(--dark)}
+.ft-status{padding:12px;border-radius:12px;font-weight:700;text-align:center;margin-bottom:10px;background:#f4f4f5;color:#52525b;border:2px solid #a1a1aa}
+.ft-status.alive{background:#ecfdf5;color:#065f46;border:2px solid #10b981}
+/* AIR/CAIR */
+.ar-stage{background:linear-gradient(180deg,#e0f2fe 0%,#fff 100%);border:2px solid #0ea5e9;border-radius:16px;padding:18px;margin-bottom:16px;text-align:center}
+.ar-cups{display:flex;justify-content:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.ar-cup{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:transform .15s}
+.ar-cup:hover{transform:scale(1.05)}
+.ar-cup .c-glass{width:50px;height:60px;border:3px solid var(--dark);border-top:none;border-radius:0 0 8px 8px;position:relative;overflow:hidden}
+.ar-cup .c-water{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#7dd3fc,#0ea5e9);transition:height .3s}
+.ar-cup .c-lbl{font-size:.78rem;font-weight:700;color:var(--dark)}
+.ar-result{padding:12px;border-radius:12px;font-weight:700;text-align:center;background:#f4f4f5;color:#52525b;border:2px solid #a1a1aa}
+.ar-result.ok{background:#ecfdf5;color:#065f46;border:2px solid #10b981}
+.ar-result.no{background:#fef2f2;color:#991b1b;border:2px solid #ef4444}
+.btn{display:block;width:100%;background:var(--w);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1.05rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn:disabled{opacity:.5;cursor:default}
+@media(max-width:520px){.dh-matlist,.ft-need,.mg-test{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<a href="/portal.html" class="top">
+  <img src="/logo-sd-512.png" alt="Logo SD">
+  <div><strong>Ruang Belajar Pak Topo</strong><span>SD Negeri 1 Tinggarjaya · Kelas 4</span></div>
+</a>
+<section class="hero">
+  <span class="icon">🔬</span>
+  <h1>Lab Sains Interaktif</h1>
+  <p>Ayo jadi ilmuwan muda! Uji, coba, dan temukan sendiri konsep sains</p>
+</section>
+<nav class="nav">
+  <a href="/materi.html?mapel=ipas" class="primary">📖 Materi IPAS</a>
+  <a href="/game-ipas.html">🎮 Game IPAS</a>
+  <a href="/rangkuman-ipas.html">📋 Rangkuman</a>
+  <a href="/portal.html">🗂️ Mapel Lain</a>
+</nav>
+<div class="hub" id="hub">
+  <div class="gcard" data-gi="0"><div class="gico">💡</div><div class="ginfo"><h3>Daya Hantar Listrik</h3><span class="tag">Simulasi Rangkaian</span><p>Pilih material, tutup saklar — lampu menyala jika konduktor</p></div><div class="ggo">▶</div></div>
+  <div class="gcard" data-gi="1"><div class="gico">🧲</div><div class="ginfo"><h3>Tarik & Tolak Magnet</h3><span class="tag">Simulasi Magnet</span><p>Uji benda, tarik atau tolak? Lihat gerak magnet</p></div><div class="ggo">▶</div></div>
+  <div class="gcard" data-gi="2"><div class="gico">🌱</div><div class="ginfo"><h3>Hidupkan Tumbuhan</h3><span class="tag">Simulasi Fotosintesis</span><p>Pilih kebutuhan tumbuhan, lihat daun menyala hijau</p></div><div class="ggo">▶</div></div>
+  <div class="gcard" data-gi="3"><div class="gico">💧</div><div class="ginfo"><h3>Padat, Cair, Gas</h3><span class="tag">Uji Wujud Zat</span><p>Taruh benda ke gelas, lihat bentuknya ikut atau tetap</p></div><div class="ggo">▶</div></div>
+</div>
+<div class="play hidden" id="play">
+  <div class="phead">
+    <button class="pback" id="pback" title="Kembali">←</button>
+    <span class="pico" id="p-ico">💡</span>
+    <h2 id="p-title">Game</h2>
+  </div>
+  <div class="pbody" id="p-body"></div>
+</div>
+<div class="foot">Lab Sains Interaktif · IPAS Kelas 4 · SD Negeri 1 Tinggarjaya</div>
+
+<script>
+const hub=document.getElementById('hub'),play=document.getElementById('play'),pBody=document.getElementById('p-body'),pTitle=document.getElementById('p-title'),pIco=document.getElementById('p-ico');
+const GAMES=[
+  {nama:'Daya Hantar Listrik',ico:'💡',fn:renderListrik},
+  {nama:'Tarik & Tolak Magnet',ico:'🧲',fn:renderMagnet},
+  {nama:'Hidupkan Tumbuhan',ico:'🌱',fn:renderFotosintesis},
+  {nama:'Padat, Cair, Gas',ico:'💧',fn:renderWujud},
+];
+document.querySelectorAll('.gcard').forEach(c=>c.onclick=()=>openGame(+c.dataset.gi));
+document.getElementById('pback').onclick=()=>{hub.classList.remove('hidden');play.classList.add('hidden');pBody.innerHTML='';};
+function openGame(i){const g=GAMES[i];hub.classList.add('hidden');play.classList.remove('hidden');pIco.textContent=g.ico;pTitle.textContent=g.nama;g.fn();}
+
+// === DAYA HANTAR LISTRIK ===
+const MAT_LIST=[
+  {nm:'Logam besi',ico:'🔩',konduktor:true},{nm:'Plastik',ico:'🥤',konduktor:false},
+  {nm:'Kayu',ico:'🪵',konduktor:false},{nm:'Tembaga',ico:'🪙',konduktor:true},
+  {nm:'Karet',ico:'🧤',konduktor:false},{nm:'Aluminium',ico:'🥫',konduktor:true},
+  {nm:'Kaca',ico:'🔮',konduktor:false},{nm:'Air garam',ico:'🧂',konduktor:true},
+  {nm:'Air murni',ico:'💧',konduktor:false},{nm:'Koin',ico:'🪙',konduktor:true},
+];
+let dhSkor=0,dhTotal=0,dhCur=null,dhQList=[];
+function renderListrik(){
+  dhQList=[...MAT_LIST].sort(()=>Math.random()-.5);
+  dhTotal=dhQList.length;dhSkor=0;dhCur=dhQList[0];
+  renderListrikQ();
+}
+function renderListrikQ(){
+  const idx=dhQList.indexOf(dhCur);
+  pBody.innerHTML=`
+    <div class="lab-q">Soal ${idx+1}/${dhTotal}: Apakah <b>${dhCur.nm}</b> menghantarkan listrik?</div>
+    <div class="lab-hint">Klik material di bawah untuk menempatkannya ke rangkaian, lalu tutup saklar</div>
+    <div class="dh-stage">
+      <div class="dh-circuit">
+        <div class="dh-battery"><div class="b-body"><span class="b-plus">+</span><span class="b-min">−</span></div><div class="b-cap"></div><small>Baterai</small></div>
+        <div class="dh-wire" id="w1"></div>
+        <div class="dh-mat" id="dh-mat"><span class="dh-mat-ico">❓</span><span class="dh-mat-name">Kosong</span></div>
+        <div class="dh-wire" id="w2"></div>
+        <div class="dh-bulb off" id="dh-bulb"><span class="dh-bulb-ico">💡</span><small>Lampu</small></div>
+        <div class="dh-wire" id="w3"></div>
+        <button class="btn" id="dh-switch" style="max-width:160px;margin:0">🔴 Tutup Saklar</button>
+      </div>
+    </div>
+    <div class="dh-score"><div>⭐ Skor: <span id="dh-sk">${dhSkor}</span></div><div>📋 ${idx+1}/${dhTotal}</div></div>
+    <div class="dh-matlist" id="dh-matlist"></div>
+    <div id="dh-result"></div>`;
+  const ml=document.getElementById('dh-matlist');
+  // tampilkan semua material (siswa pilih yg benar uji sesuai soal)
+  MAT_LIST.forEach(m=>{
+    const b=document.createElement('button');b.className='dh-matbtn';b.innerHTML=`<span class="m-ico">${m.ico}</span><span class="m-nm">${m.nm}</span>`;
+    b.onclick=()=>placeMaterial(m);
+    ml.appendChild(b);
+  });
+  document.getElementById('dh-switch').onclick=closeSwitch;
+}
+function placeMaterial(m){
+  document.getElementById('dh-mat').innerHTML=`<span class="dh-mat-ico">${m.ico}</span><span class="dh-mat-name">${m.nm}</span>`;
+  document.getElementById('dh-mat').classList.add('on');
+  dhCurPlaced=m;
+}
+let dhCurPlaced=null;
+function closeSwitch(){
+  if(!dhCurPlaced){document.getElementById('dh-result').innerHTML='<div class="dh-result no">⚠️ Pilih material dulu!</div>';return;}
+  const konduktor=dhCurPlaced.konduktor;
+  const bulb=document.getElementById('dh-bulb');
+  const wires=['w1','w2','w3'].map(id=>document.getElementById(id));
+  if(konduktor){
+    bulb.classList.remove('off');bulb.classList.add('on');
+    wires.forEach(w=>w.classList.add('on'));
+    dhSkor++;
+    document.getElementById('dh-result').innerHTML=`<div class="dh-result yes">✓ Lampu menyala! ${dhCurPlaced.nm} adalah KONDUKTOR (penghantar listrik).</div>`;
+  }else{
+    bulb.classList.remove('on');bulb.classList.add('off');
+    wires.forEach(w=>w.classList.remove('on'));
+    document.getElementById('dh-result').innerHTML=`<div class="dh-result no">✗ Lampu mati. ${dhCurPlaced.nm} adalah ISOLATOR (bukan penghantar).</div>`;
+  }
+  document.getElementById('dh-sk').textContent=dhSkor;
+  document.getElementById('dh-switch').disabled=true;
+  setTimeout(()=>{
+    const i=dhQList.indexOf(dhCur);
+    if(i+1<dhTotal){dhCur=dhQList[i+1];dhCurPlaced=null;renderListrikQ();}
+    else{showHasilLab('Daya Hantar Listrik',dhSkor,dhTotal,'Konduktor menghantarkan listrik, isolator tidak!');}
+  },1800);
+}
+
+// === MAGNET ===
+const MG_ITEMS=[
+  {nm:'Paku besi',ico:'📌',tarik:true},{nm:'Kertas',ico:'📄',tarik:false},
+  {nm:'Koin tembaga',ico:'🪙',tarik:true},{nm:'Plastik',ico:'🥤',tarik:false},
+  {nm:'Jarum',ico:'🪡',tarik:true},{nm:'Kayu',ico:'🪵',tarik:false},
+  {nm:'Paku aluminium',ico:'🔩',tarik:false},{nm:'Gunting besi',ico:'✂️',tarik:true},
+];
+let mgSkor=0,mgTotal=0,mgCur=null,mgQList=[],mgPole='n';
+function renderMagnet(){
+  mgQList=[...MG_ITEMS].sort(()=>Math.random()-.5);
+  mgTotal=mgQList.length;mgSkor=0;mgCur=mgQList[0];mgPole='n';
+  renderMagnetQ();
+}
+function renderMagnetQ(){
+  const idx=mgQList.indexOf(mgCur);
+  pBody.innerHTML=`
+    <div class="lab-q">Soal ${idx+1}/${mgTotal}: Apakah <b>${mgCur.nm}</b> ditarik magnet?</div>
+    <div class="lab-hint">Pilih kutub magnet, lalu klik benda untuk mengujinya</div>
+    <div class="mg-stage">
+      <div class="mg-pole">
+        <div class="mg-magnet n" data-pole="n"><div class="m-bar">N</div><div class="m-lbl">Kutub Utara</div></div>
+        <div class="mg-magnet s" data-pole="s"><div class="m-bar">S</div><div class="m-lbl">Kutub Selatan</div></div>
+      </div>
+      <div class="mg-arrows" id="mg-arrows">❓</div>
+    </div>
+    <div class="dh-score"><div>⭐ Skor: <span id="mg-sk">${mgSkor}</span></div><div>📋 ${idx+1}/${mgTotal}</div></div>
+    <div class="mg-test" id="mg-test"></div>
+    <div id="mg-fb"></div>`;
+  document.querySelectorAll('.mg-magnet').forEach(m=>{
+    m.onclick=()=>{document.querySelectorAll('.mg-magnet').forEach(x=>x.style.opacity='.5');m.style.opacity='1';mgPole=m.dataset.pole;};
+  });
+  document.querySelector('.mg-magnet.n').style.opacity='1';
+  const t=document.getElementById('mg-test');
+  MG_ITEMS.forEach(it=>{
+    const b=document.createElement('button');b.className='mg-item';b.innerHTML=`<span class="m-ico">${it.ico}</span><span class="m-nm">${it.nm}</span>`;
+    b.onclick=()=>testMagnet(it,b);
+    t.appendChild(b);
+  });
+}
+function testMagnet(it,btn){
+  const arrows=document.getElementById('mg-arrows');
+  if(it.tarik){
+    arrows.textContent=mgPole==='n'?'⬅️ ditarik':'➡️ ditarik';
+    arrows.style.color='#10b981';
+    mgSkor++;
+    document.getElementById('mg-fb').innerHTML=`<div class="mg-fb attract">✓ DITARIK! ${it.nm} terbuat dari besi/baja → ditarik magnet.</div>`;
+  }else{
+    arrows.textContent='🚫 tidak terpengaruh';
+    arrows.style.color='#991b1b';
+    document.getElementById('mg-fb').innerHTML=`<div class="mg-fb nothing">✗ Tidak ditarik. ${it.nm} bukan besi/baja.</div>`;
+  }
+  document.getElementById('mg-sk').textContent=mgSkor;
+  document.querySelectorAll('.mg-item').forEach(b=>b.disabled=true);
+  setTimeout(()=>{
+    const i=mgQList.indexOf(mgCur);
+    if(i+1<mgTotal){mgCur=mgQList[i+1];renderMagnetQ();}
+    else{showHasilLab('Tarik & Tolak Magnet',mgSkor,mgTotal,'Magnet hanya menarik benda dari besi & baja!');}
+  },1800);
+}
+
+// === FOTOSINTESIS ===
+const FT_NEEDS=[
+  {nm:'Cahaya',ico:'☀️',need:true},{nm:'Air',ico:'💧',need:true},
+  {nm:'CO₂',ico:'💨',need:true},{nm:'Klorofil',ico:'🍃',need:true},
+  {nm:'Gula',ico:'🍬',need:false},{nm:'Tanah',ico:'🪴',need:false},
+];
+let ftSel=[];
+function renderFotosintesis(){
+  ftSel=[];
+  pBody.innerHTML=`
+    <div class="lab-q">Tumbuhan butuh apa untuk fotosintesis? Pilih 4 kebutuhan yang benar!</div>
+    <div class="lab-hint">Klik 4 kebutuhan yang benar, lalu tekan tombol "Mulai Fotosintesis"</div>
+    <div class="ft-stage">
+      <div class="ft-tree"><span class="ft-leaf" id="ft-leaf">🌱</span><small id="ft-lbl">Pilih kebutuhan...</small></div>
+    </div>
+    <div class="dh-score"><div>⭐ Skor: <span id="ft-sk">0</span></div></div>
+    <div class="ft-need" id="ft-need"></div>
+    <button class="btn" id="ft-start">🔆 Mulai Fotosintesis</button>
+    <div id="ft-fb"></div>`;
+  const n=document.getElementById('ft-need');
+  FT_NEEDS.forEach(x=>{
+    const b=document.createElement('button');b.className='ft-need-btn';b.innerHTML=`<span class="n-ico">${x.ico}</span><span class="n-nm">${x.nm}</span>`;
+    b.onclick=()=>{
+      if(ftSel.includes(x.nm)){ftSel=ftSel.filter(s=>s!==x.nm);b.classList.remove('on');}
+      else if(ftSel.length<4){ftSel.push(x.nm);b.classList.add('on');}
+      updateFtLbl();
+    };
+    n.appendChild(b);
+  });
+  document.getElementById('ft-start').onclick=startFtosintesis;
+}
+function updateFtLbl(){document.getElementById('ft-lbl').textContent=ftSel.length===0?'Pilih kebutuhan...':ftSel.join(' + ');}
+function startFtosintesis(){
+  const benar=FT_NEEDS.filter(x=>x.need).map(x=>x.nm).sort().join(',');
+  const user=ftSel.slice().sort().join(',');
+  const ok=benar===user;
+  const leaf=document.getElementById('ft-leaf');
+  let skor=0;
+  if(ok){
+    leaf.classList.add('glow');leaf.textContent='🌳';
+    document.getElementById('ft-lbl').textContent='Fotosintesis berjalan! Hasil: glukosa + O₂';
+    document.getElementById('ft-fb').innerHTML='<div class="dh-result yes">✓ Benar! Tumbuhan butuh: cahaya, air, CO₂, klorofil. Hasil: glukosa + oksigen.</div>';
+    skor=10;
+  }else{
+    leaf.classList.add('dead');leaf.textContent='🥀';
+    document.getElementById('ft-lbl').textContent='Fotosintesis gagal... kebutuhan kurang/salah';
+    document.getElementById('ft-fb').innerHTML='<div class="dh-result no">✗ Belum tepat. Tumbuhan butuh: cahaya, air, CO₂, klorofil.</div>';
+  }
+  document.getElementById('ft-sk').textContent=skor;
+  document.getElementById('ft-start').disabled=true;
+  setTimeout(()=>showHasilLab('Hidupkan Tumbuhan',skor,10,'Fotosintesis = cahaya + air + CO₂ + klorofil → glukosa + O₂'),2200);
+}
+
+// === WUJUD ZAT ===
+const AR_ITEMS=[
+  {nm:'Batu',ico:'🪨',wujud:'padat'},{nm:'Air',ico:'💧',wujud:'cair'},
+  {nm:'Udara',ico:'💨',wujud:'gas'},{nm:'Es',ico:'🧊',wujud:'padat'},
+  {nm:'Minyak',ico:'🫗',wujud:'cair'},{nm:'Asap',ico:'🌫️',wujud:'gas'},
+  {nm:'Paku',ico:'🔩',wujud:'padat'},{nm:'Susu',ico:'🥛',wujud:'cair'},
+];
+let arSkor=0,arTotal=0,arCur=null,arQList=[];
+function renderWujud(){
+  arQList=[...AR_ITEMS].sort(()=>Math.random()-.5);
+  arTotal=arQList.length;arSkor=0;arCur=arQList[0];
+  renderWujudQ();
+}
+function renderWujudQ(){
+  const idx=arQList.indexOf(arCur);
+  pBody.innerHTML=`
+    <div class="lab-q">Soal ${idx+1}/${arTotal}: Masukkan <b>${arCur.nm}</b> ${arCur.ico} ke wadah yang benar!</div>
+    <div class="lab-hint">Klik wadah yang sesuai wujud zat benda ini</div>
+    <div class="ar-stage">
+      <div class="ar-cups">
+        <div class="ar-cup" data-w="padat"><div class="c-glass"></div><div class="c-lbl"> PADAT 🪨</div></div>
+        <div class="ar-cup" data-w="cair"><div class="c-glass"><div class="c-water" style="height:60%"></div></div><div class="c-lbl"> CAIR 💧</div></div>
+        <div class="ar-cup" data-w="gas"><div class="c-glass" style="background:linear-gradient(180deg,transparent,#d1d5db)"></div><div class="c-lbl"> GAS 💨</div></div>
+      </div>
+    </div>
+    <div class="dh-score"><div>⭐ Skor: <span id="ar-sk">${arSkor}</span></div><div>📋 ${idx+1}/${arTotal}</div></div>
+    <div id="ar-result"></div>`;
+  document.querySelectorAll('.ar-cup').forEach(c=>{
+    c.onclick=()=>testWujud(c.dataset.w);
+  });
+}
+function testWujud(w){
+  const ok=w===arCur.wujud;
+  if(ok){arSkor++;document.getElementById('ar-result').innerHTML=`<div class="ar-result ok">✓ Benar! ${arCur.nm} adalah wujud ${arCur.wujud.toUpperCase()}.</div>`;}
+  else{document.getElementById('ar-result').innerHTML=`<div class="ar-result no">✗ Salah. ${arCur.nm} adalah wujud ${arCur.wujud.toUpperCase()}.</div>`;}
+  document.getElementById('ar-sk').textContent=arSkor;
+  document.querySelectorAll('.ar-cup').forEach(c=>c.style.pointerEvents='none');
+  setTimeout(()=>{
+    const i=arQList.indexOf(arCur);
+    if(i+1<arTotal){arCur=arQList[i+1];renderWujudQ();}
+    else{showHasilLab('Padat, Cair, Gas',arSkor,arTotal,'Zat padat bentuk tetap, cair ikut wadah, gas penuh ruang!');}
+  },1600);
+}
+
+function showHasilLab(nama,skor,total,pesan){
+  const pct=total?skor/total*100:0;
+  let stars='⭐⭐',msg='Tetap semangat mencoba!';
+  if(pct>=90){stars='⭐⭐⭐⭐⭐';msg='Luar biasa, ilmuwan hebat!';}
+  else if(pct>=70){stars='⭐⭐⭐⭐';msg='Hebat, eksperimen sukses!';}
+  else if(pct>=50){stars='⭐⭐⭐';msg='Bagus, terus berlatih!';}
+  pBody.innerHTML=`<div style="text-align:center;padding:30px 10px">
+    <div style="font-size:2.6rem;letter-spacing:4px;margin-bottom:10px">${stars}</div>
+    <h2 style="font-family:Fraunces,serif;font-size:1.5rem;margin-bottom:6px;color:var(--w)">Selesai!</h2>
+    <p style="color:#52525b;margin-bottom:8px">${msg}</p>
+    <p style="color:#71717a;font-size:.85rem;margin-bottom:16px">💡 ${pesan}</p>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:16px">Skor: ${skor}/${total}</div>
+    <button class="btn" onclick="openGame(GAMES.findIndex(g=>g.nama==='${nama}'))" style="max-width:280px;margin:0 auto 10px">🔁 Coba Lagi</button>
+    <button class="btn" onclick="hub.classList.remove('hidden');play.classList.add('hidden')" style="max-width:280px;margin:0 auto;background:#71717a">🏠 Lab Lainnya</button>
+  </div>`;
+}
+</script>
+</body>
+</html>

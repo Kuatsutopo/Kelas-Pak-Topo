@@ -184,6 +184,7 @@ footer{max-width:1080px;margin:0 auto;padding:20px 24px;border-top:1px solid var
         <a class="ma video" id="m-video" href="#"><div class="ma-ico video">🎬</div><div class="ma-info"><strong>Video Belajar</strong><span>Tonton di materi page</span></div></a>
         <a class="ma pdf" id="m-pdf" href="#" target="_blank" rel="noopener" download><div class="ma-ico pdf">📄</div><div class="ma-info"><strong>Download Buku</strong><span id="m-pdf-nama">PDF buku siswa</span></div></a>
         <a class="ma game" id="m-game" href="#"><div class="ma-ico game">🎮</div><div class="ma-info"><strong>Main Game</strong><span>Asah pemahaman</span></div></a>
+        <a class="ma lab full" id="m-lab" href="/lab-sains.html" style="display:none"><div class="ma-ico lab">🔬</div><div class="ma-info"><strong>Lab Sains Interaktif</strong><span>Simulasi & eksperimen</span></div></a>
         <a class="ma kuis-big full" href="/kuis-sas1-kelas4.html"><div class="ma-ico kuis">📝</div><div class="ma-info"><strong>Kerjakan Kuis SAS 1</strong><span>Evaluasi akhir semester</span></div></a>
       </div>
     </div>
@@ -261,6 +262,7 @@ function openModal(key){
   if(m.pdf){ pdfA.href = m.pdf.href; pdfA.style.display=''; document.getElementById('m-pdf-nama').textContent = m.pdf.nama.slice(0,32); }
   else { pdfA.style.display='none'; }
   document.getElementById('m-game').href = '/game-' + key + '.html';
+  document.getElementById('m-lab').style.display = (key==='ipas') ? '' : 'none';
   document.getElementById('modal').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
