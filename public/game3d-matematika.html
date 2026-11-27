@@ -24,10 +24,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:
 .hud-l .mat .d{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.5)}
 .hud-l .mat .d.on{background:#fbbf24;border-color:#fde68a;box-shadow:0 0 6px #fbbf24}
 .hud-r{background:rgba(0,0,0,.45);padding:6px 12px;border-radius:99px;font-size:.82rem}
-/* JOYSTICK */
-#joy{position:fixed;left:18px;bottom:18px;width:130px;height:130px;z-index:30;touch-action:none}
-#joy-b{width:100%;height:100%;border-radius:50%;background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.5);position:relative}
-#joy-k{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.65);border:2px solid #fff;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:none}
+/* TAP-TO-MOVE (sentuh layar untuk bergerak) */
+#tap-mark{position:fixed;width:36px;height:36px;border-radius:50%;border:3px solid #fbbf24;background:rgba(251,191,36,.3);transform:translate(-50%,-50%);z-index:25;pointer-events:none;display:none;animation:tapPulse .9s ease-out forwards}
+#tap-mark.show{display:block}
+@keyframes tapPulse{0%{transform:translate(-50%,-50%) scale(.4);opacity:1}100%{transform:translate(-50%,-50%) scale(1.8);opacity:0}}
+#tap-hint{position:fixed;left:50%;top:62px;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;padding:6px 14px;border-radius:99px;font-size:.76rem;font-weight:700;z-index:22;pointer-events:none}
 /* ACTION BTN */
 #act{position:fixed;right:18px;bottom:30px;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);border:3px solid #fff;color:#fff;font-size:1.6rem;font-weight:800;display:grid;place-items:center;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,.3);touch-action:none;cursor:pointer}
 #act:active{transform:scale(.92)}
@@ -68,7 +69,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:
 /* HINT label dekat NPC */
 #hint{position:fixed;left:50%;top:62%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fbbf24;padding:6px 14px;border-radius:99px;font-size:.82rem;font-weight:700;z-index:25;display:none;border:1.5px solid #fbbf24}
 #hint.show{display:block}
-@media(max-width:520px){#joy{width:110px;height:110px;left:14px;bottom:14px}#act{width:68px;height:68px;right:14px;bottom:24px;font-size:1.3rem}#dlg{bottom:110px}#quiz-box{padding:18px 14px}}
+@media(max-width:520px){#act{width:68px;height:68px;right:14px;bottom:24px;font-size:1.3rem}#dlg{bottom:110px}#quiz-box{padding:18px 14px}}
 </style>
 </head>
 <body>
@@ -86,7 +87,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:
 
 <div id="hint">Tekan <b>A</b> untuk bicara</div>
 
-<div id="joy"><div id="joy-b"><div id="joy-k"></div></div></div>
+<div id="tap-hint">👆 Sentuh layar untuk berjalan · Dekati kristal & tekan 🅰</div>
+<div id="tap-mark"></div>
 <div id="act"><div>🅰</div><div class="lbl">Aksi</div></div>
 
 <div id="dlg">
@@ -372,47 +374,97 @@ window.addEventListener('keydown', e=>{
 });
 window.addEventListener('keyup', e=>{ keys[e.key.toLowerCase()] = false; });
 
-// Virtual joystick
-const joy = document.getElementById('joy');
-const joyK = document.getElementById('joy-k');
-const joyB = document.getElementById('joy-b');
-let joyActive = false, joyVec = {x:0, y:0}, joyId = null;
-function joyStart(e){
+// === TAP-TO-MOVE ===
+// Sentuh/klik di mana saja di layar -> raycast ke ground -> pemain jalan ke titik itu.
+// Sentuh langsung pada kristal/NPC -> auto-jalan & bicara saat tiba.
+const tapMark = document.getElementById('tap-mark');
+const tapHint = document.getElementById('tap-hint');
+const raycaster = new THREE.Raycaster();
+const groundPlane = new THREE.Plane(new THREE.Vector3(0,1,0), 0);
+let tapTarget = null;          // THREE.Vector3 tujuan jalan, atau null
+let tapTargetNpc = null;       // idx NPC jika tap mengenai kristal
+let tapHintShown = false;
+
+function screenToWorld(clientX, clientY){
+  const ndc = new THREE.Vector2(
+    (clientX / window.innerWidth) * 2 - 1,
+    -(clientY / window.innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(ndc, camera);
+  const hit = new THREE.Vector3();
+  raycaster.ray.intersectPlane(groundPlane, hit);
+  return hit;
+}
+
+function onSceneTap(clientX, clientY){
   initAudio();
-  joyActive = true;
-  const t = e.touches ? e.touches[0] : e;
-  joyId = e.touches ? t.identifier : null;
-  joyMove(e);
-  e.preventDefault();
-}
-function joyMove(e){
-  if(!joyActive) return;
-  const rect = joyB.getBoundingClientRect();
-  let t = e;
-  if(e.touches){
-    for(let i=0;i<e.touches.length;i++){ if(e.touches[i].identifier===joyId){ t = e.touches[i]; break; } }
+  // 1) cek apakah tap mengenai NPC/kristal (raycast ke NPC meshes)
+  const ndc = new THREE.Vector2(
+    (clientX / window.innerWidth) * 2 - 1,
+    -(clientY / window.innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(ndc, camera);
+  // kumpulkan mesh kristal & boss
+  const targets = [];
+  npcs.forEach((n,i)=>{ if(!n.userData.collected){ n.children.forEach(c=>targets.push(c)); } });
+  boss.children.forEach(c=>targets.push(c));
+  const hits = raycaster.intersectObjects(targets, false);
+  if(hits.length){
+    // cari NPC pemilik mesh
+    for(const h of hits){
+      let owner = null;
+      for(let i=0;i<npcs.length;i++){
+        if(!npcs[i].userData.collected && npcs[i].children.includes(h.object)){ owner = {type:'npc', idx:i}; break; }
+      }
+      if(!owner && boss.children.includes(h.object)) owner = {type:'boss'};
+      if(owner){
+        const point = screenToWorld(clientX, clientY);
+        if(owner.type==='npc'){
+          // auto-jalan ke depan kristal, bicara saat tiba
+          const np = npcPositions[owner.idx];
+          tapTarget = new THREE.Vector3(np.x, 0, np.z);
+          // mundur sedikit biar tidak nabrak
+          const dx = state.pos.x - np.x, dz = state.pos.z - np.z;
+          const m = Math.sqrt(dx*dx+dz*dz) || 1;
+          tapTarget.x = np.x + dx/m * 2.5;
+          tapTarget.z = np.z + dz/m * 2.5;
+          tapTargetNpc = owner.idx;
+        } else {
+          // boss: jalan ke depan boss
+          tapTarget = new THREE.Vector3(boss.position.x, 0, boss.position.z - 3);
+          tapTargetNpc = 'boss';
+        }
+        showTapMark(clientX, clientY);
+        return;
+      }
+    }
   }
-  let dx = t.clientX - (rect.left + rect.width/2);
-  let dy = t.clientY - (rect.top + rect.height/2);
-  const mag = Math.sqrt(dx*dx+dy*dy);
-  const max = rect.width/2 - 18;
-  if(mag > max){ dx = dx/mag*max; dy = dy/mag*max; }
-  joyK.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-  joyVec.x = dx/max; joyVec.y = dy/max;
+  // 2) tap kosong -> jalan ke titik ground
+  const point = screenToWorld(clientX, clientY);
+  if(point && isFinite(point.x)){
+    tapTarget = point.clone();
+    tapTargetNpc = null;
+    showTapMark(clientX, clientY);
+  }
+}
+
+function showTapMark(x, y){
+  tapMark.style.left = x + 'px';
+  tapMark.style.top = y + 'px';
+  tapMark.classList.remove('show');
+  // reflow agar animasi restart
+  void tapMark.offsetWidth;
+  tapMark.classList.add('show');
+  if(!tapHintShown){ tapHintShown = true; setTimeout(()=>{ tapHint.style.opacity='0'; }, 4000); }
+}
+
+// canvas (di belakang UI) jadi target tap
+canvas.addEventListener('pointerdown', e=>{
+  onSceneTap(e.clientX, e.clientY);
   e.preventDefault();
-}
-function joyEnd(e){
-  joyActive = false; joyId = null;
-  joyK.style.transform = 'translate(-50%,-50%)';
-  joyVec.x = 0; joyVec.y = 0;
-}
-joy.addEventListener('touchstart', joyStart, {passive:false});
-joy.addEventListener('touchmove', joyMove, {passive:false});
-joy.addEventListener('touchend', joyEnd);
-joy.addEventListener('touchcancel', joyEnd);
-joy.addEventListener('mousedown', joyStart);
-window.addEventListener('mousemove', e=>{ if(joyActive) joyMove(e); });
-window.addEventListener('mouseup', joyEnd);
+}, {passive:false});
+// sentuh juga di area kosong body (canvas sudah full-screen jadi cukup canvas)
+canvas.style.touchAction = 'none';
 
 // Action button
 const actBtn = document.getElementById('act');
@@ -567,15 +619,28 @@ function update(now){
   lastT = now;
 
   if(!state.won && !state.quizActive){
-    // input gerak
+    // input gerak: keyboard (WASD/panah) atau TAP-TO-MOVE (jalan menuju tapTarget)
     let mx = 0, mz = 0;
     if(keys['w']||keys['arrowup']) mz -= 1;
     if(keys['s']||keys['arrowdown']) mz += 1;
     if(keys['a']||keys['arrowleft']) mx -= 1;
     if(keys['d']||keys['arrowright']) mx += 1;
-    // joystick
-    if(joyActive && (Math.abs(joyVec.x) > 0.15 || Math.abs(joyVec.y) > 0.15)){
-      mx = joyVec.x; mz = joyVec.y;
+    // tap-to-move: jika ada target, arah gerak = menuju tapTarget
+    if(tapTarget){
+      const dx = tapTarget.x - state.pos.x;
+      const dz = tapTarget.z - state.pos.z;
+      const dist = Math.sqrt(dx*dx + dz*dz);
+      if(dist > 0.4){
+        mx = dx / dist;
+        mz = dz / dist;
+      } else {
+        // sampai di tujuan
+        tapTarget = null;
+        // jika tap ke NPC, otomatis bicara
+        if(tapTargetNpc === 'boss'){ doAction(); }
+        else if(tapTargetNpc !== null){ doAction(); }
+        tapTargetNpc = null;
+      }
     }
     const mag = Math.sqrt(mx*mx + mz*mz);
     if(mag > 0.05){
