@@ -83,6 +83,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .ma:hover{border-color:var(--brand-green);background:var(--brand-green-soft)}
 .ma-ico{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:1.3rem;flex-shrink:0}
 .ma-ico.materi{background:#ecfdf5;color:#0f5132}
+.ma-ico.rangkuman{background:#fff7ed;color:#c2410c}
 .ma-ico.video{background:#eff6ff;color:#1d4ed8}
 .ma-ico.pdf{background:#fffbeb;color:#b45309}
 .ma-ico.game{background:#fdf2f8;color:#be185d}
@@ -179,6 +180,7 @@ footer{max-width:1080px;margin:0 auto;padding:20px 24px;border-top:1px solid var
       <p class="modal-desc" id="m-desc"></p>
       <div class="modal-actions">
         <a class="ma materi" id="m-materi" href="#"><div class="ma-ico materi">📖</div><div class="ma-info"><strong>Materi Ringkas</strong><span>Baca ringkasan & contoh</span></div></a>
+        <a class="ma rangkuman" id="m-rangkuman" href="#"><div class="ma-ico rangkuman">📋</div><div class="ma-info"><strong>Rangkuman Materi</strong><span>Intisari visual per topik</span></div></a>
         <a class="ma video" id="m-video" href="#"><div class="ma-ico video">🎬</div><div class="ma-info"><strong>Video Belajar</strong><span>Tonton di materi page</span></div></a>
         <a class="ma pdf" id="m-pdf" href="#" target="_blank" rel="noopener" download><div class="ma-ico pdf">📄</div><div class="ma-info"><strong>Download Buku</strong><span id="m-pdf-nama">PDF buku siswa</span></div></a>
         <a class="ma game" id="m-game" href="#"><div class="ma-ico game">🎮</div><div class="ma-info"><strong>Main Game</strong><span>Asah pemahaman</span></div></a>
@@ -253,6 +255,7 @@ function openModal(key){
   document.getElementById('m-desc').textContent = m.deskripsi || '';
   // aksi link
   document.getElementById('m-materi').href = '/materi.html?mapel=' + key;
+  document.getElementById('m-rangkuman').href = '/rangkuman-' + key + '.html';
   document.getElementById('m-video').href = '/materi.html?mapel=' + key + '#video-list';
   const pdfA = document.getElementById('m-pdf');
   if(m.pdf){ pdfA.href = m.pdf.href; pdfA.style.display=''; document.getElementById('m-pdf-nama').textContent = m.pdf.nama.slice(0,32); }
