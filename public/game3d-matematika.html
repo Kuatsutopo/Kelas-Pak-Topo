@@ -400,11 +400,9 @@ function screenToWorld(clientX, clientY){
   const hit = new THREE.Vector3();
   const ok = raycaster.ray.intersectPlane(groundPlane, hit);
   if(!ok){
-    // tap di atas horizon (langit) -> jalan ke titik jauh searah ray horizontal
-    const dir = raycaster.ray.direction.clone();
-    // pakai komponen x,z saja, normalisasi, lalu kalikan jarak 30
-    const len = Math.sqrt(dir.x*dir.x + dir.z*dir.z) || 1;
-    hit.set(dir.x/len*30 + camera.position.x, 0, dir.z/len*30 + camera.position.z);
+    // tap di atas horizon (langit) -> jalan ke depan pemain searah yaw, 20 unit
+    const fwd = new THREE.Vector3(Math.sin(state.yaw), 0, -Math.cos(state.yaw));
+    hit.set(state.pos.x + fwd.x*20, 0, state.pos.z + fwd.z*20);
   }
   return hit;
 }
