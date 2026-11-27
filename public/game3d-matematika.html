@@ -29,6 +29,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:
 #tap-mark.show{display:block}
 @keyframes tapPulse{0%{transform:translate(-50%,-50%) scale(.4);opacity:1}100%{transform:translate(-50%,-50%) scale(1.8);opacity:0}}
 #tap-hint{position:fixed;left:50%;top:62px;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;padding:6px 14px;border-radius:99px;font-size:.76rem;font-weight:700;z-index:22;pointer-events:none}
+/* MINIMAP (peta kecil pojok kanan-atas) */
+#mini{position:fixed;right:10px;top:10px;width:96px;height:96px;border-radius:50%;background:rgba(15,23,42,.7);border:2px solid rgba(255,255,255,.5);z-index:23;pointer-events:none;overflow:hidden}
+#mini canvas{width:100%;height:100%}
+#mini-lbl{position:fixed;right:10px;top:108px;font-size:.62rem;color:rgba(255,255,255,.85);z-index:23;pointer-events:none;font-weight:700;text-shadow:0 1px 2px #000}
 /* ACTION BTN */
 #act{position:fixed;right:18px;bottom:30px;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);border:3px solid #fff;color:#fff;font-size:1.6rem;font-weight:800;display:grid;place-items:center;z-index:30;box-shadow:0 6px 16px rgba(0,0,0,.3);touch-action:none;cursor:pointer}
 #act:active{transform:scale(.92)}
@@ -88,6 +92,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#87ceeb;font-family:
 <div id="hint">Tekan <b>A</b> untuk bicara</div>
 
 <div id="tap-hint">👆 Sentuh layar untuk berjalan · Dekati kristal & tekan 🅰</div>
+<div id="mini"><canvas id="mini-c"></canvas></div>
+<div id="mini-lbl">🗺️ Peta Lembah</div>
 <div id="tap-mark"></div>
 <div id="act"><div>🅰</div><div class="lbl">Aksi</div></div>
 
@@ -466,6 +472,53 @@ canvas.addEventListener('pointerdown', e=>{
 // sentuh juga di area kosong body (canvas sudah full-screen jadi cukup canvas)
 canvas.style.touchAction = 'none';
 
+// === MINIMAP (peta kecil, tunjukkan pemain + NPC + boss) ===
+const miniC = document.getElementById('mini-c');
+const miniCtx = miniC.getContext('2d');
+miniC.width = 96; miniC.height = 96;
+const MAP_RANGE = 45; // dunia -45..45 dipetakan ke minimap
+function drawMinimap(){
+  const ctx = miniCtx;
+  ctx.clearRect(0,0,96,96);
+  // latar air
+  ctx.fillStyle = 'rgba(59,130,246,.35)';
+  ctx.beginPath(); ctx.arc(48,48,46,0,Math.PI*2); ctx.fill();
+  // pulau (lingkaran hijau)
+  ctx.fillStyle = 'rgba(106,176,76,.85)';
+  ctx.beginPath(); ctx.arc(48,48,46*(40/MAP_RANGE),0,Math.PI*2); ctx.fill();
+  // jalan setapak
+  ctx.strokeStyle = 'rgba(212,165,116,.7)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(48,48,46*(8.5/MAP_RANGE),0,Math.PI*2); ctx.stroke();
+  // NPC kristal
+  npcPositions.forEach((np,i)=>{
+    if(state.collected[i]) return;
+    const mx = 48 + (np.x/MAP_RANGE)*46;
+    const my = 48 + (np.z/MAP_RANGE)*46;
+    ctx.fillStyle = ['#60a5fa','#fbbf24','#a855f7'][i];
+    ctx.beginPath(); ctx.arc(mx,my,5,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+  });
+  // boss
+  const bx = 48 + (boss.position.x/MAP_RANGE)*46;
+  const by = 48 + (boss.position.z/MAP_RANGE)*46;
+  ctx.fillStyle = '#ef4444';
+  ctx.beginPath(); ctx.arc(bx,by,6,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
+  // pemain (panah arah hadap)
+  const px = 48 + (state.pos.x/MAP_RANGE)*46;
+  const py = 48 + (state.pos.z/MAP_RANGE)*46;
+  ctx.save();
+  ctx.translate(px,py);
+  ctx.rotate(state.yaw);
+  ctx.fillStyle = '#10b981';
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(0,-7); ctx.lineTo(5,5); ctx.lineTo(-5,5); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  ctx.restore();
+}
+
 // Action button
 const actBtn = document.getElementById('act');
 actBtn.addEventListener('click', ()=>{ initAudio(); doAction(); });
@@ -715,6 +768,7 @@ function update(now){
   camera.position.y += ((camHeight + state.pos.y) - camera.position.y) * Math.min(1, dt*6);
   camera.lookAt(state.pos.x, state.pos.y + 1.5, state.pos.z);
 
+  drawMinimap();
   renderer.render(scene, camera);
   requestAnimationFrame(update);
 }
