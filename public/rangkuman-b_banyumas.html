@@ -40,7 +40,14 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
 .card-body .contoh{margin-top:12px;background:#fafafa;border-radius:10px;padding:12px 16px;font-size:.86rem}
 .card-body .contoh strong{color:var(--w);display:block;margin-bottom:4px;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
 .foot{max-width:900px;margin:24px auto 0;text-align:center;font-size:.8rem;color:#71717a;padding:18px}
-@media(max-width:640px){.hero{padding:22px 18px}.card-head{padding:14px 16px}.card-body{padding:14px 16px 18px}.card-num{width:40px;height:40px;font-size:1.2rem}}
+.poster-section{max-width:900px;margin:0 auto 28px;text-align:center}
+.poster-title{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;color:var(--w);margin-bottom:4px}
+.poster-sub{font-size:.82rem;color:#71717a;margin-bottom:14px}
+.poster-wrap{display:inline-block;position:relative;max-width:520px;width:100%}
+.poster-img{width:100%;height:auto;border-radius:18px;box-shadow:0 18px 40px -16px rgba(0,0,0,.18);border:1px solid #e4e4e7;max-height:900px;object-fit:contain}
+.poster-dl{display:inline-block;margin-top:12px;padding:9px 18px;border-radius:99px;background:var(--w);color:#fff;text-decoration:none;font-size:.84rem;font-weight:600;transition:opacity .15s}
+.poster-dl:hover{opacity:.85}
+@media(max-width:640px){.hero{padding:22px 18px}.card-head{padding:14px 16px}.card-body{padding:14px 16px 18px}.card-num{width:40px;height:40px;font-size:1.2rem}.poster-img{max-height:none}}
 </style>
 </head>
 <body>
@@ -62,6 +69,15 @@ body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:linear-
   <a href="/portal.html">🗂️ Mapel Lain</a>
   <a href="/kuis-sas1-kelas4.html">📝 Kuis SAS 1</a>
 </nav>
+
+<div class="poster-section">
+  <h3 class="poster-title">🖼️ Poster Materi Budaya Banyumasan</h3>
+  <p class="poster-sub">Rangkuman visual gaya infografis kartun ceria</p>
+  <div class="poster-wrap">
+    <img src="/poster/poster-b_banyumas.png" alt="Poster Materi Budaya Banyumasan Kelas 4 SD" class="poster-img" loading="lazy">
+    <a href="/poster/poster-b_banyumas.png" download class="poster-dl">⬇️ Download Poster</a>
+  </div>
+</div>
 
 <div class="cards">
 
